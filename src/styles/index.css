@@ -1,0 +1,52 @@
+:root {
+  --nav-height: 2rem;
+  /* color palette */
+  --main-color: rgb(41, 204, 229);
+  --main-color-green: #85ff9e;
+  --main-color-blue: #1c3144;
+  --main-color-yellow: #ffba08;
+  --main-color-orange: #ff5714;
+  --modal-bg-color: #dbf8e1;
+  --three-d-font: "Rampart One";
+  --azaret-font: "Azeret Mono";
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+body {
+  margin: 0;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    20deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(41, 204, 229, 1) 90%,
+    rgba(44, 205, 229, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  min-height: 97vh;
+}
+
+.folder {
+  width: 150px;
+  height: 105px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 5px 5px 5px 5px;
+  position: relative;
+  background-color: #ffba08;
+  border-radius: 0 6px 6px 6px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
+}
+
+.folder:before {
+  content: "";
+  width: 50%;
+  height: 12px;
+  border-radius: 0 20px 0 0;
+  background-color: #ff5714;
+  position: absolute;
+  top: -12px;
+  left: 0px;
+}

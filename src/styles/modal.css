@@ -1,0 +1,67 @@
+.modal-main-container {
+  position: fixed;
+  width: 80%;
+  top: 50%;
+  height: 90%;
+  left: 50%;
+  border-radius: 0.7rem;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 1000;
+  box-shadow: 0 17px 50px 0 rgb(0 0 0 / 19%), 0 12px 15px 0 rgb(0 0 0 / 24%);
+  background-color: var(--modal-bg-color);
+  overflow: auto;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.main-content-modal {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.modal-header {
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+.xbtn {
+  font-size: 1.2rem;
+}
+
+.xbtn-wrapper {
+  cursor: pointer;
+  border: none;
+  background-color: var(--modal-bg-color);
+  border-radius: 1rem;
+  height: 2rem;
+  width: 2rem;
+}
+.xbtn-wrapper:hover {
+  background-color: #c1dbc7;
+}
+
+.modal-title-input {
+  width: 90%;
+  background-color: var(--modal-bg-color);
+  outline-color: #99caa3;
+  border: none;
+  font-family: "Azeret Mono", "Gill Sans", "Gill Sans MT", "Calibri",
+    "Trebuchet MS", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--main-color-blue);
+  min-height: 1rem;
+  overflow-wrap: break-word;
+  resize: none;
+  margin: 0.3rem;
+}

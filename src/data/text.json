@@ -1,0 +1,23 @@
+{
+  "LoginPage": {},
+  "HomePage": {
+    "h1": {
+      "English": "Grab The Snippet",
+      "Greek": "Grab The Snippet"
+    }
+  },
+  "SnippetCard": {
+    "Title": {
+      "English": "Add the title of the snippet",
+      "Greek": "Oρίστε τίτλο για το snippet"
+    },
+    "EditorLanguage": {
+      "English": "Editor's language",
+      "Greek": " Oρίστε την γλώσσα προγραμματισμού!"
+    },
+    "EditorTheme": {
+      "English": "Editor's Theme",
+      "Greek": " Oρίστε χρωματικό φόντο "
+    }
+  }
+}
