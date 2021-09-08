@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  margin-top: 0.8rem;
 }
 #editor-languages-selector {
   border: none;
@@ -55,7 +56,7 @@
   margin-top: 0.3rem;
   font-family: monospace;
   height: 60vh;
-  /* min-height: 60vh;    this will cause  an unexpected behaviour of the editor in very big snippets */
+  /* min-height: 60vh;    this will cause  an unexpected behavior of the editor in very big snippets (it tries to take the whole space and the application is lagging hard */
   color: black;
   direction: ltr;
 }
