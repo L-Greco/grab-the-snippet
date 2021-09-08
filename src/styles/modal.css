@@ -12,6 +12,16 @@
   background-color: var(--modal-bg-color);
   overflow: auto;
 }
+@media (max-width: 576px) {
+  .modal-main-container {
+    width: 95%;
+  }
+}
+@media (min-width: 1200px) {
+  .modal-main-container {
+    max-width: 70%;
+  }
+}
 
 .modal-overlay {
   position: fixed;

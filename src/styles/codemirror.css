@@ -13,9 +13,16 @@
   font-weight: 700;
   color: var(--main-color-blue);
   margin-left: 0.7rem;
+  padding: 0.5rem;
+  border-radius: 0.8rem;
+  outline: none !important;
+}
+#editor-languages-selector:hover {
+  background-color: #c1dbc7;
 }
 #editor-themes-selector {
-  border-radius: 2px;
+  padding: 0.5rem;
+  border-radius: 0.8rem;
   border: none;
   font-family: var(--azaret-font);
   background-color: var(--modal-bg-color);
@@ -23,13 +30,22 @@
   font-weight: 700;
   color: var(--main-color-blue);
   margin-left: 0.7rem;
+  outline: none !important;
+}
+#editor-themes-selector:hover {
+  background-color: #c1dbc7;
 }
 .editor-selector-label {
   font-family: var(--azaret-font);
   font-style: italic;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 200;
   color: rgba(0, 0, 0, 0.74);
+}
+@media screen and (max-width: 1033px) and (min-width: 966px) {
+  .editor-selector-label {
+    font-size: 0.6rem;
+  }
 }
 /* Till Here */
 /* BASICS */
@@ -39,6 +55,7 @@
   margin-top: 0.3rem;
   font-family: monospace;
   height: 60vh;
+  /* min-height: 60vh;    this will cause  an unexpected behaviour of the editor in very big snippets */
   color: black;
   direction: ltr;
 }
@@ -68,6 +85,7 @@
 .CodeMirror-linenumbers {
 }
 .CodeMirror-linenumber {
+  font-size: 0.7rem !important; /* i set here the font of the line number to match the font of the code  */
   padding: 0 3px 0 5px;
   min-width: 20px;
   text-align: right;
@@ -390,7 +408,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   border-width: 0;
   background: transparent;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 0.7rem; /* This is the font for the editor */
   margin: 0;
   white-space: pre;
   word-wrap: normal;
