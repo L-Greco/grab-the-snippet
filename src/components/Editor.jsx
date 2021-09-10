@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useDebounce } from "react";
 import {
   Controlled as ControlledEditor,
   UnControlled as UncontrolledEditor,
@@ -214,6 +214,7 @@ function Editor() {
   const [language, setLanguage] = useState("javascript");
   const [text, setText] = useState("");
   const [editorTheme, setEditorTheme] = useState("");
+  const debouncedText = useDebounce(text, 500);
 
   function handleChange(value) {
     setText(value);
@@ -286,7 +287,7 @@ function Editor() {
       /> */}
       <UncontrolledEditor
         className="editor"
-        onChange={(editor, data, value) => console.log(value)}
+        onChange={(editor, data, value) => handleChange(value)}
         options={{
           keyMap: "sublime",
           lineWrapping: true,

@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import Editor from "./Editor";
 import { connect } from "react-redux";
 import { closeCardModalAction, setSnippetTitleAction } from "../redux/actions";
-import { IconContext } from "react-icons";
+import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
 
