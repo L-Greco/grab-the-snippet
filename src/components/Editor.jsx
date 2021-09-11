@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useDebounce } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Controlled as ControlledEditor,
   UnControlled as UncontrolledEditor,
 } from "react-codemirror2";
+import Toast from "react-bootstrap/Toast";
+import { AiOutlineClose } from "react-icons/ai";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // import closebrackets.js addon to have the closing tag functionality
@@ -214,7 +216,7 @@ function Editor() {
   const [language, setLanguage] = useState("javascript");
   const [text, setText] = useState("");
   const [editorTheme, setEditorTheme] = useState("");
-  const debouncedText = useDebounce(text, 500);
+  const [show, setShow] = useState(false);
 
   function handleChange(value) {
     setText(value);
@@ -298,9 +300,15 @@ function Editor() {
           autoCloseBrackets: true,
         }}
       />
-
+      <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
+        <div className="toast-header">
+          Copied to clipboard!
+          {/* <AiOutlineClose onClick={() => setShow(false)} /> */}
+        </div>
+        {/* <Toast.Body className="text-center"></Toast.Body> */}
+      </Toast>
       <CopyToClipboard text={text}>
-        <button>Grab The Snippet!</button>
+        <button onClick={() => setShow(true)}>Grab The Snippet!</button>
       </CopyToClipboard>
     </div>
   );

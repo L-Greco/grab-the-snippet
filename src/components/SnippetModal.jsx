@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-function CardModal({ page, closeModal, snippet, setTitle }) {
+function SnippetModal({ page, closeModal, snippet, setTitle }) {
   const ModalNode = useRef();
 
   function CloseModalIfClickedOut(ref) {
@@ -70,4 +70,4 @@ function CardModal({ page, closeModal, snippet, setTitle }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SnippetModal);

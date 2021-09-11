@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { closeCardModalAction, openCardModalAction } from "../redux/actions";
-import CardModal from "./CardModal";
+import SnippetModal from "./SnippetModal";
 import "../styles/homePage.css";
 
 let text = require("../data/text.json");
@@ -25,7 +25,7 @@ function Home({ openModal }) {
         <button className="addSnippetBtn" onClick={() => openModal()}>
           open Modal
         </button>
-        <CardModal />
+        <SnippetModal />
       </div>
     </div>
   );

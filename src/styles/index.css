@@ -9,6 +9,9 @@
   --modal-bg-color: #dbf8e1; /*   #dbf8e1  */
   --three-d-font: "Rampart One";
   --azaret-font: "Azeret Mono";
+  --font-1: "Anton";
+  --font-2: "Acme";
+  --font-3: "Roboto";
 }
 @media (prefers-reduced-motion: no-preference) {
   :root {

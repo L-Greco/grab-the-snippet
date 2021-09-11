@@ -12,12 +12,12 @@
       "Greek": "Oρίστε τίτλο για το snippet"
     },
     "EditorLanguage": {
-      "English": "Editor's language",
-      "Greek": " Oρίστε την γλώσσα προγραμματισμού!"
+      "English": "Editor's language :",
+      "Greek": "Γλώσσα :"
     },
     "EditorTheme": {
-      "English": "Editor's Theme",
-      "Greek": " Oρίστε χρωματικό φόντο "
+      "English": "Editor's Theme :",
+      "Greek": "Χρωματικό φόντο :"
     }
   }
 }

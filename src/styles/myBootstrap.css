@@ -5635,13 +5635,19 @@ fieldset:disabled .btn {
 .btn-close-white {
   filter: invert(1) grayscale(100%) brightness(200%);
 }
-
+/* my toast here */
 .toast {
-  width: 350px;
-  max-width: 100%;
-  font-size: 0.875rem;
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: fit-content;
+  transform: translate(-50%);
+  max-width: 300px;
+  font-weight: 500;
+  font-size: 0.7rem;
+  font-family: var(--font-2);
   pointer-events: auto;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: var(--main-color-green);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -5669,6 +5675,7 @@ fieldset:disabled .btn {
   display: flex;
   align-items: center;
   padding: 0.5rem 0.75rem;
+  justify-content: space-between; /* my rule */
   color: #6c757d;
   background-color: rgba(255, 255, 255, 0.85);
   background-clip: padding-box;

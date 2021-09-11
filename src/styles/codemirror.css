@@ -7,11 +7,18 @@
   flex-wrap: wrap;
   margin-top: 0.8rem;
 }
+
+@media (max-width: 930px) {
+  .editor-options-wrapper {
+    flex-direction: column;
+  }
+}
 #editor-languages-selector {
   border: none;
-  font-family: var(--azaret-font);
+  font-family: var(--font-3);
+  font-weight: 500;
+  font-size: 0.85rem;
   background-color: var(--modal-bg-color);
-  font-weight: 700;
   color: var(--main-color-blue);
   margin-left: 0.7rem;
   padding: 0.5rem;
@@ -25,10 +32,12 @@
   padding: 0.5rem;
   border-radius: 0.8rem;
   border: none;
-  font-family: var(--azaret-font);
+  font-family: var(--font-3);
+  font-size: 0.85rem;
+  font-weight: 500;
   background-color: var(--modal-bg-color);
   cursor: pointer;
-  font-weight: 700;
+
   color: var(--main-color-blue);
   margin-left: 0.7rem;
   outline: none !important;
@@ -37,15 +46,15 @@
   background-color: #c1dbc7;
 }
 .editor-selector-label {
-  font-family: var(--azaret-font);
+  font-family: var(--font-2);
   font-style: italic;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   font-weight: 200;
   color: rgba(0, 0, 0, 0.74);
 }
-@media screen and (max-width: 1033px) and (min-width: 966px) {
+@media screen and (max-width: 981px) and (min-width: 911px) {
   .editor-selector-label {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
   }
 }
 /* Till Here */
