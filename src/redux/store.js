@@ -8,6 +8,7 @@ export const initialState = {
     user: {
         editorTheme: "",
         editorLanguage: "",
+        loggedIn: false,
     },
     page: {
         language: "English",

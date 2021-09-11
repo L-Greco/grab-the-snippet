@@ -2196,7 +2196,8 @@ progress {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-family: var(--font-3); /* my rule : no set  before */
+  font-size: 16px; /* my rule : 1rem before */
   font-weight: 400;
   line-height: 1.5;
   color: #212529;

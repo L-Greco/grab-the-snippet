@@ -1,4 +1,5 @@
 import Home from "./components/Home";
+import LoginPage from "./components/LoginPage";
 import axios from "axios"
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import { useEffect } from "react"
@@ -24,9 +25,11 @@ function App() {
     })
   }, [])
   return (
-    <>
-      <Home />
-    </>
+    <Router>
+      <Route component={LoginPage} path='/' exact />
+      <Route component={Home} path='/home' exact />
+
+    </Router>
   );
 }
 

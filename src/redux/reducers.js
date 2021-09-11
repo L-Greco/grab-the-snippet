@@ -26,6 +26,18 @@ export const userReducer = (state = initialState.user, action) => {
                 editorTheme: action.payload
 
             }
+        case `SET_LOGGGED_IN`:
+            return {
+                ...state,
+                loggedIn: true
+
+            }
+        case `SET_LOGGGED_OFF`:
+            return {
+                ...state,
+                loggedIn: false
+
+            }
         default:
             return state
     }

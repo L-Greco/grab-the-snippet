@@ -42,9 +42,13 @@ body {
     rgba(44, 205, 229, 1) 100%,
     rgba(0, 212, 255, 1) 100%
   );
-  min-height: 96.5vh;
+  min-height: 96.7vh;
 }
-
+@media screen and (max-width: 729px) {
+  body {
+    min-height: 97vh;
+  }
+}
 .folder {
   width: 150px;
   height: 105px;
