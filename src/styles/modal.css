@@ -75,3 +75,22 @@
   resize: none;
   margin: 0.3rem;
 }
+
+.modal-after-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-comments-input {
+  /* width: 90%; */
+  background-color: var(--modal-bg-color);
+  outline-color: #99caa3;
+  border: none;
+  font-family: var(--font-3), "Azeret Mono", "Gill Sans", "Gill Sans MT",
+    "Calibri", "Trebuchet MS", sans-serif;
+  font-weight: 600;
+  color: var(--main-color-blue);
+  overflow-wrap: break-word;
+  resize: none;
+  margin: 0.3rem;
+}

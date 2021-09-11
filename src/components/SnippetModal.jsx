@@ -60,6 +60,15 @@ function SnippetModal({ page, closeModal, snippet, setTitle }) {
                 </IconContext.Provider>
               </button>
             </div>
+            {/* <div className="modal-after-title-wrapper">
+              <textarea
+                className="modal-comments-input"
+                value={snippet.title}
+                placeholder={text.SnippetCard.Comments[page.language]}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <input type="text" />
+            </div> */}
 
             <Editor />
           </div>

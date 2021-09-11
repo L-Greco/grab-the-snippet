@@ -28,7 +28,7 @@ export const setEditorThemeAction = (theme) => {
         payload: theme
     }
 }
-export const setEditorCode = (code) => {
+export const setEditorCodeAction = (code) => {
     return {
         type: `SET_EDITOR_CODE`,
         payload: code

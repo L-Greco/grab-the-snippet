@@ -20,6 +20,12 @@ export const pageManagementReducer = (state = initialState.page, action) => {
 
 export const userReducer = (state = initialState.user, action) => {
     switch (action.type) {
+        case `SET_EDITOR_THEME`:
+            return {
+                ...state,
+                editorTheme: action.payload
+
+            }
         default:
             return state
     }
@@ -39,12 +45,7 @@ export const snippetReducer = (state = initialState.snippet, action) => {
                 editorLanguage: action.payload
 
             }
-        case `SET_EDITOR_THEME`:
-            return {
-                ...state,
-                editorTheme: action.payload
 
-            }
         case `SET_EDITOR_CODE`:
             return {
                 ...state,

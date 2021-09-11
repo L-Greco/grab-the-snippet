@@ -4,8 +4,13 @@ import {
   UnControlled as UncontrolledEditor,
 } from "react-codemirror2";
 import Toast from "react-bootstrap/Toast";
-import { AiOutlineClose } from "react-icons/ai";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setEditorCodeAction,
+  setEditorThemeAction,
+  setEditorLanguageAction,
+} from "../redux/actions";
 
 // import closebrackets.js addon to have the closing tag functionality
 import "codemirror/addon/edit/closebrackets.js";
@@ -217,6 +222,9 @@ function Editor() {
   const [text, setText] = useState("");
   const [editorTheme, setEditorTheme] = useState("");
   const [show, setShow] = useState(false);
+  const snippet = useSelector((state) => state.snippet);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   function handleChange(value) {
     setText(value);
@@ -239,8 +247,10 @@ function Editor() {
           <input
             id="editor-languages-selector"
             list="programming-languages"
-            defaultValue="javascript"
-            onChange={(e) => setLanguage(e.target.value)}
+            defaultValue={
+              user.editorLanguage ? user.EditorLanguage : "javascript"
+            }
+            onChange={(e) => dispatch(setEditorLanguageAction(e.target.value))}
           />
           <datalist id="programming-languages">
             {arrayOfEditorLanguages.map((language) => (
@@ -258,10 +268,12 @@ function Editor() {
             {content.SnippetCard.EditorTheme.English}
           </label>
           <select
-            onChange={(e) => setEditorTheme(e.target.value)}
+            onChange={(e) => dispatch(setEditorThemeAction(e.target.value))}
             name="themes"
             id="editor-themes-selector"
-            defaultValue="tomorrow-night-bright"
+            defaultValue={
+              user.editorTheme ? user.editorTheme : "tomorrow-night-bright"
+            }
           >
             {arrayOfEditorThemes.map((theme) => (
               <option key={theme + 1} value={theme}>
@@ -275,8 +287,10 @@ function Editor() {
 
       {/* <ControlledEditor
         className="editor"
-        onBeforeChange={(editor, data, value) => handleChange(value)}
-        value={text}
+        onBeforeChange={(editor, data, value) =>
+          dispatch(setEditorCodeAction(value))
+        }
+        value={snippet.code}
         options={{
           keyMap: "sublime",
           lineWrapping: true,
@@ -289,7 +303,7 @@ function Editor() {
       /> */}
       <UncontrolledEditor
         className="editor"
-        onChange={(editor, data, value) => handleChange(value)}
+        onChange={(editor, data, value) => dispatch(setEditorCodeAction(value))}
         options={{
           keyMap: "sublime",
           lineWrapping: true,
@@ -300,6 +314,7 @@ function Editor() {
           autoCloseBrackets: true,
         }}
       />
+
       <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
         <div className="toast-header">
           Copied to clipboard!

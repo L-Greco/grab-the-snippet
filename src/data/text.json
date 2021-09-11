@@ -8,8 +8,12 @@
   },
   "SnippetCard": {
     "Title": {
-      "English": "Add the title of the snippet",
-      "Greek": "Oρίστε τίτλο για το snippet"
+      "English": "Title of the snippet",
+      "Greek": "Τίτλος του σνίπετ"
+    },
+    "Comments": {
+      "English": "You can add your comments here",
+      "Greek": "Χώρος για σχόλια"
     },
     "EditorLanguage": {
       "English": "Editor's language :",
