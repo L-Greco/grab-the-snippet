@@ -12,6 +12,16 @@ export const pageManagementReducer = (state = initialState.page, action) => {
                 ...state,
                 cardModalIsOpen: false
             }
+        case `OPEN_ADD_A_SNIPPET_MODAL`:
+            return {
+                ...state,
+                cardModalIsOpen: true
+            }
+        case `CLOSE_ADD_A_SNIPPET_MODAL`:
+            return {
+                ...state,
+                cardModalIsOpen: false
+            }
         default:
             return state
     }

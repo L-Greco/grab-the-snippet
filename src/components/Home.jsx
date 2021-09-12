@@ -1,17 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
-import { closeCardModalAction, openCardModalAction } from "../redux/actions";
+import {
+  closeCardModalAction,
+  openCardModalAction,
+  closeAddSnippetModalAction,
+  openAddSnippetModalAction,
+} from "../redux/actions";
 import SnippetModal from "./SnippetModal";
+import AddSnippetModal from "./AddSnippetModal";
 import "../styles/homePage.css";
 
 let text = require("../data/text.json");
 
 const mapDispatchToProps = (dispatch) => ({
   openModal: () => {
-    dispatch(openCardModalAction());
+    dispatch(openAddSnippetModalAction());
   },
   closeModal: () => {
-    dispatch(closeCardModalAction);
+    dispatch(closeAddSnippetModalAction());
   },
 });
 
@@ -25,7 +31,7 @@ function Home({ openModal }) {
         <button className="addSnippetBtn" onClick={() => openModal()}>
           open Modal
         </button>
-        <SnippetModal />
+        <AddSnippetModal />
       </div>
     </div>
   );

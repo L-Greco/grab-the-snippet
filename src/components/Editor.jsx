@@ -236,7 +236,7 @@ function Editor() {
   }, []);
   return (
     <div>
-      <div className="editor-options-wrapper">
+      {/* <div className="editor-options-wrapper">
         <div>
           <label
             className="editor-selector-label"
@@ -283,7 +283,7 @@ function Editor() {
             ))}
           </select>
         </div>
-      </div>
+      </div> */}
 
       {/* <ControlledEditor
         className="editor"
@@ -314,22 +314,6 @@ function Editor() {
           autoCloseBrackets: true,
         }}
       />
-
-      <Toast onClose={() => setShow(false)} show={show} delay={1000} autohide>
-        <div className="toast-header">
-          Copied to clipboard!
-          {/* <AiOutlineClose onClick={() => setShow(false)} /> */}
-        </div>
-        {/* <Toast.Body className="text-center"></Toast.Body> */}
-      </Toast>
-      <CopyToClipboard text={snippet.code}>
-        <button
-          className="grab-the-snippet-button"
-          onClick={() => setShow(true)}
-        >
-          Grab The Snippet!
-        </button>
-      </CopyToClipboard>
     </div>
   );
 }

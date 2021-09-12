@@ -14,6 +14,7 @@ export const initialState = {
         language: "English",
         theme: "",
         cardModalIsOpen: false,
+        addSnippetModalIsOpen: false
     },
     snippet: {
         title: "",

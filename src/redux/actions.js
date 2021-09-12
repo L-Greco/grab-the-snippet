@@ -11,6 +11,17 @@ export const closeCardModalAction = () => {
         type: `CLOSE_CARD_MODAL`
     }
 }
+export const openAddSnippetModalAction = () => {
+    return {
+        type: `OPEN_ADD_A_SNIPPET_MODAL`
+    }
+}
+
+export const closeAddSnippetModalAction = () => {
+    return {
+        type: `CLOSE_ADD_A_SNIPPET_MODAL`
+    }
+}
 // *********************** SNIPPET *********************** //
 
 export const setSnippetTitleAction = (title) => {
