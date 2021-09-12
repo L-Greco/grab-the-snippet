@@ -6,7 +6,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export const initialState = {
     user: {
-        editorTheme: "",
+        editorTheme: "tomorrow-night-bright",
         editorLanguage: "",
         loggedIn: false,
     },
@@ -17,7 +17,7 @@ export const initialState = {
     },
     snippet: {
         title: "",
-        editorLanguage: "",
+        editorLanguage: "javascript",
         code: ""
     }
 

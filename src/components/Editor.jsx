@@ -248,7 +248,7 @@ function Editor() {
             id="editor-languages-selector"
             list="programming-languages"
             defaultValue={
-              user.editorLanguage ? user.EditorLanguage : "javascript"
+              user.editorLanguage ? user.editorLanguage : "javascript"
             }
             onChange={(e) => dispatch(setEditorLanguageAction(e.target.value))}
           />
@@ -307,10 +307,10 @@ function Editor() {
         options={{
           keyMap: "sublime",
           lineWrapping: true,
-          mode: language,
+          mode: snippet.editorLanguage, // here its the editor's language
           lint: true,
           lineNumbers: true,
-          theme: editorTheme,
+          theme: user.editorTheme, // here the editor's theme
           autoCloseBrackets: true,
         }}
       />
@@ -322,7 +322,7 @@ function Editor() {
         </div>
         {/* <Toast.Body className="text-center"></Toast.Body> */}
       </Toast>
-      <CopyToClipboard text={text}>
+      <CopyToClipboard text={snippet.code}>
         <button onClick={() => setShow(true)}>Grab The Snippet!</button>
       </CopyToClipboard>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import { getRequest } from "../lib/axios";
 // Icons
 import { SiLinkedin } from "react-icons/si";
 import { SiGithub } from "react-icons/si";
@@ -7,6 +8,15 @@ import { FcGoogle } from "react-icons/fc";
 import "../styles/loginPage.css";
 
 function LoginPage() {
+  const googleLogin = async () => {
+    try {
+      const res = await getRequest("users/googleLogin");
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <h1 className="text-center" style={{ fontFamily: "Rampart One" }}>
@@ -36,12 +46,18 @@ function LoginPage() {
             OR
           </div>
           <button className="login-continue-with-provider">
-            <div className="login-icon-wrapper">
-              <FcGoogle
-              //   style={{ color: "rgb(10,102,194)" }}
-              />
-              <div style={{ marginLeft: "5px" }}>Continue with Google</div>
-            </div>
+            <a
+              className="text-decoration-none "
+              style={{ color: "black" }}
+              href={process.env.REACT_APP_BE_URL + "/users/googleLogin"}
+            >
+              <div className="login-icon-wrapper">
+                <FcGoogle
+                //   style={{ color: "rgb(10,102,194)" }}
+                />
+                <div style={{ marginLeft: "5px" }}>Continue with Google</div>
+              </div>
+            </a>
           </button>
           <button className="login-continue-with-provider">
             <div className="login-icon-wrapper">
