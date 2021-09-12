@@ -323,7 +323,12 @@ function Editor() {
         {/* <Toast.Body className="text-center"></Toast.Body> */}
       </Toast>
       <CopyToClipboard text={snippet.code}>
-        <button onClick={() => setShow(true)}>Grab The Snippet!</button>
+        <button
+          className="grab-the-snippet-button"
+          onClick={() => setShow(true)}
+        >
+          Grab The Snippet!
+        </button>
       </CopyToClipboard>
     </div>
   );

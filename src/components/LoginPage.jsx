@@ -8,15 +8,6 @@ import { FcGoogle } from "react-icons/fc";
 import "../styles/loginPage.css";
 
 function LoginPage() {
-  const googleLogin = async () => {
-    try {
-      const res = await getRequest("users/googleLogin");
-
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <>
       <h1 className="text-center" style={{ fontFamily: "Rampart One" }}>

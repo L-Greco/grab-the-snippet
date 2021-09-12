@@ -6,7 +6,6 @@
   left: 50%;
   border-radius: 0.7rem;
   transform: translate(-50%, -50%);
-  background-color: white;
   z-index: 1000;
   box-shadow: 0 17px 50px 0 rgb(0 0 0 / 19%), 0 12px 15px 0 rgb(0 0 0 / 24%);
   background-color: var(--modal-bg-color);
@@ -36,7 +35,7 @@
 .main-content-modal {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .modal-header {
@@ -65,7 +64,7 @@
   background-color: var(--modal-bg-color);
   outline-color: #99caa3;
   border: none;
-  font-family: var(--font-3), "Azeret Mono", "Gill Sans", "Gill Sans MT",
+  font-family: "Acme", var(--font-3), "Azeret Mono", "Gill Sans", "Gill Sans MT",
     "Calibri", "Trebuchet MS", sans-serif;
   font-weight: 600;
   font-size: 1rem;
@@ -93,4 +92,23 @@
   overflow-wrap: break-word;
   resize: none;
   margin: 0.3rem;
+}
+
+.grab-the-snippet-button {
+  padding: 0.6rem;
+  border-radius: 0.3rem;
+  font-family: "Acme";
+  margin-top: 1rem;
+  border: none;
+  background-color: rgb(35, 182, 204);
+  color: white;
+  box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+}
+
+.grab-the-snippet-button:hover {
+  background-color: var(--main-color);
+  cursor: grab;
+}
+.grab-the-snippet-button:active {
+  cursor: grabbing;
 }

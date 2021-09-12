@@ -39,18 +39,19 @@ export const setEditorThemeAction = (theme) => {
     return {
         type: `SET_EDITOR_THEME`,
         payload: theme
+
     }
 }
 
 export const setLoggedInAction = (value) => {
     return {
-        type: `SET_LOGGGED_IN`,
-        payload: value
+        type: `SET_LOGGED_IN`
+
     }
 }
 export const setLoggedOffAction = (value) => {
     return {
-        type: `SET_LOGGGED_OFF`,
+        type: `SET_LOGGED_OFF`,
         payload: value
     }
 }

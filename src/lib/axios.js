@@ -1,5 +1,7 @@
 import axios from 'axios';
-
+import createAuthRefreshInterceptor from 'axios-auth-refresh';
+import { setLoggedInAction, setLoggedOffAction } from "../redux/actions.js"
+import { useSelector, useDispatch } from "react-redux";
 const axiosClient = axios.create();
 axiosClient.defaults.baseURL = process.env.REACT_APP_BE_URL;
 // console.log(axiosClient.defaults.baseURL)
@@ -9,6 +11,8 @@ axiosClient.defaults.headers = {
 };
 axiosClient.defaults.timeout = 20000;
 axiosClient.defaults.withCredentials = true;
+
+
 
 export const getRequest = (URL, options = {}) =>
     axiosClient.get(`/${URL}`, options).then((response) => response);
@@ -21,3 +25,14 @@ export const putRequest = (URL, payload, options = {}) =>
 
 export const deleteRequest = (URL) =>
     axiosClient.delete(`/${URL}`).then((response) => response);
+
+const refreshAuthLogic = failedRequest => axiosClient.post(`${process.env.REACT_APP_BE_URL}/users/refreshToken`,).then(tokenRefreshResponse => {
+    console.log(tokenRefreshResponse)
+    if (tokenRefreshResponse.status === 401) {
+        useDispatch(setLoggedOffAction())
+    }
+    return Promise.resolve();
+
+});
+
+createAuthRefreshInterceptor(axiosClient, refreshAuthLogic);
