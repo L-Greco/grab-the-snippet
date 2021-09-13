@@ -9,6 +9,7 @@ export const initialState = {
         editorTheme: "tomorrow-night-bright",
         editorLanguage: "javascript",
         loggedIn: false,
+        _id: ""
     },
     page: {
         language: "English",
@@ -19,7 +20,10 @@ export const initialState = {
     snippet: {
         title: "",
         editorLanguage: "javascript",
-        code: ""
+        code: "",
+        comments: "",
+        queryParameters: ""
+
     }
 
 }

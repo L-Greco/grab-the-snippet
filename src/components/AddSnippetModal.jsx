@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 import ReactDom from "react-dom";
 import Editor from "./Editor";
+import EditorOptions from "./EditorOptions";
 import Toast from "react-bootstrap/Toast";
 import { connect, useDispatch } from "react-redux";
 import {
   closeAddSnippetModalAction,
   setSnippetTitleAction,
-  setEditorLanguageAction,
-  setEditorThemeAction,
+  setEditorCodeAction,
 } from "../redux/actions";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
@@ -15,9 +15,6 @@ import "../styles/modal.css";
 import "../styles/codemirror.css";
 
 let text = require("../data/text.json");
-let editorData = require("../data/editor.json");
-let arrayOfEditorLanguages = editorData["programming-languages-array"];
-let arrayOfEditorThemes = editorData["editor-themes"];
 
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({
@@ -27,9 +24,19 @@ const mapDispatchToProps = (dispatch) => ({
   setTitle: (title) => {
     dispatch(setSnippetTitleAction(title));
   },
+  setCode: (code) => {
+    dispatch(setEditorCodeAction(code));
+  },
 });
 
-function AddSnippetModal({ page, closeModal, snippet, setTitle, user }) {
+function AddSnippetModal({
+  page,
+  closeModal,
+  snippet,
+  setTitle,
+  user,
+  setCode,
+}) {
   const ModalNode = useRef();
   const dispatch = useDispatch();
   function CloseModalIfClickedOut(ref) {
@@ -70,76 +77,34 @@ function AddSnippetModal({ page, closeModal, snippet, setTitle, user }) {
                 </IconContext.Provider>
               </button>
             </div>
-            <div className="add-Modal-inputs-wrapper">
-              {/* <input
-                type="text"
-                placeholder={text.SnippetCard.QueryParameters[page.language]}
-                className="add-snippet-query-input"
-              /> */}
-              <div>
-                {" "}
-                <div className="editor-options-wrapper">
-                  <div>
-                    <label
-                      className="editor-selector-label"
-                      htmlFor="editor-languages-selector"
-                    >
-                      {text.SnippetCard.EditorLanguage.English}
-                    </label>
-                    <input
-                      id="editor-languages-selector"
-                      list="programming-languages"
-                      defaultValue={
-                        user.editorLanguage ? user.editorLanguage : "javascript"
-                      }
-                      onChange={(e) =>
-                        dispatch(setEditorLanguageAction(e.target.value))
-                      }
-                    />
-                    <datalist id="programming-languages">
-                      {arrayOfEditorLanguages.map((language) => (
-                        <option key={language + 1} value={language}></option>
-                      ))}
-                    </datalist>{" "}
-                  </div>
 
-                  <div>
-                    {" "}
-                    <label
-                      className="editor-selector-label"
-                      htmlFor="editor-themes-selector"
-                    >
-                      {text.SnippetCard.EditorTheme.English}
-                    </label>
-                    <select
-                      onChange={(e) =>
-                        dispatch(setEditorThemeAction(e.target.value))
-                      }
-                      name="themes"
-                      id="editor-themes-selector"
-                      defaultValue={
-                        user.editorTheme
-                          ? user.editorTheme
-                          : "tomorrow-night-bright"
-                      }
-                    >
-                      {arrayOfEditorThemes.map((theme) => (
-                        <option key={theme + 1} value={theme}>
-                          {" "}
-                          {theme}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <Editor />{" "}
+            <div style={{ width: "80%" }}>
+              <EditorOptions />
+            </div>
+            <div style={{ width: "20%" }}></div>
+            <div className="add-Modal-editor-inputs-wrapper ">
+              <div className="editor-col">
+                <Editor />
               </div>
-
-              <textarea
-                type="text"
-                placeholder={text.SnippetCard.Comments[page.language]}
-                className="add-snippet-textarea"
-              />
+              <div className="add-Modal-inputs-wrapper ">
+                <textarea
+                  type="text"
+                  placeholder={text.SnippetCard.Comments[page.language]}
+                  className="add-snippet-textarea"
+                />
+                <input
+                  type="text"
+                  placeholder={text.SnippetCard.QueryParameters[page.language]}
+                  className="add-snippet-query-input"
+                />
+                <button
+                  className="clear-editor-btn"
+                  onClick={() => setCode("")}
+                >
+                  Clear
+                </button>
+                <button className="save-editor-btn">Save</button>
+              </div>
             </div>
           </div>
         </div>

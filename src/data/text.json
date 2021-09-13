@@ -12,8 +12,8 @@
       "Greek": "Τίτλος του σνίπετ"
     },
     "QueryParameters": {
-      "English": "Query parameters",
-      "Greek": "Παράμετροι αναζήτησης"
+      "English": "Query parameters (optional)",
+      "Greek": "Παράμετροι αναζήτησης (προαιρετικό)"
     },
     "Comments": {
       "English": "You can add your Comments here",

@@ -30,6 +30,12 @@ export const pageManagementReducer = (state = initialState.page, action) => {
 
 export const userReducer = (state = initialState.user, action) => {
     switch (action.type) {
+        case `SET_USER_ID`:
+            return {
+                ...state,
+                _id: action.payload
+
+            }
         case `SET_EDITOR_THEME`:
             return {
                 ...state,
@@ -72,6 +78,12 @@ export const snippetReducer = (state = initialState.snippet, action) => {
             return {
                 ...state,
                 code: action.payload
+
+            }
+        case `SET_SNIPPET_COMMENTS`:
+            return {
+                ...state,
+                comments: action.payload
 
             }
         default:

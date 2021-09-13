@@ -236,56 +236,7 @@ function Editor() {
   }, []);
   return (
     <div>
-      {/* <div className="editor-options-wrapper">
-        <div>
-          <label
-            className="editor-selector-label"
-            htmlFor="editor-languages-selector"
-          >
-            {content.SnippetCard.EditorLanguage.English}
-          </label>
-          <input
-            id="editor-languages-selector"
-            list="programming-languages"
-            defaultValue={
-              user.editorLanguage ? user.editorLanguage : "javascript"
-            }
-            onChange={(e) => dispatch(setEditorLanguageAction(e.target.value))}
-          />
-          <datalist id="programming-languages">
-            {arrayOfEditorLanguages.map((language) => (
-              <option key={language + 1} value={language}></option>
-            ))}
-          </datalist>{" "}
-        </div>
-
-        <div>
-          {" "}
-          <label
-            className="editor-selector-label"
-            htmlFor="editor-themes-selector"
-          >
-            {content.SnippetCard.EditorTheme.English}
-          </label>
-          <select
-            onChange={(e) => dispatch(setEditorThemeAction(e.target.value))}
-            name="themes"
-            id="editor-themes-selector"
-            defaultValue={
-              user.editorTheme ? user.editorTheme : "tomorrow-night-bright"
-            }
-          >
-            {arrayOfEditorThemes.map((theme) => (
-              <option key={theme + 1} value={theme}>
-                {" "}
-                {theme}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div> */}
-
-      {/* <ControlledEditor
+      <ControlledEditor
         className="editor"
         onBeforeChange={(editor, data, value) =>
           dispatch(setEditorCodeAction(value))
@@ -294,14 +245,14 @@ function Editor() {
         options={{
           keyMap: "sublime",
           lineWrapping: true,
-          mode: language,
+          mode: snippet.editorLanguage,
           lint: true,
           lineNumbers: true,
-          theme: editorTheme,
+          theme: user.editorTheme,
           autoCloseBrackets: true,
         }}
-      /> */}
-      <UncontrolledEditor
+      />
+      {/* <UncontrolledEditor
         className="editor"
         onChange={(editor, data, value) => dispatch(setEditorCodeAction(value))}
         options={{
@@ -313,7 +264,7 @@ function Editor() {
           theme: user.editorTheme, // here the editor's theme
           autoCloseBrackets: true,
         }}
-      />
+      /> */}
     </div>
   );
 }
