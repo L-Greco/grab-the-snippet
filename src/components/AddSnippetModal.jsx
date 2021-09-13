@@ -39,10 +39,15 @@ function AddSnippetModal({
 }) {
   const ModalNode = useRef();
   const dispatch = useDispatch();
+  const [btnAction, setBtnAction] = useState(false);
+  function triggerBtnAction() {
+    btnAction ? setBtnAction(false) : setBtnAction(true);
+  }
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
+          triggerBtnAction();
           closeModal();
         }
       }
@@ -84,7 +89,7 @@ function AddSnippetModal({
             <div style={{ width: "20%" }}></div>
             <div className="add-Modal-editor-inputs-wrapper ">
               <div className="editor-col">
-                <Editor />
+                <Editor buttonAction={btnAction} />
               </div>
               <div className="add-Modal-inputs-wrapper ">
                 <textarea
@@ -103,7 +108,12 @@ function AddSnippetModal({
                 >
                   Clear
                 </button>
-                <button className="save-editor-btn">Save</button>
+                <button
+                  className="save-editor-btn"
+                  onClick={() => triggerBtnAction()}
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>

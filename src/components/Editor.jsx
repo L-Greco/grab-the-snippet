@@ -217,31 +217,46 @@ let content = require("../data/text.json");
 let arrayOfEditorLanguages = editorData["programming-languages-array"];
 let arrayOfEditorThemes = editorData["editor-themes"];
 
-function Editor() {
+function Editor({ buttonAction }) {
   const [language, setLanguage] = useState("javascript");
   const [text, setText] = useState("");
   const [editorTheme, setEditorTheme] = useState("");
   const [show, setShow] = useState(false);
   const snippet = useSelector((state) => state.snippet);
   const user = useSelector((state) => state.user);
+  const page = useSelector((state) => state.page);
   const dispatch = useDispatch();
 
   function handleChange(value) {
     setText(value);
   }
+  // component did mount
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(setEditorCodeAction(text));
+  //     console.log(text);
+  //   };
+  // }, []);
 
+  // component will unmount
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(setEditorCodeAction(text));
+  //   };
+  // }, [text]);
+
+  // component did update
   useEffect(() => {
-    let editorTheme = document.getElementById("editor-themes-selector");
-    setEditorTheme(editorTheme.value);
-  }, []);
+    dispatch(setEditorCodeAction(text));
+  }, [buttonAction, page.addSnippetModalIsOpen]);
+
   return (
     <div>
       <ControlledEditor
         className="editor"
-        onBeforeChange={(editor, data, value) =>
-          dispatch(setEditorCodeAction(value))
-        }
-        value={snippet.code}
+        editorDidMount={(editor, next) => setText(snippet.code)}
+        onBeforeChange={(editor, data, value) => setText(value)}
+        value={text}
         options={{
           keyMap: "sublime",
           lineWrapping: true,
