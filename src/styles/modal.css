@@ -72,7 +72,6 @@
   border: none;
   font-family: "Acme", var(--font-3), "Azeret Mono", "Gill Sans", "Gill Sans MT",
     "Calibri", "Trebuchet MS", sans-serif;
-  font-weight: 600;
   font-size: 0.9rem;
   /* color: var(--main-color-blue); */
   min-height: 1rem;
@@ -190,4 +189,44 @@
 }
 .save-editor-btn:hover {
   background-color: var(--main-color);
+}
+
+.w-80 {
+  width: 80%;
+}
+.w-20 {
+  width: 20%;
+}
+@media (max-width: 600px) {
+  .w-80 {
+    width: 100%;
+  }
+  .w-20 {
+    width: 20%;
+  }
+  .editor-col {
+    width: 100%;
+  }
+  .add-Modal-editor-inputs-wrapper {
+    flex-direction: column;
+  }
+  .add-Modal-inputs-wrapper {
+    margin-top: 1rem;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-end;
+  }
+  .add-snippet-query-input {
+    width: fit-content;
+    overflow: auto;
+    margin-right: 0.5rem;
+  }
+  .add-snippet-textarea {
+    height: 4rem;
+    width: 50%;
+    margin-right: 0.5rem;
+  }
+  .save-editor-btn {
+    margin-left: 0.5rem;
+  }
 }

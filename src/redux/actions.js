@@ -43,6 +43,24 @@ export const setEditorCodeAction = (code) => {
         payload: code
     }
 }
+export const setSnippetCommentsAction = (comments) => {
+    return {
+        type: `SET_SNIPPET_COMMENTS`,
+        payload: comments
+    }
+}
+export const setQueryParametersAction = (query) => {
+    return {
+        type: `SET_SNIPPET_QUERY_PARAMETERS`,
+        payload: query
+    }
+}
+export const emptyTheSnippetAction = () => {
+    return {
+        type: `EMPTY_THE_SNIPPET`
+
+    }
+}
 
 // *********************** USER *********************** //
 

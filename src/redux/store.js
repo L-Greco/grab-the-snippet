@@ -20,6 +20,7 @@ export const initialState = {
     snippet: {
         title: "",
         editorLanguage: "javascript",
+        editorTheme: "",
         code: "",
         comments: "",
         queryParameters: ""

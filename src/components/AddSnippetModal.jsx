@@ -8,7 +8,11 @@ import {
   closeAddSnippetModalAction,
   setSnippetTitleAction,
   setEditorCodeAction,
+  setSnippetCommentsAction,
+  setQueryParametersAction,
+  emptyTheSnippetAction,
 } from "../redux/actions";
+import { postRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
@@ -27,6 +31,15 @@ const mapDispatchToProps = (dispatch) => ({
   setCode: (code) => {
     dispatch(setEditorCodeAction(code));
   },
+  setComments: (comments) => {
+    dispatch(setSnippetCommentsAction(comments));
+  },
+  setQuery: (query) => {
+    dispatch(setQueryParametersAction(query));
+  },
+  emptyTheSnippet: () => {
+    dispatch(emptyTheSnippetAction());
+  },
 });
 
 function AddSnippetModal({
@@ -36,9 +49,31 @@ function AddSnippetModal({
   setTitle,
   user,
   setCode,
+  setComments,
+  setQuery,
+  emptyTheSnippet,
 }) {
   const ModalNode = useRef();
-  const dispatch = useDispatch();
+
+  const handleSave = async () => {
+    let snippetToSend = {
+      title: snippet.title,
+      language: snippet.editorLanguage,
+      code: snippet.code,
+      queryParameters: snippet.queryParameters,
+    };
+
+    try {
+      if (user.editorTheme) {
+      }
+      let res = await postRequest(`snippets`, snippetToSend);
+      if (res.status === 201) {
+        emptyTheSnippet();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -78,10 +113,10 @@ function AddSnippetModal({
               </button>
             </div>
 
-            <div style={{ width: "80%" }}>
+            <div className="w-80">
               <EditorOptions />
             </div>
-            <div style={{ width: "20%" }}></div>
+            <div className="w-20"></div>
             <div className="add-Modal-editor-inputs-wrapper ">
               <div className="editor-col">
                 <Editor />
@@ -91,11 +126,15 @@ function AddSnippetModal({
                   type="text"
                   placeholder={text.SnippetCard.Comments[page.language]}
                   className="add-snippet-textarea"
+                  value={snippet.comments}
+                  onChange={(e) => setComments(e.target.value)}
                 />
                 <input
                   type="text"
                   placeholder={text.SnippetCard.QueryParameters[page.language]}
                   className="add-snippet-query-input"
+                  value={snippet.queryParameters}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
                 <button
                   className="clear-editor-btn"
@@ -103,7 +142,12 @@ function AddSnippetModal({
                 >
                   Clear
                 </button>
-                <button className="save-editor-btn">Save</button>
+                <button
+                  onClick={() => handleSave()}
+                  className="save-editor-btn"
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>

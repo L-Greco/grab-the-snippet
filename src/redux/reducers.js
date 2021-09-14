@@ -86,6 +86,21 @@ export const snippetReducer = (state = initialState.snippet, action) => {
                 comments: action.payload
 
             }
+        case `SET_SNIPPET_QUERY_PARAMETERS`:
+            return {
+                ...state,
+                queryParameters: action.payload
+
+            }
+        case `EMPTY_THE_SNIPPET`:
+            return {
+                ...state,
+                queryParameters: "",
+                code: "",
+                title: "",
+                comments: ""
+
+            }
         default:
             return state
 

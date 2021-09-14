@@ -3,14 +3,9 @@ import {
   Controlled as ControlledEditor,
   UnControlled as UncontrolledEditor,
 } from "react-codemirror2";
-import Toast from "react-bootstrap/Toast";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setEditorCodeAction,
-  setEditorThemeAction,
-  setEditorLanguageAction,
-} from "../redux/actions";
+import { setEditorCodeAction } from "../redux/actions";
 
 // import closebrackets.js addon to have the closing tag functionality
 import "codemirror/addon/edit/closebrackets.js";
@@ -211,29 +206,12 @@ import "codemirror/mode/z80/z80";
 
 // main css file
 import "../styles/codemirror.css";
-// array with editor languages and themes
-let editorData = require("../data/editor.json");
-let content = require("../data/text.json");
-let arrayOfEditorLanguages = editorData["programming-languages-array"];
-let arrayOfEditorThemes = editorData["editor-themes"];
 
 function Editor() {
-  const [language, setLanguage] = useState("javascript");
-  const [text, setText] = useState("");
-  const [editorTheme, setEditorTheme] = useState("");
-  const [show, setShow] = useState(false);
   const snippet = useSelector((state) => state.snippet);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  function handleChange(value) {
-    setText(value);
-  }
-
-  useEffect(() => {
-    let editorTheme = document.getElementById("editor-themes-selector");
-    setEditorTheme(editorTheme.value);
-  }, []);
   return (
     <div>
       <ControlledEditor
