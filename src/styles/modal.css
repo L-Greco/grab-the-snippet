@@ -29,7 +29,7 @@
 }
 
 .modal-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
@@ -229,4 +229,68 @@
   .save-editor-btn {
     margin-left: 0.5rem;
   }
+}
+.account-modal-main-container {
+  position: absolute;
+  width: 350px;
+  max-width: 95%;
+  top: 7vh;
+  height: 600px;
+  right: 0.4rem;
+  border-radius: 0.7rem;
+  /* transform: translate(-50%, -50%); */
+  z-index: 1000;
+  box-shadow: 0 17px 50px 0 rgb(0 0 0 / 19%), 0 12px 15px 0 rgb(0 0 0 / 24%);
+  background-color: white;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.account-modal-header {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
+  align-items: center;
+}
+.xbtn1 {
+  font-size: 1.2rem;
+}
+
+.xbtn-wrapper1 {
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  border-radius: 1rem;
+  height: 2rem;
+  width: 2rem;
+  margin-left: auto;
+}
+.xbtn-wrapper1:hover {
+  background-color: #edebeb;
+}
+
+.account-modal-account {
+  margin-left: 120px;
+  font-family: "Acme";
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.611);
+}
+
+.account-modal-info {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
+  padding: 0.3rem;
+}
+.acc-name {
+  font-family: "Acme";
+  font-size: 0.8rem;
+}
+.acc-mail {
+  font-family: "Acme";
+  font-size: 0.7rem;
+  margin-top: 0.4rem;
+  margin-left: 1rem;
+  color: grey;
 }

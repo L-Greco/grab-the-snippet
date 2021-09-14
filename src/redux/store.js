@@ -2,12 +2,17 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { pageManagementReducer, snippetReducer, userReducer } from './reducers'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true }) || compose
 
 export const initialState = {
     user: {
-        editorTheme: "tomorrow-night-bright",
-        editorLanguage: "javascript",
+        username: "",
+        firstName: "",
+        lastName: "",
+        avatar: "",
+        editorTheme: "",
+        editorLanguage: "",
+        language: "",
         loggedIn: false,
         _id: ""
     },
@@ -15,11 +20,12 @@ export const initialState = {
         language: "English",
         theme: "",
         cardModalIsOpen: false,
-        addSnippetModalIsOpen: false
+        addSnippetModalIsOpen: false,
+        accountModalIsOpen: false
     },
     snippet: {
         title: "",
-        editorLanguage: "javascript",
+        editorLanguage: "",
         editorTheme: "",
         code: "",
         comments: "",

@@ -1,0 +1,49 @@
+.navbar-wrapper {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(41, 204, 229, 0.5);
+  padding: 0.5rem;
+  position: relative;
+  height: 7vh;
+}
+.navbar-header {
+  font-family: "Rampart One";
+  font-size: 1.2rem;
+  font-weight: 700;
+  opacity: 0.7;
+  cursor: pointer;
+  position: relative;
+}
+.navbar-header::before {
+  content: "";
+  position: absolute;
+  background-color: var(--main-color-green);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  transition: 250ms linear;
+}
+.navbar-header:hover {
+  opacity: 1;
+}
+.navbar-header:hover::before {
+  width: 100%;
+}
+
+.navbar-header-icon-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-account {
+  position: relative;
+  flex: right;
+  background-color: white;
+  padding: 0.2rem;
+  border-radius: 2rem;
+  font-family: var(--font-2), var(--font-3);
+  border: 1px solid var(--main-color-green);
+  cursor: pointer;
+  font-size: 1.1rem;
+}

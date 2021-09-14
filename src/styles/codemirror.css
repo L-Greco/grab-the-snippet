@@ -9,12 +9,6 @@
   /* height: 2rem; */
 }
 
-/* @media (max-width: 1015px) {
-  .editor-options-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-} */
 #editor-languages-selector {
   border: none;
   font-family: var(--font-2);
@@ -74,18 +68,7 @@
     font-size: 0.7rem;
   }
 }
-/* 
-@media (min-width: 1254px) {
-  .editor-selector-label {
-    font-size: 0.8rem;
-  }
-  #editor-themes-selector {
-    font-size: 0.75rem;
-  }
-  #editor-languages-selector {
-    font-size: 0.75rem;
-  }
-} */
+
 /* Till Here */
 /* BASICS */
 

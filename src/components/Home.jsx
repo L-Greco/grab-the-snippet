@@ -25,9 +25,6 @@ function Home({ openModal }) {
   return (
     <div>
       <div>
-        <h1 style={{ fontFamily: "Rampart One" }}>
-          {text.HomePage.h1.English}
-        </h1>
         <button className="addSnippetBtn" onClick={() => openModal()}>
           open Modal
         </button>

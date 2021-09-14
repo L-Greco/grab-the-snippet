@@ -11,6 +11,16 @@ export const closeCardModalAction = () => {
         type: `CLOSE_CARD_MODAL`
     }
 }
+export const openAccountModalAction = () => {
+    return {
+        type: `OPEN_ACCOUNT_MODAL`
+    }
+}
+export const closeAccountModalAction = () => {
+    return {
+        type: `CLOSE_ACCOUNT_MODAL`
+    }
+}
 export const openAddSnippetModalAction = () => {
     return {
         type: `OPEN_ADD_A_SNIPPET_MODAL`
@@ -68,6 +78,20 @@ export const setEditorThemeAction = (theme) => {
     return {
         type: `SET_EDITOR_THEME`,
         payload: theme
+
+    }
+}
+export const setUserAction = (user) => {
+    return {
+        type: `SET_USER`,
+        payload: user
+
+    }
+}
+export const clearUserAction = (user) => {
+    return {
+        type: `CLEAR_USER`,
+        payload: user
 
     }
 }

@@ -22,6 +22,16 @@ export const pageManagementReducer = (state = initialState.page, action) => {
                 ...state,
                 cardModalIsOpen: false
             }
+        case `OPEN_ACCOUNT_MODAL`:
+            return {
+                ...state,
+                accountModalIsOpen: true
+            }
+        case `CLOSE_ACCOUNT_MODAL`:
+            return {
+                ...state,
+                accountModalIsOpen: false
+            }
         default:
             return state
     }
@@ -52,6 +62,37 @@ export const userReducer = (state = initialState.user, action) => {
             return {
                 ...state,
                 loggedIn: false
+
+            }
+        case `SET_USER`:
+            return {
+                ...state,
+                username: action.payload.profile.username ? action.profile.username : "",
+                firstName: action.payload.profile.firstName,
+                lastName: action.payload.profile.lastName,
+                avatar: action.payload.profile.avatar,
+                email: action.payload.profile.email,
+                editorTheme: action.payload.accountSettings.preferredEditorTheme,
+                editorLanguage: action.payload.accountSettings.preferredEditorLanguage,
+                language: action.payload.accountSettings.preferredApplicationLanguage,
+                loggedIn: true,
+                _id: action.payload._id
+
+
+            }
+        case `CLEAR_USER`:
+            return {
+                ...state,
+                username: "",
+                firstName: "",
+                lastName: "",
+                avatar: "",
+                editorTheme: "",
+                editorLanguage: "",
+                language: "",
+                loggedIn: false,
+                _id: ""
+
 
             }
         default:
