@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setEditorLanguageAction,
   setEditorThemeAction,
+  setSnippetEditorThemeAction,
 } from "../redux/actions";
 let text = require("../data/text.json");
 let editorData = require("../data/editor.json");
@@ -45,7 +46,9 @@ export default function EditorOptions() {
           {text.SnippetCard.EditorTheme.English}
         </label>
         <select
-          onChange={(e) => dispatch(setEditorThemeAction(e.target.value))}
+          onChange={(e) =>
+            dispatch(setSnippetEditorThemeAction(e.target.value))
+          }
           name="themes"
           id="editor-themes-selector"
           defaultValue={

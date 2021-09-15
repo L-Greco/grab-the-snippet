@@ -226,7 +226,7 @@ function Editor() {
           mode: snippet.editorLanguage,
           lint: true,
           lineNumbers: true,
-          theme: user.editorTheme,
+          theme: snippet.editorTheme,
           autoCloseBrackets: true,
         }}
       />

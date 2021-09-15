@@ -53,7 +53,7 @@ function AddSnippetModal({
   setQuery,
   emptyTheSnippet,
 }) {
-  const ModalNode = useRef();
+  const addSnippetModalNode = useRef();
 
   const handleSave = async () => {
     let snippetToSend = {
@@ -61,10 +61,11 @@ function AddSnippetModal({
       language: snippet.editorLanguage,
       code: snippet.code,
       queryParameters: snippet.queryParameters,
+      parent: page.parent,
     };
 
     try {
-      if (user.editorTheme) {
+      if (user.editorTheme !== snippet.editorTheme) {
       }
       let res = await postRequest(`snippets`, snippetToSend);
       if (res.status === 201) {
@@ -90,14 +91,14 @@ function AddSnippetModal({
       };
     }, [ref]);
   }
-  CloseModalIfClickedOut(ModalNode);
+  CloseModalIfClickedOut(addSnippetModalNode);
 
-  if (!page.cardModalIsOpen) return null;
+  if (!page.addSnippetModalIsOpen) return null;
 
   return ReactDom.createPortal(
     <>
       <div className="modal-overlay">
-        <div ref={ModalNode} className="modal-main-container">
+        <div ref={addSnippetModalNode} className="modal-main-container">
           <div className="main-content-modal">
             <div className="modal-header">
               <textarea

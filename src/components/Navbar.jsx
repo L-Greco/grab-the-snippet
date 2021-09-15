@@ -26,7 +26,7 @@ function Navbar() {
   return (
     <div className="navbar-wrapper">
       <div className="navbar-header-icon-wrapper mx-auto">
-        <img src="gts1111.png" alt="logo here" className="img-fluid" />
+        <img src="/gts1111.png" alt="logo here" className="img-fluid" />
         <div className="navbar-header">
           {text.HomePage.h1[state.page.language]}
         </div>
@@ -35,7 +35,7 @@ function Navbar() {
         onClick={() => dispatch(openAccountModalAction())}
         className="navbar-account"
       >
-        {acc}
+        <div className="text-center"> {acc}</div>
       </div>
       <AccountModal />
     </div>

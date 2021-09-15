@@ -15,12 +15,12 @@ export const pageManagementReducer = (state = initialState.page, action) => {
         case `OPEN_ADD_A_SNIPPET_MODAL`:
             return {
                 ...state,
-                cardModalIsOpen: true
+                addSnippetModalIsOpen: true
             }
         case `CLOSE_ADD_A_SNIPPET_MODAL`:
             return {
                 ...state,
-                cardModalIsOpen: false
+                addSnippetModalIsOpen: false
             }
         case `OPEN_ACCOUNT_MODAL`:
             return {
@@ -31,6 +31,11 @@ export const pageManagementReducer = (state = initialState.page, action) => {
             return {
                 ...state,
                 accountModalIsOpen: false
+            }
+        case `ADD_PARENT`:
+            return {
+                ...state,
+                parent: action.payload
             }
         default:
             return state
@@ -46,7 +51,7 @@ export const userReducer = (state = initialState.user, action) => {
                 _id: action.payload
 
             }
-        case `SET_EDITOR_THEME`:
+        case `SET_USER_EDITOR_THEME`:
             return {
                 ...state,
                 editorTheme: action.payload
@@ -61,6 +66,7 @@ export const userReducer = (state = initialState.user, action) => {
         case `SET_LOGGED_OFF`:
             return {
                 ...state,
+                userLanded: true,
                 loggedIn: false
 
             }
@@ -76,6 +82,7 @@ export const userReducer = (state = initialState.user, action) => {
                 editorLanguage: action.payload.accountSettings.preferredEditorLanguage,
                 language: action.payload.accountSettings.preferredApplicationLanguage,
                 loggedIn: true,
+                userLanded: true,
                 _id: action.payload._id
 
 
@@ -112,6 +119,12 @@ export const snippetReducer = (state = initialState.snippet, action) => {
             return {
                 ...state,
                 editorLanguage: action.payload
+
+            }
+        case `SET_SNIPPET_EDITOR_THEME`:
+            return {
+                ...state,
+                editorTheme: action.payload
 
             }
 

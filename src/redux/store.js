@@ -14,14 +14,18 @@ export const initialState = {
         editorLanguage: "",
         language: "",
         loggedIn: false,
-        _id: ""
+        _id: "",
+        userLanded: false
+
     },
     page: {
         language: "English",
         theme: "",
         cardModalIsOpen: false,
         addSnippetModalIsOpen: false,
-        accountModalIsOpen: false
+        accountModalIsOpen: false,
+        parent: ""
+
     },
     snippet: {
         title: "",
@@ -29,7 +33,8 @@ export const initialState = {
         editorTheme: "",
         code: "",
         comments: "",
-        queryParameters: ""
+        queryParameters: "",
+
 
     }
 

@@ -1,11 +1,48 @@
+.home-main-container {
+  margin-top: 0.5rem;
+
+  font-family: "Acme";
+}
+.home-functionality-wrapper {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
+  padding: 0.5rem;
+}
+
 .addSnippetBtn {
   background-color: var(--main-color-green);
-  padding: calc(1.375rem + 1.5vw);
-  border-radius: 3rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 1rem;
   border: none;
   color: var(--main-color-blue);
   cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
 }
 .addSnippetBtn:hover {
-  box-shadow: 0 17px 50px 0 rgb(0 0 0 / 19%), 0 12px 15px 0 rgb(0 0 0 / 24%);
+  background-color: #69fa86;
+}
+.addFolderBtn {
+  margin-left: 0.5rem;
+  background-color: var(--main-color-orange);
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 1rem;
+  border: none;
+  color: var(--main-color-blue);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
+}
+.addFolderBtn:hover {
+  background-color: var(--main-color-yellow);
+}
+
+.home-cards-container {
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
 }

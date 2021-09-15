@@ -32,6 +32,13 @@ export const closeAddSnippetModalAction = () => {
         type: `CLOSE_ADD_A_SNIPPET_MODAL`
     }
 }
+export const addParentAction = (parent) => {
+    return {
+        type: `ADD_PARENT`,
+        payload: parent
+
+    }
+}
 // *********************** SNIPPET *********************** //
 
 export const setSnippetTitleAction = (title) => {
@@ -44,6 +51,12 @@ export const setEditorLanguageAction = (language) => {
     return {
         type: `SET_EDITOR_LANGUAGE`,
         payload: language
+    }
+}
+export const setSnippetEditorThemeAction = (theme) => {
+    return {
+        type: `SET_SNIPPET_EDITOR_THEME`,
+        payload: theme
     }
 }
 
@@ -76,7 +89,7 @@ export const emptyTheSnippetAction = () => {
 
 export const setEditorThemeAction = (theme) => {
     return {
-        type: `SET_EDITOR_THEME`,
+        type: `SET_USER_EDITOR_THEME`,
         payload: theme
 
     }
@@ -102,10 +115,10 @@ export const setLoggedInAction = (value) => {
 
     }
 }
-export const setLoggedOffAction = (value) => {
+export const setLoggedOffAction = () => {
     return {
-        type: `SET_LOGGED_OFF`,
-        payload: value
+        type: `SET_LOGGED_OFF`
+
     }
 }
 export const setUserIdAction = (id) => {

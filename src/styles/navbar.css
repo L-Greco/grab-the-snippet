@@ -5,6 +5,7 @@
   padding: 0.5rem;
   position: relative;
   height: 7vh;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
 }
 .navbar-header {
   font-family: "Rampart One";
@@ -39,9 +40,11 @@
 .navbar-account {
   position: relative;
   flex: right;
+  display: flex;
+  align-items: center;
   background-color: white;
   padding: 0.2rem;
-  border-radius: 2rem;
+  border-radius: 100%;
   font-family: var(--font-2), var(--font-3);
   border: 1px solid var(--main-color-green);
   cursor: pointer;
