@@ -6,7 +6,7 @@ import StartingPage from "./components/StartingPage";
 import { useEffect, useState } from "react"
 import WebFont from "webfontloader"
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import { setLoggedInAction, setLoggedOffAction, setUserAction } from "./redux/actions.js"
+import { setLoggedInAction, setLoggedOffAction, setUserAction, setSnippetEditorThemeAction, setEditorLanguageAction } from "./redux/actions.js"
 import { getRequest } from "./lib/axios.js"
 import { useSelector, useDispatch } from "react-redux";
 
@@ -18,10 +18,12 @@ function App() {
 
   const setUser = async () => {
     try {
-      const data = await getRequest("users/me")
-      if (data.status === 200) {
-        console.log(data.data)
-        dispatch(setUserAction(data.data))
+      const res = await getRequest("users/me")
+      if (res.status === 200) {
+        console.log(res.data)
+        dispatch(setUserAction(res.data))
+        dispatch(setSnippetEditorThemeAction(res.data.accountSettings.preferredEditorTheme))
+        dispatch(setEditorLanguageAction(res.data.accountSettings.preferredEditorLanguage))
 
       } else {
         dispatch(setLoggedOffAction())

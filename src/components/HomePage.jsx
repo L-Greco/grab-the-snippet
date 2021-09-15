@@ -7,6 +7,7 @@ import {
   closeAddSnippetModalAction,
   openAddSnippetModalAction,
   addParentAction,
+  addSnippetsArrayAction,
 } from "../redux/actions";
 import { getRequest } from "../lib/axios";
 // Components
@@ -43,11 +44,12 @@ function HomePage({ match, history }) {
   async function getData() {
     try {
       const res = await getRequest(`snippets/${returnParent("url")}`);
-
-      console.log(res.data[0]);
+      if (res.status === 200) {
+        dispatch(addSnippetsArrayAction(res.data));
+      }
     } catch (error) {
       alert(error);
-      console.log(error);
+      history.push("/home");
     }
   }
 
@@ -75,14 +77,21 @@ function HomePage({ match, history }) {
             Add a Snippet!
           </button>
           <button
-            onClick={() => history.push("/folder/fuck")}
+            onClick={() => history.push("/folder/strive")}
             className="addFolderBtn"
           >
             Add a Folder!
           </button>
         </div>
         <div className="home-cards-container">
-          <MyCard />
+          {page.foldersArray.length > 0 &&
+            page.foldersArray.map((snippet) => (
+              <MyCard key={snippet._id} data={snippet} />
+            ))}
+          {page.snippetsArray.length > 0 &&
+            page.snippetsArray.map((snippet) => (
+              <MyCard key={snippet._id} data={snippet} />
+            ))}
         </div>
       </main>
     </>

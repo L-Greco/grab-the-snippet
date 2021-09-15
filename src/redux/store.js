@@ -24,7 +24,9 @@ export const initialState = {
         cardModalIsOpen: false,
         addSnippetModalIsOpen: false,
         accountModalIsOpen: false,
-        parent: ""
+        parent: "",
+        snippetsArray: [],
+        foldersArray: [],
 
     },
     snippet: {

@@ -39,6 +39,20 @@ export const addParentAction = (parent) => {
 
     }
 }
+export const addSnippetsArrayAction = (array) => {
+    return {
+        type: `ADD_SNIPPETS_ARRAY`,
+        payload: array
+
+    }
+}
+export const addFoldersArrayAction = (array) => {
+    return {
+        type: `ADD_FOLDERS_ARRAY`,
+        payload: array
+
+    }
+}
 // *********************** SNIPPET *********************** //
 
 export const setSnippetTitleAction = (title) => {
@@ -87,7 +101,7 @@ export const emptyTheSnippetAction = () => {
 
 // *********************** USER *********************** //
 
-export const setEditorThemeAction = (theme) => {
+export const setUserThemeAction = (theme) => {
     return {
         type: `SET_USER_EDITOR_THEME`,
         payload: theme

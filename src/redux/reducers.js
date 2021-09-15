@@ -37,6 +37,16 @@ export const pageManagementReducer = (state = initialState.page, action) => {
                 ...state,
                 parent: action.payload
             }
+        case `ADD_SNIPPETS_ARRAY`:
+            return {
+                ...state,
+                snippetsArray: action.payload
+            }
+        case `ADD_FOLDERS_ARRAY`:
+            return {
+                ...state,
+                foldersArray: action.payload
+            }
         default:
             return state
     }
