@@ -53,6 +53,24 @@ export const addFoldersArrayAction = (array) => {
 
     }
 }
+export const cardModalisLoadingAction = (boolean) => {
+    return {
+        type: `CARD_MODAL_IS_LOADING`,
+        payload: boolean
+    }
+}
+export const addSnippetTOArrayAction = (snippet) => {
+    return {
+        type: `ADD_SNIPPET_TO_ARRAY`,
+        payload: snippet
+    }
+}
+export const removeSnippetFromArrayAction = (index) => {
+    return {
+        type: `REMOVE_SNIPPET_FROM_ARRAY`,
+        payload: index
+    }
+}
 // *********************** SNIPPET *********************** //
 
 export const setSnippetTitleAction = (title) => {
@@ -92,9 +110,17 @@ export const setQueryParametersAction = (query) => {
         payload: query
     }
 }
-export const emptyTheSnippetAction = () => {
+export const emptyTheSnippetAction = (userLanguage, userTheme) => {
     return {
-        type: `EMPTY_THE_SNIPPET`
+        type: `EMPTY_THE_SNIPPET`,
+        payload: { userLanguage, userTheme }
+
+    }
+}
+export const setTheSnippetAction = (snippet) => {
+    return {
+        type: `SET_THE_SNIPPET`,
+        payload: snippet
 
     }
 }

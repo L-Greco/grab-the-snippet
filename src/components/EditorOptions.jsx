@@ -12,6 +12,7 @@ let arrayOfEditorThemes = editorData["editor-themes"];
 export default function EditorOptions() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const snippet = useSelector((state) => state.snippet);
   return (
     <div className="editor-options-wrapper">
       <div>
@@ -24,9 +25,7 @@ export default function EditorOptions() {
         <input
           id="editor-languages-selector"
           list="programming-languages"
-          defaultValue={
-            user.editorLanguage ? user.editorLanguage : "javascript"
-          }
+          defaultValue={snippet.editorLanguage}
           onChange={(e) => dispatch(setEditorLanguageAction(e.target.value))}
         />
         <datalist id="programming-languages">
@@ -50,9 +49,7 @@ export default function EditorOptions() {
           }
           name="themes"
           id="editor-themes-selector"
-          defaultValue={
-            user.editorTheme ? user.editorTheme : "tomorrow-night-bright"
-          }
+          defaultValue={snippet.editorTheme}
         >
           {arrayOfEditorThemes.map((theme) => (
             <option key={theme + 1} value={theme}>

@@ -47,6 +47,22 @@ export const pageManagementReducer = (state = initialState.page, action) => {
                 ...state,
                 foldersArray: action.payload
             }
+        case `CARD_MODAL_IS_LOADING`:
+            return {
+                ...state,
+                cardModalIsLoading: action.payload
+            }
+        case `ADD_SNIPPET_TO_ARRAY`:
+            return {
+                ...state,
+                snippetsArray: [...state.snippetsArray, action.payload]
+            }
+        case `REMOVE_SNIPPET_FROM_ARRAY`:
+            let newSnippetArray = state.snippetsArray.filter((snippet, i) => i !== action.payload)
+            return {
+                ...state,
+                snippetsArray: newSnippetArray
+            }
         default:
             return state
     }
@@ -112,6 +128,7 @@ export const userReducer = (state = initialState.user, action) => {
 
 
             }
+
         default:
             return state
     }
@@ -162,7 +179,20 @@ export const snippetReducer = (state = initialState.snippet, action) => {
                 queryParameters: "",
                 code: "",
                 title: "",
-                comments: ""
+                comments: "",
+                editorLanguage: action.payload.userLanguage,
+                editorTheme: action.payload.userTheme
+
+
+            }
+        case `SET_THE_SNIPPET`:
+            return {
+                ...state,
+                queryParameters: action.payload.queryParameters ? action.payload.queryParameters : "",
+                code: action.payload.code,
+                title: action.payload.title,
+                comments: action.payload.comments ? action.payload.comments : "",
+                editorLanguage: action.payload.language
 
             }
         default:

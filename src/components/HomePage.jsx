@@ -8,6 +8,8 @@ import {
   openAddSnippetModalAction,
   addParentAction,
   addSnippetsArrayAction,
+  setEditorLanguageAction,
+  setSnippetEditorThemeAction,
 } from "../redux/actions";
 import { getRequest } from "../lib/axios";
 // Components
@@ -40,7 +42,11 @@ function HomePage({ match, history }) {
       } else return "home";
     }
   }
-
+  function addSnippet() {
+    dispatch(setEditorLanguageAction(user.editorLanguage));
+    dispatch(setSnippetEditorThemeAction(user.editorTheme));
+    dispatch(openAddSnippetModalAction());
+  }
   async function getData() {
     try {
       const res = await getRequest(`snippets/${returnParent("url")}`);
@@ -58,7 +64,7 @@ function HomePage({ match, history }) {
     getData();
   }, [match]);
 
-  if (!user.loggedIn || page.language === "russian") {
+  if (!user.loggedIn) {
     return <Redirect to="/LoginPage" />;
   }
   return (
@@ -71,7 +77,7 @@ function HomePage({ match, history }) {
           <button
             className="addSnippetBtn"
             // disabled={true}
-            onClick={() => dispatch(openAddSnippetModalAction())}
+            onClick={addSnippet}
           >
             {/* <TiPlusOutline style={{ fontSize: "1.2rem" }} /> */}
             Add a Snippet!
@@ -85,12 +91,12 @@ function HomePage({ match, history }) {
         </div>
         <div className="home-cards-container">
           {page.foldersArray.length > 0 &&
-            page.foldersArray.map((snippet) => (
-              <MyCard key={snippet._id} data={snippet} />
+            page.foldersArray.map((snippet, i) => (
+              <MyCard key={snippet._id} data={{ ...snippet, index: i }} />
             ))}
           {page.snippetsArray.length > 0 &&
-            page.snippetsArray.map((snippet) => (
-              <MyCard key={snippet._id} data={snippet} />
+            page.snippetsArray.map((snippet, i) => (
+              <MyCard key={snippet._id} data={{ ...snippet, index: i }} />
             ))}
         </div>
       </main>

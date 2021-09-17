@@ -11,8 +11,10 @@ import {
   setSnippetCommentsAction,
   setQueryParametersAction,
   emptyTheSnippetAction,
+  addSnippetTOArrayAction,
+  setUserThemeAction,
 } from "../redux/actions";
-import { postRequest } from "../lib/axios.js";
+import { postRequest, putRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
@@ -37,8 +39,14 @@ const mapDispatchToProps = (dispatch) => ({
   setQuery: (query) => {
     dispatch(setQueryParametersAction(query));
   },
-  emptyTheSnippet: () => {
-    dispatch(emptyTheSnippetAction());
+  emptyTheSnippet: (language, theme) => {
+    dispatch(emptyTheSnippetAction(language, theme));
+  },
+  addSnippetToArray: (snippet) => {
+    dispatch(addSnippetTOArrayAction(snippet));
+  },
+  setUserTheme: (theme) => {
+    dispatch(setUserThemeAction(theme));
   },
 });
 
@@ -52,6 +60,8 @@ function AddSnippetModal({
   setComments,
   setQuery,
   emptyTheSnippet,
+  addSnippetToArray,
+  setUserTheme,
 }) {
   const addSnippetModalNode = useRef();
 
@@ -62,14 +72,26 @@ function AddSnippetModal({
       code: snippet.code,
       queryParameters: snippet.queryParameters,
       parent: page.parent,
+      comments: snippet.comments,
     };
 
     try {
       if (user.editorTheme !== snippet.editorTheme) {
+        let userTheme = {
+          accountSettings: {
+            preferredEditorTheme: snippet.editorTheme,
+          },
+        };
+        const res = await putRequest("users/edit", userTheme);
+        if (res.status === 200) {
+          setUserTheme(snippet.editorTheme);
+        }
       }
       let res = await postRequest(`snippets`, snippetToSend);
       if (res.status === 201) {
-        emptyTheSnippet();
+        addSnippetToArray(res.data);
+        closeModal();
+        emptyTheSnippet(user.editorLanguage, user.editorTheme);
       }
     } catch (error) {
       console.log(error);

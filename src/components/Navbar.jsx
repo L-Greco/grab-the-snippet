@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AccountModal from "./AccountModal";
 import { useSelector, useDispatch } from "react-redux";
+import { withRouter, Redirect } from "react-router";
 import { openAccountModalAction } from "../redux/actions";
 import "../styles/navbar.css";
 let text = require("../data/text.json");
 
-function Navbar() {
+function Navbar({ history }) {
   const [acc, setAcc] = useState("");
 
   const state = useSelector((state) => state);
@@ -27,7 +28,7 @@ function Navbar() {
     <div className="navbar-wrapper">
       <div className="navbar-header-icon-wrapper mx-auto">
         <img src="/gts1111.png" alt="logo here" className="img-fluid" />
-        <div className="navbar-header">
+        <div className="navbar-header" onClick={() => history.push("/home")}>
           {text.HomePage.h1[state.page.language]}
         </div>
       </div>
@@ -42,4 +43,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default withRouter(Navbar);

@@ -27,6 +27,7 @@ export const initialState = {
         parent: "",
         snippetsArray: [],
         foldersArray: [],
+        cardModalIsLoading: false
 
     },
     snippet: {
