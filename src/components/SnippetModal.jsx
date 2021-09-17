@@ -56,6 +56,7 @@ function SnippetModal({
 }) {
   const ModalNode = useRef();
   const [show, setShow] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleSave = async () => {
     let snippetToSend = {
@@ -81,6 +82,7 @@ function SnippetModal({
     closeModal();
     emptyTheSnippet(user.editorLanguage, user.editorTheme);
   }
+  async function handleDelete() {}
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -106,87 +108,111 @@ function SnippetModal({
       <div className="modal-overlay">
         <div ref={ModalNode} className="modal-main-container">
           <div className="main-content-modal">
-            {page.cardModalIsLoading && (
-              <Spinner animation="border" variant="info" />
-            )}
-            {!page.cardModalIsLoading && (
-              <div>
-                <div className="modal-header">
-                  <textarea
-                    className="modal-title-input"
-                    value={snippet.title}
-                    placeholder={text.SnippetCard.Title[page.language]}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                  <button className="xbtn-wrapper" onClick={handleClose}>
-                    <IconContext.Provider value={{ className: "xbtn" }}>
-                      <AiOutlineClose />
-                    </IconContext.Provider>
-                  </button>
-                </div>
-
-                <div className="w-80">
-                  <EditorOptions />
-                </div>
-                <div className="w-20"></div>
-                <div className="add-Modal-editor-inputs-wrapper ">
-                  <div className="editor-col">
-                    <Editor />
+            {showDeleteModal && (
+              <div className="delete-modal-overlay">
+                <div className="small-delete-modal">
+                  <div>Are you sure you want to delete the snippet?</div>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <button
+                      style={{ width: "35%" }}
+                      onClick={handleDelete}
+                      className="addSnippetBtn"
+                    >
+                      Yes
+                    </button>
+                    <button
+                      onClick={() => setShowDeleteModal(false)}
+                      className="addFolderBtn"
+                      style={{ width: "35%" }}
+                    >
+                      No
+                    </button>
                   </div>
-                  <div className="add-Modal-inputs-wrapper ">
-                    <textarea
-                      type="text"
-                      placeholder={text.SnippetCard.Comments[page.language]}
-                      className="add-snippet-textarea"
-                      value={snippet.comments}
-                      onChange={(e) => setComments(e.target.value)}
-                    />
-                    <input
-                      type="text"
-                      placeholder={
-                        text.SnippetCard.QueryParameters[page.language]
-                      }
-                      className="add-snippet-query-input"
-                      value={snippet.queryParameters}
-                      onChange={(e) => setQuery(e.target.value)}
-                    />
-                    {/* <button
+                </div>
+              </div>
+            )}
+
+            <div>
+              <div className="modal-header">
+                <textarea
+                  className="modal-title-input"
+                  value={snippet.title}
+                  placeholder={text.SnippetCard.Title[page.language]}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <button className="xbtn-wrapper" onClick={handleClose}>
+                  <IconContext.Provider value={{ className: "xbtn" }}>
+                    <AiOutlineClose />
+                  </IconContext.Provider>
+                </button>
+              </div>
+
+              <div className="w-80">
+                <EditorOptions />
+              </div>
+              <div className="w-20"></div>
+              <div className="add-Modal-editor-inputs-wrapper ">
+                <div className="editor-col">
+                  <Editor />
+                </div>
+                <div className="add-Modal-inputs-wrapper ">
+                  <textarea
+                    type="text"
+                    placeholder={text.SnippetCard.Comments[page.language]}
+                    className="add-snippet-textarea"
+                    value={snippet.comments}
+                    onChange={(e) => setComments(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder={
+                      text.SnippetCard.QueryParameters[page.language]
+                    }
+                    className="add-snippet-query-input"
+                    value={snippet.queryParameters}
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+                  {/* <button
                   className="clear-editor-btn"
                   onClick={() => setCode("")}
                 >
                   Clear
                 </button> */}
-                    <Toast
-                      onClose={() => setShow(false)}
-                      show={show}
-                      delay={1000}
-                      autohide
-                    >
-                      <div className="toast-header">
-                        Copied to clipboard!
-                        {/* <AiOutlineClose onClick={() => setShow(false)} /> */}
-                      </div>
-                      {/* <Toast.Body className="text-center"></Toast.Body> */}
-                    </Toast>
-                    <button className="clear-editor-btn">Delete</button>
+                  <Toast
+                    onClose={() => setShow(false)}
+                    show={show}
+                    delay={1000}
+                    autohide
+                  >
+                    <div className="toast-header">
+                      Copied to clipboard!
+                      {/* <AiOutlineClose onClick={() => setShow(false)} /> */}
+                    </div>
+                    {/* <Toast.Body className="text-center"></Toast.Body> */}
+                  </Toast>
+                  <button
+                    className="clear-editor-btn"
+                    onClick={() => setShowDeleteModal(true)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => handleSave()}
+                    className="save-editor-btn"
+                  >
+                    Save Changes
+                  </button>
+                  <CopyToClipboard text={snippet.code}>
                     <button
-                      onClick={() => handleSave()}
-                      className="save-editor-btn"
+                      className="grab-the-snippet-button"
+                      onClick={() => setShow(true)}
                     >
-                      Save Changes
+                      Grab The Snippet!
                     </button>
-                    <CopyToClipboard text={snippet.code}>
-                      <button
-                        className="grab-the-snippet-button"
-                        onClick={() => setShow(true)}
-                      >
-                        Grab The Snippet!
-                      </button>
-                    </CopyToClipboard>
-                  </div>
+                  </CopyToClipboard>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

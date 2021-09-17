@@ -181,7 +181,8 @@ export const snippetReducer = (state = initialState.snippet, action) => {
                 title: "",
                 comments: "",
                 editorLanguage: action.payload.userLanguage,
-                editorTheme: action.payload.userTheme
+                editorTheme: action.payload.userTheme,
+                id: ""
 
 
             }
@@ -192,7 +193,9 @@ export const snippetReducer = (state = initialState.snippet, action) => {
                 code: action.payload.code,
                 title: action.payload.title,
                 comments: action.payload.comments ? action.payload.comments : "",
-                editorLanguage: action.payload.language
+                editorLanguage: action.payload.language,
+                id: action.payload._id
+
 
             }
         default:
