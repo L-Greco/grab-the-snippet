@@ -40,6 +40,10 @@
   padding: 0.2rem;
   box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
   transition: 200ms linear;
+  cursor: pointer;
+}
+.myCard:hover {
+  transform: scale(1.1);
 }
 
 .myCard-title {
@@ -47,6 +51,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 100%;
+  margin-bottom: auto;
+  height: 66%;
 }
 
 .myCard-subtitle {
@@ -55,7 +61,7 @@
 .myCard-btn-wrapper {
   display: flex;
   flex-direction: row;
-  margin-top: auto;
+  height: 30%;
 }
 .grab-it {
   padding: 0.2rem;

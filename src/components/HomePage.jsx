@@ -170,7 +170,7 @@ function HomePage({ match, history }) {
             <div className="folder-inputs-wrapper">
               <button onClick={handleSaveFolderInput} className="folder-btn1">
                 {saveIsLoading ? (
-                  <Spinner animation="border" variant="info" />
+                  <Spinner id="mySpinner" animation="border" variant="info" />
                 ) : (
                   "Save"
                 )}

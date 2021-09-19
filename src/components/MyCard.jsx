@@ -21,13 +21,15 @@ function MyCard({ data, toast }) {
   return (
     <div>
       <div className="myCard">
-        <div className="myCard-title">{data.title}</div>
+        <div className="myCard-title" onClick={() => getTheSnippet(data)}>
+          {data.title}
+        </div>
         {/* <div className="mb-2 text-muted myCard-subtitle">{data.language}</div> */}
 
         <div className="myCard-btn-wrapper">
-          <button className="open-it" onClick={() => getTheSnippet(data)}>
+          {/* <button className="open-it" onClick={() => getTheSnippet(data)}>
             Open
-          </button>
+          </button> */}
           <CopyToClipboard text={data.code}>
             <button className="grab-it" onClick={() => toast()}>
               Grab it!
