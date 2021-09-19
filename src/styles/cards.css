@@ -1,0 +1,92 @@
+.folder:before {
+  content: "";
+  width: 50%;
+  height: 12px;
+  border-radius: 0 20px 0 0;
+  background-color: #ff5714;
+  position: absolute;
+  top: -12px;
+  left: 0px;
+}
+
+.folder {
+  width: 150px;
+  height: 105px;
+  padding: 5px 5px 5px 5px;
+  position: relative;
+  background-color: #ffba08;
+  border-radius: 0 6px 6px 6px;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 1rem;
+  transition: 200ms linear;
+}
+.folder:hover {
+  transform: scale(1.1);
+}
+
+.myCard {
+  margin-right: 10px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 105px;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 0.2rem;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
+  transition: 200ms linear;
+}
+
+.myCard-title {
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100%;
+}
+
+.myCard-subtitle {
+  font-size: 0.7rem;
+}
+.myCard-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+}
+.grab-it {
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  font-family: "Acme";
+  border: none;
+  width: 100%;
+  background-color: rgb(35, 182, 204);
+  box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+  /* color: var(--main-color-blue); */
+  color: white;
+}
+.grab-it:hover {
+  background-color: var(--main-color);
+  cursor: grab;
+}
+.grab-it:active {
+  cursor: grabbing;
+}
+
+.open-it {
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  font-family: "Acme";
+  border: none;
+  width: 100%;
+  margin-right: 2px;
+  background-color: var(--main-color-green);
+  color: var(--main-color-blue);
+}
+
+.open-it:hover {
+  background-color: #69fa86;
+}

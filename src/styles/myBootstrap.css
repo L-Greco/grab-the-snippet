@@ -595,7 +595,7 @@ progress {
 
 .img-fluid {
   max-width: 100%;
-  height: auto;
+  height: 2rem; /* my rule : previous ---> height: auto; */
 }
 
 .img-thumbnail {
@@ -6455,6 +6455,17 @@ fieldset:disabled .btn {
   display: inline-block;
   width: 2rem;
   height: 2rem;
+  vertical-align: -0.125em;
+  border: 0.25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: 0.75s linear infinite spinner-border;
+  animation: 0.75s linear infinite spinner-border;
+}
+#mySpinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
   vertical-align: -0.125em;
   border: 0.25em solid currentColor;
   border-right-color: transparent;

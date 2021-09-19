@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import ReactDom from "react-dom";
 import Editor from "./Editor";
 import EditorOptions from "./EditorOptions";
-import Toast from "react-bootstrap/Toast";
+import Spinner from "react-bootstrap/Spinner";
 import { connect, useDispatch } from "react-redux";
 import {
   closeAddSnippetModalAction,
@@ -64,7 +64,7 @@ function AddSnippetModal({
   setUserTheme,
 }) {
   const addSnippetModalNode = useRef();
-
+  const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
   const handleSave = async () => {
     let snippetToSend = {
       title: snippet.title,
@@ -76,6 +76,7 @@ function AddSnippetModal({
     };
 
     try {
+      setSaveBtnIsLoading(true);
       if (user.editorTheme !== snippet.editorTheme) {
         let userTheme = {
           accountSettings: {
@@ -93,7 +94,9 @@ function AddSnippetModal({
         closeModal();
         emptyTheSnippet(user.editorLanguage, user.editorTheme);
       }
+      setSaveBtnIsLoading(false);
     } catch (error) {
+      setSaveBtnIsLoading(false);
       console.log(error);
     }
   };
@@ -168,8 +171,13 @@ function AddSnippetModal({
                 <button
                   onClick={() => handleSave()}
                   className="save-editor-btn"
+                  disabled={saveBtnIsLoading}
                 >
-                  Save
+                  {saveBtnIsLoading ? (
+                    <Spinner id="mySpinner" animation="border" variant="dark" />
+                  ) : (
+                    "Save"
+                  )}
                 </button>
               </div>
             </div>

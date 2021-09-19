@@ -58,10 +58,21 @@ export const pageManagementReducer = (state = initialState.page, action) => {
                 snippetsArray: [...state.snippetsArray, action.payload]
             }
         case `REMOVE_SNIPPET_FROM_ARRAY`:
-            let newSnippetArray = state.snippetsArray.filter((snippet, i) => i !== action.payload)
+            let newSnippetArray = state.snippetsArray.filter((snippet) => snippet._id !== action.payload)
             return {
                 ...state,
                 snippetsArray: newSnippetArray
+            }
+        case `ADD_FOLDER_TO_ARRAY`:
+            return {
+                ...state,
+                foldersArray: [...state.foldersArray, action.payload]
+            }
+        case `REMOVE_FOLDER_FROM_ARRAY`:
+            let newFoldersArray = state.foldersArray.filter((folder, i) => i !== action.payload)
+            return {
+                ...state,
+                foldersArray: newFoldersArray
             }
         default:
             return state

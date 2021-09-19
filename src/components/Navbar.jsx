@@ -26,9 +26,12 @@ function Navbar({ history }) {
 
   return (
     <div className="navbar-wrapper">
-      <div className="navbar-header-icon-wrapper mx-auto">
+      <div
+        className="navbar-header-icon-wrapper mx-auto"
+        onClick={() => history.push("/home")}
+      >
         <img src="/gts1111.png" alt="logo here" className="img-fluid" />
-        <div className="navbar-header" onClick={() => history.push("/home")}>
+        <div className="navbar-header">
           {text.HomePage.h1[state.page.language]}
         </div>
       </div>

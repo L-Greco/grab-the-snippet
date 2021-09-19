@@ -35,6 +35,7 @@
 .navbar-header-icon-wrapper {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .navbar-account {

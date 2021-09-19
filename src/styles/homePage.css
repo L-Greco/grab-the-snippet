@@ -20,6 +20,7 @@
   font-size: 1rem;
   font-weight: 600;
   box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
+  max-height: 2.5rem;
 }
 .addSnippetBtn:hover {
   background-color: #69fa86;
@@ -45,4 +46,75 @@
   padding: 0.5rem;
   display: flex;
   flex-wrap: wrap;
+}
+
+.folder-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+  background-color: var(--main-color-orange);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: none;
+  color: var(--main-color-blue);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
+}
+
+#folderInput {
+  resize: none;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  font-family: "Acme";
+  font-size: 0.8rem;
+}
+.folder-inputs-wrapper {
+  display: flex;
+  margin-top: 0.2rem;
+  justify-content: space-around;
+}
+
+.folder-btn1 {
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  font-family: "Acme";
+  border: none;
+  background-color: rgb(35, 182, 204);
+  color: white;
+  box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+  cursor: pointer;
+}
+.folder-btn1 {
+  padding: 0.2rem;
+  border-radius: 0.3rem;
+  font-family: "Acme";
+  font-size: 0.7rem;
+  border: none;
+  background-color: var(--main-color-green);
+  color: var(--main-color-blue);
+  box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+  cursor: pointer;
+  width: 30%;
+}
+.folder-btn1:hover {
+  background-color: #69fa86;
+}
+
+.folder-btn2 {
+  padding: 0.2rem;
+  border-radius: 0.3rem;
+  font-family: "Acme";
+  border: none;
+  background-color: rgb(204, 35, 66);
+  color: var(--main-color-blue);
+  box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+  cursor: pointer;
+  width: 30%;
+  font-size: 0.7rem;
+  font-weight: 600;
 }

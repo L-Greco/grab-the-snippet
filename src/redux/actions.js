@@ -65,9 +65,21 @@ export const addSnippetTOArrayAction = (snippet) => {
         payload: snippet
     }
 }
-export const removeSnippetFromArrayAction = (index) => {
+export const removeSnippetFromArrayAction = (id) => {
     return {
         type: `REMOVE_SNIPPET_FROM_ARRAY`,
+        payload: id
+    }
+}
+export const addFolderTOArrayAction = (folder) => {
+    return {
+        type: `ADD_FOLDER_TO_ARRAY`,
+        payload: folder
+    }
+}
+export const removeFolderFromArrayAction = (index) => {
+    return {
+        type: `REMOVE_FOLDER_FROM_ARRAY`,
         payload: index
     }
 }

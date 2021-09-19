@@ -13,8 +13,9 @@ import {
   setSnippetCommentsAction,
   setQueryParametersAction,
   emptyTheSnippetAction,
+  removeSnippetFromArrayAction,
 } from "../redux/actions";
-import { postRequest } from "../lib/axios.js";
+import { postRequest, deleteRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
@@ -41,6 +42,9 @@ const mapDispatchToProps = (dispatch) => ({
   emptyTheSnippet: (language, theme) => {
     dispatch(emptyTheSnippetAction(language, theme));
   },
+  removeSnippet: (id) => {
+    dispatch(removeSnippetFromArrayAction(id));
+  },
 });
 
 function SnippetModal({
@@ -53,8 +57,11 @@ function SnippetModal({
   setComments,
   setQuery,
   emptyTheSnippet,
+  index,
+  removeSnippet,
 }) {
   const ModalNode = useRef();
+  const smallDeleteMOdal = useRef();
   const [show, setShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -81,13 +88,33 @@ function SnippetModal({
   function handleClose() {
     closeModal();
     emptyTheSnippet(user.editorLanguage, user.editorTheme);
+    setShowDeleteModal(false);
   }
-  async function handleDelete() {}
-  function CloseModalIfClickedOut(ref) {
+  // Function for Deleting the Snippet
+  async function handleDelete() {
+    try {
+      const res = await deleteRequest(`snippets/delete/${snippet.id}`);
+
+      if (res.status === 200) {
+        removeSnippet(snippet.id);
+        handleClose();
+      } else if (res.status === 404) {
+        alert(`Error 404 : "Snippet not found!"`);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  function CloseModalIfClickedOut(ref1, ref2) {
     useEffect(() => {
       function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
+        if (ref1.current && !ref1.current.contains(event.target)) {
           handleClose();
+          setShowDeleteModal(false);
+        }
+        if (ref2.current && !ref2.current.contains(event.target)) {
+          setShowDeleteModal(false);
         }
       }
 
@@ -97,9 +124,10 @@ function SnippetModal({
         // Unbind the event listener
         document.removeEventListener("mousedown", handleClickOutside);
       };
-    }, [ref]);
+    }, [ref1, ref2]);
   }
-  CloseModalIfClickedOut(ModalNode);
+  CloseModalIfClickedOut(ModalNode, smallDeleteMOdal);
+  // CloseModalIfClickedOut(smallDeleteMOdal);
 
   if (!page.cardModalIsOpen) return null;
 
@@ -110,8 +138,8 @@ function SnippetModal({
           <div className="main-content-modal">
             {showDeleteModal && (
               <div className="delete-modal-overlay">
-                <div className="small-delete-modal">
-                  <div>Are you sure you want to delete the snippet?</div>
+                <div ref={smallDeleteMOdal} className="small-delete-modal">
+                  <div>Are you sure you want to delete this snippet?</div>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <button
                       style={{ width: "35%" }}
