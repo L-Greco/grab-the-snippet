@@ -9,6 +9,7 @@ import {
   setSnippetEditorThemeAction,
   addFoldersArrayAction,
   addFolderTOArrayAction,
+  addFolderToUserFoldersArrayAction,
 } from "../redux/actions";
 import { getRequest, postRequest } from "../lib/axios";
 // Components
@@ -38,11 +39,12 @@ function HomePage({ match, history }) {
   const [saveIsLoading, setSaveIsLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
-
+  // Close Folder input and clear the local state
   function handleCloseFolderInput() {
     setFolderInput(false);
     setFoldersName("");
   }
+  // Function for Saving the Folder
   async function handleSaveFolderInput() {
     try {
       setSaveIsLoading(true);
@@ -52,15 +54,18 @@ function HomePage({ match, history }) {
       };
       const res = await postRequest("folders", folderObj);
       if (res.status === 201) {
+        console.log(res.data);
         handleCloseFolderInput();
         setSaveIsLoading(false);
         dispatch(addFolderTOArrayAction(res.data));
+        dispatch(addFolderToUserFoldersArrayAction(res.data));
       }
     } catch (error) {
       handleCloseFolderInput();
       alert(error);
     }
   }
+  // Return Parent from the url
   function returnParent(string) {
     if (string === "url") {
       if (match.params.folderName) {
@@ -72,13 +77,28 @@ function HomePage({ match, history }) {
       } else return "home";
     }
   }
+  // adds the user preferences for language and theme and opens the snippet modal
   function addSnippet() {
     dispatch(setEditorLanguageAction(user.editorLanguage));
     dispatch(setSnippetEditorThemeAction(user.editorTheme));
     dispatch(openAddSnippetModalAction());
   }
+  // checker
+  function checkIfFolderExists() {
+    const filteredArray1 = user.folders.filter(
+      (folder) => folder.parent === returnParent("state")
+    );
+    const filteredArray2 = user.folders.filter(
+      (folder) => folder.name === returnParent("state")
+    );
+    if (filteredArray1.length > 0 || filteredArray2.length > 0) {
+      console.log("Yes this is a real Folder ");
+    } else history.push("/home");
+  }
+  // Runs on mounting the component and gets the data
   async function getData() {
     try {
+      checkIfFolderExists();
       setIsLoading(true);
       console.time("time");
       const folderResponse = await getRequest(
@@ -99,12 +119,14 @@ function HomePage({ match, history }) {
       history.push("/home");
     }
   }
+  // Click on folder button
   function folderButton() {
     setFolderInput(true);
     setTimeout(() => {
       document.getElementById("folderInput").focus();
     }, 100);
   }
+  // Close the folder input if clicked outside
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -119,11 +141,12 @@ function HomePage({ match, history }) {
     }, [ref]);
   }
   CloseModalIfClickedOut(folderInputNode);
+  // On mounting it adds the parent on the global state page.parent and then gets the data
   useEffect(() => {
     dispatch(addParentAction(returnParent("state")));
     getData();
   }, [match]);
-
+  // Redirect if user is not logged in
   if (!user.loggedIn) {
     return <Redirect to="/LoginPage" />;
   }
@@ -202,6 +225,9 @@ function HomePage({ match, history }) {
               />
             </div>
           )}
+          {page.snippetsArray.length === 0 &&
+            page.foldersArray.length === 0 &&
+            !isLoading && <div> There are no snippets or folders yet :(</div>}
           {!isLoading && (
             <>
               {page.foldersArray.length > 0 &&

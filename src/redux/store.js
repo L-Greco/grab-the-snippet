@@ -15,7 +15,8 @@ export const initialState = {
         language: "",
         loggedIn: false,
         _id: "",
-        userLanded: false
+        userLanded: false,
+        folders: []
 
     },
     page: {

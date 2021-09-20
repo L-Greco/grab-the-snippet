@@ -179,3 +179,16 @@ export const setUserIdAction = (id) => {
         payload: id
     }
 }
+export const addFolderToUserFoldersArrayAction = (folder) => {
+    return {
+        type: `ADD_FOLDER_TO_USER_FOLDERS_ARRAY`,
+        payload: folder
+    }
+}
+// not yet ready
+// export const removeFolderToUserFoldersArrayAction = (folder) => {
+//     return {
+//         type: `ADD_FOLDER_TO_USER_ARRAY`,
+//         payload: folder
+//     }
+// }

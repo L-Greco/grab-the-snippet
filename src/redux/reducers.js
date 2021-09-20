@@ -120,7 +120,8 @@ export const userReducer = (state = initialState.user, action) => {
                 language: action.payload.accountSettings.preferredApplicationLanguage,
                 loggedIn: true,
                 userLanded: true,
-                _id: action.payload._id
+                _id: action.payload._id,
+                folders: action.payload.folders
 
 
             }
@@ -136,6 +137,13 @@ export const userReducer = (state = initialState.user, action) => {
                 language: "",
                 loggedIn: false,
                 _id: ""
+
+
+            }
+        case `ADD_FOLDER_TO_USER_FOLDERS_ARRAY`:
+            return {
+                ...state,
+                folders: [...state.folders, action.payload]
 
 
             }
