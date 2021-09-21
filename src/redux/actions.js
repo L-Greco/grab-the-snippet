@@ -71,6 +71,12 @@ export const removeSnippetFromArrayAction = (id) => {
         payload: id
     }
 }
+export const replaceSnippetFromArrayAction = (snippet) => {
+    return {
+        type: `REPLACE_SNIPPET_FROM_ARRAY`,
+        payload: snippet
+    }
+}
 export const addFolderTOArrayAction = (folder) => {
     return {
         type: `ADD_FOLDER_TO_ARRAY`,
@@ -81,6 +87,12 @@ export const removeFolderFromArrayAction = (index) => {
     return {
         type: `REMOVE_FOLDER_FROM_ARRAY`,
         payload: index
+    }
+}
+export const toggleFolderSettingsModalAction = (boolean) => {
+    return {
+        type: `TOGGLE_FOLDER_SETTINGS_MODAL`,
+        payload: boolean
     }
 }
 // *********************** SNIPPET *********************** //
@@ -136,6 +148,13 @@ export const setTheSnippetAction = (snippet) => {
 
     }
 }
+export const setUsersFoldersAction = (array) => {
+    return {
+        type: `SET_USERS_FOLDERS_ARRAY`,
+        payload: array
+
+    }
+}
 
 // *********************** USER *********************** //
 
@@ -143,6 +162,13 @@ export const setUserThemeAction = (theme) => {
     return {
         type: `SET_USER_EDITOR_THEME`,
         payload: theme
+
+    }
+}
+export const setUserLanguageAction = (language) => {
+    return {
+        type: `SET_USER_EDITOR_LANGUAGE`,
+        payload: language
 
     }
 }

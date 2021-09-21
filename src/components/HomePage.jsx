@@ -10,6 +10,7 @@ import {
   addFoldersArrayAction,
   addFolderTOArrayAction,
   addFolderToUserFoldersArrayAction,
+  toggleFolderSettingsModalAction,
 } from "../redux/actions";
 import { getRequest, postRequest } from "../lib/axios";
 // Components
@@ -22,12 +23,12 @@ import Folder from "./Folder";
 import Spinner from "react-bootstrap/Spinner";
 import Toast from "react-bootstrap/Toast";
 // React Icons
-import { TiPlusOutline } from "react-icons/ti";
 import { AiOutlineClose } from "react-icons/ai";
+import { RiFolderSettingsLine } from "react-icons/ri";
+// css styles
 import "../styles/homePage.css";
-import "../styles/cards.css";
 
-let text = require("../data/text.json");
+// let text = require("../data/text.json");
 
 function HomePage({ match, history }) {
   const folderInputNode = useRef();
@@ -39,6 +40,23 @@ function HomePage({ match, history }) {
   const [saveIsLoading, setSaveIsLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+
+  // Finding Folder name through the id
+  function findFolderName(a) {
+    if (!page.parent) return null;
+    const { name, parent } = page.userFolders.filter(
+      (folder) => folder._id === page.parent
+    )[0];
+    if (!parent.home) {
+      const nameOfParent = page.userFolders.filter(
+        (folder) => folder._id === parent.folderId
+      )[0].name;
+      if (a === 1) return `${name}`;
+      if (a === 2) return `${nameOfParent}`;
+    } else if (a == 1) return `${name}`;
+    if (a === 2) return null;
+  }
   // Close Folder input and clear the local state
   function handleCloseFolderInput() {
     setFolderInput(false);
@@ -47,18 +65,29 @@ function HomePage({ match, history }) {
   // Function for Saving the Folder
   async function handleSaveFolderInput() {
     try {
-      setSaveIsLoading(true);
-      const folderObj = {
-        name: foldersName,
-        parent: page.parent,
-      };
-      const res = await postRequest("folders", folderObj);
-      if (res.status === 201) {
-        console.log(res.data);
+      let filteredArray = page.foldersArray.filter(
+        (folder) => folder.name === foldersName
+      );
+      if (!filteredArray.length > 0) {
+        setSaveIsLoading(true);
+        const folderObj = {
+          name: foldersName,
+          parent: {
+            home: page.parent === "home" ? true : false,
+            folderId: page.parent === "home" ? null : page.parent,
+          },
+        };
+        const res = await postRequest("folders", folderObj);
+        if (res.status === 201) {
+          console.log(res.data);
+          handleCloseFolderInput();
+          setSaveIsLoading(false);
+          dispatch(addFolderTOArrayAction(res.data));
+          dispatch(addFolderToUserFoldersArrayAction(res.data));
+        }
+      } else {
         handleCloseFolderInput();
-        setSaveIsLoading(false);
-        dispatch(addFolderTOArrayAction(res.data));
-        dispatch(addFolderToUserFoldersArrayAction(res.data));
+        setShowErrorToast(true);
       }
     } catch (error) {
       handleCloseFolderInput();
@@ -83,40 +112,42 @@ function HomePage({ match, history }) {
     dispatch(setSnippetEditorThemeAction(user.editorTheme));
     dispatch(openAddSnippetModalAction());
   }
-  // checker
+  // checks if the user tries to enter to a non existant folder , if not it redirects to home
   function checkIfFolderExists() {
-    const filteredArray1 = user.folders.filter(
-      (folder) => folder.parent === returnParent("state")
+    if (returnParent("state") === "home") return true;
+    const filteredArray = page.userFolders.filter(
+      (folder) => folder._id === returnParent("state")
     );
-    const filteredArray2 = user.folders.filter(
-      (folder) => folder.name === returnParent("state")
-    );
-    if (filteredArray1.length > 0 || filteredArray2.length > 0) {
-      console.log("Yes this is a real Folder ");
-    } else history.push("/home");
+
+    if (filteredArray.length > 0) {
+      return true;
+    } else return false;
   }
   // Runs on mounting the component and gets the data
   async function getData() {
     try {
-      checkIfFolderExists();
       setIsLoading(true);
-      console.time("time");
-      const folderResponse = await getRequest(
-        `folders/parent/${returnParent("state")}`
-      );
+      if (checkIfFolderExists()) {
+        console.time("time");
+        const folderResponse = await getRequest(
+          `folders/${returnParent("state")}`
+        );
 
-      if (folderResponse.status === 200) {
-        dispatch(addFoldersArrayAction(folderResponse.data));
+        if (folderResponse.status === 200) {
+          dispatch(addFoldersArrayAction(folderResponse.data));
+        }
+        const res = await getRequest(`snippets/${returnParent("url")}`);
+        if (res.status === 200) {
+          dispatch(addSnippetsArrayAction(res.data));
+        }
+        setIsLoading(false);
+        console.timeEnd("time");
+      } else if (page.parent !== "home") {
+        history.push("/home");
       }
-      const res = await getRequest(`snippets/${returnParent("url")}`);
-      if (res.status === 200) {
-        dispatch(addSnippetsArrayAction(res.data));
-      }
-      setIsLoading(false);
-      console.timeEnd("time");
     } catch (error) {
+      setIsLoading(false);
       alert(error);
-      history.push("/home");
     }
   }
   // Click on folder button
@@ -143,9 +174,12 @@ function HomePage({ match, history }) {
   CloseModalIfClickedOut(folderInputNode);
   // On mounting it adds the parent on the global state page.parent and then gets the data
   useEffect(() => {
-    dispatch(addParentAction(returnParent("state")));
-    getData();
+    if (user.loggedIn) {
+      dispatch(addParentAction(returnParent("state")));
+      getData();
+    }
   }, [match]);
+  if (!user.userLanded) return null;
   // Redirect if user is not logged in
   if (!user.loggedIn) {
     return <Redirect to="/LoginPage" />;
@@ -155,6 +189,7 @@ function HomePage({ match, history }) {
       <SnippetModal />
       <AddSnippetModal />
       <Navbar />
+      {/* GRAB THE SNIPPET TOAST HERE */}
       <Toast
         onClose={() => setShowToast(false)}
         show={showToast}
@@ -166,6 +201,26 @@ function HomePage({ match, history }) {
           <AiOutlineClose onClick={() => setShowToast(false)} />
         </div>
         <Toast.Body className="text-center"> Copied to clipboard!</Toast.Body>
+      </Toast>
+      {/* ERROR TOAST HERE */}
+      <Toast
+        style={{ backgroundColor: "var(--main-color-orange)" }}
+        onClose={() => setShowErrorToast(false)}
+        show={showErrorToast}
+        delay={3000}
+        autohide
+      >
+        <div className="toast-header">
+          Oooops
+          <AiOutlineClose
+            style={{ cursor: "pointer" }}
+            onClick={() => setShowErrorToast(false)}
+          />
+        </div>
+        <Toast.Body className="text-center">
+          {" "}
+          Seems you have already a folder with the same name here!
+        </Toast.Body>
       </Toast>
       <main className="home-main-container">
         <div className="home-functionality-wrapper">
@@ -203,6 +258,24 @@ function HomePage({ match, history }) {
               </button>
             </div>
           </div>
+          {page.parent !== "home" && (
+            <div className="home-folder-settings-wrapper">
+              <em>
+                <button
+                  onClick={() =>
+                    dispatch(toggleFolderSettingsModalAction(true))
+                  }
+                  className="home-folder-btn"
+                >
+                  <div style={{ display: "flex", alignItem: "center" }}>
+                    {findFolderName(1)}{" "}
+                    <RiFolderSettingsLine style={{ fontSize: "1.2rem" }} />
+                  </div>
+                </button>
+              </em>
+              {findFolderName(2) && <>child of "{findFolderName(2)}" </>}
+            </div>
+          )}
         </div>
 
         <div className="home-cards-container">
@@ -227,7 +300,8 @@ function HomePage({ match, history }) {
           )}
           {page.snippetsArray.length === 0 &&
             page.foldersArray.length === 0 &&
-            !isLoading && <div> There are no snippets or folders yet :(</div>}
+            page.parent !== "home" &&
+            !isLoading && <div> This folder is empty :(</div>}
           {!isLoading && (
             <>
               {page.foldersArray.length > 0 &&

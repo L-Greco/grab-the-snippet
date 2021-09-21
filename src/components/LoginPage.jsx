@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
-import { getRequest } from "../lib/axios";
+import { useSelector } from "react-redux";
 // Icons
 import { SiLinkedin } from "react-icons/si";
 import { SiGithub } from "react-icons/si";
 import { FcGoogle } from "react-icons/fc";
 import "../styles/loginPage.css";
+import { Redirect } from "react-router";
 
 function LoginPage() {
+  const user = useSelector((state) => state.user);
+  if (user.loggedIn) {
+    return <Redirect to="/home" />;
+  }
   return (
     <>
       <h1 className="text-center" style={{ fontFamily: "Rampart One" }}>

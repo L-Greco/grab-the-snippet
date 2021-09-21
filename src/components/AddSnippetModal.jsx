@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import Editor from "./Editor";
 import EditorOptions from "./EditorOptions";
 import Spinner from "react-bootstrap/Spinner";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import {
   closeAddSnippetModalAction,
   setSnippetTitleAction,
@@ -71,11 +71,15 @@ function AddSnippetModal({
       language: snippet.editorLanguage,
       code: snippet.code,
       queryParameters: snippet.queryParameters,
-      parent: page.parent,
+      parent: {
+        home: page.parent === "home" ? true : false,
+        folderId: page.parent === "home" ? null : page.parent,
+      },
       comments: snippet.comments,
     };
 
     try {
+      console.log(snippetToSend);
       setSaveBtnIsLoading(true);
       if (user.editorTheme !== snippet.editorTheme) {
         let userTheme = {
@@ -155,13 +159,13 @@ function AddSnippetModal({
                   value={snippet.comments}
                   onChange={(e) => setComments(e.target.value)}
                 />
-                <input
+                {/* <input
                   type="text"
                   placeholder={text.SnippetCard.QueryParameters[page.language]}
                   className="add-snippet-query-input"
                   value={snippet.queryParameters}
                   onChange={(e) => setQuery(e.target.value)}
-                />
+                /> */}
                 <button
                   className="clear-editor-btn"
                   onClick={() => setCode("")}

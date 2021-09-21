@@ -1,17 +1,67 @@
-import React, { useEffect, useRef } from "react";
-import "../styles/modal.css";
+import React, { useEffect, useRef, useState } from "react";
+import "../styles/accountModal.css";
 import ReactDom from "react-dom";
+import Spinner from "react-bootstrap/Spinner";
 import { useSelector, useDispatch } from "react-redux";
-import { closeAccountModalAction } from "../redux/actions.js";
+import {
+  closeAccountModalAction,
+  setUserLanguageAction,
+  setUserThemeAction,
+  clearUserAction,
+} from "../redux/actions.js";
+import { putRequest, postRequest } from "../lib/axios";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 
+// let text = require("../data/text.json");
+let editorData = require("../data/editor.json");
+let arrayOfEditorLanguages = editorData["programming-languages-array"];
+let arrayOfEditorThemes = editorData["editor-themes"];
+
 function AccountModal() {
   const state = useSelector((state) => state);
+  const [editorLanguage, setEditorLanguage] = useState("");
+  const [editorTheme, setEditorTheme] = useState("");
+  const [isLoading, setIsLOading] = useState(false);
   const dispatch = useDispatch();
 
-  const ModalAccountNode = useRef();
+  async function handleLogout() {
+    try {
+      dispatch(clearUserAction());
+      const res = await postRequest("users/logout");
+      if (res.status === 200) {
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
 
+  async function handleSave() {
+    setIsLOading(true);
+    try {
+      let userSettings = {
+        accountSettings: {
+          preferredEditorTheme: editorTheme,
+          preferredEditorLanguage: editorLanguage,
+        },
+      };
+      const res = await putRequest("users/edit", userSettings);
+      setIsLOading(false);
+      if (res.status === 200) {
+        dispatch(setUserThemeAction(editorTheme));
+        dispatch(setUserLanguageAction(editorLanguage));
+        dispatch(closeAccountModalAction());
+      }
+    } catch (error) {
+      setIsLOading(false);
+      alert(error);
+    }
+  }
+  const ModalAccountNode = useRef();
+  useEffect(() => {
+    setEditorLanguage(state.user.editorLanguage);
+    setEditorTheme(state.user.editorTheme);
+  }, []);
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -60,6 +110,59 @@ function AccountModal() {
           </div>
           <div className="acc-mail mx-auto">{state.user.email}</div>
         </div>
+        <div className="acc-settings">
+          <label
+            className="acc-editor-selector-label mx-auto"
+            htmlFor="acc-modal-editor-selector"
+          >
+            Default editor language
+          </label>
+          <input
+            id="acc-modal-editor-selector"
+            className="mx-auto"
+            list="programming-languages"
+            defaultValue={state.user.editorLanguage}
+            onChange={(e) => setEditorLanguage(e.target.value)}
+          />
+          <datalist id="programming-languages">
+            {arrayOfEditorLanguages.map((language) => (
+              <option key={language + 1} value={language}></option>
+            ))}
+          </datalist>
+
+          <label
+            className="acc-editor-selector-label mx-auto"
+            htmlFor="acc-editor-themes-selector"
+          >
+            Default editor theme
+          </label>
+          <select
+            onChange={(e) => setEditorTheme(e.target.value)}
+            name="themes"
+            className="mx-auto"
+            id="acc-editor-themes-selector"
+            defaultValue={state.user.editorTheme}
+          >
+            {arrayOfEditorThemes.map((theme) => (
+              <option key={theme + 1} value={theme}>
+                {theme}
+              </option>
+            ))}
+          </select>
+          {(editorLanguage !== state.user.editorLanguage ||
+            editorTheme !== state.user.editorTheme) && (
+            <button onClick={handleSave} className="acc-modal-save-btn">
+              {isLoading ? (
+                <Spinner id="mySpinner" animation="border" variant="dark" />
+              ) : (
+                "Save Changes"
+              )}
+            </button>
+          )}
+        </div>
+        <button onClick={handleLogout} className="acc-modal-logOut-btn">
+          Logout
+        </button>
       </div>
     </div>,
 

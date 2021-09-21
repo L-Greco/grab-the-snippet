@@ -13,6 +13,18 @@
   --font-2: "Acme";
   --font-3: "Roboto";
 }
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -42,7 +54,7 @@ body {
     rgba(44, 205, 229, 1) 100%,
     rgba(0, 212, 255, 1) 100%
   );
-  min-height: 96.7vh;
+  min-height: 99.9vh;
 }
 @media screen and (max-width: 729px) {
   body {

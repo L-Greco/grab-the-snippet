@@ -7,6 +7,7 @@
   display: flex;
   border-bottom: 1px solid rgba(0, 0, 0, 0.179);
   padding: 0.5rem;
+  align-items: center;
 }
 
 .addSnippetBtn {
@@ -20,7 +21,6 @@
   font-size: 1rem;
   font-weight: 600;
   box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
-  max-height: 2.5rem;
 }
 .addSnippetBtn:hover {
   background-color: #69fa86;
@@ -117,4 +117,34 @@
   width: 30%;
   font-size: 0.7rem;
   font-weight: 600;
+}
+.home-folder-settings-wrapper {
+  margin-left: 2rem;
+  height: 2rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-left: 2px solid var(--main-color-green);
+}
+
+.home-buttons-folder-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.home-folder-btn {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: var(--main-color-yellow);
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 1rem;
+  border: none;
+  color: var(--main-color-blue);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
+}
+.home-folder-btn:hover {
+  background-color: #ffaf03;
 }

@@ -5654,6 +5654,23 @@ fieldset:disabled .btn {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
+.toast1 {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: fit-content;
+  transform: translate(-50%);
+  max-width: 300px;
+  font-weight: 500;
+  font-size: 0.7rem;
+  font-family: var(--font-2);
+  pointer-events: auto;
+  background-color: var(--main-color-orange);
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
 .toast.showing {
   opacity: 0;
 }

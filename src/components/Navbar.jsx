@@ -28,7 +28,9 @@ function Navbar({ history }) {
     <div className="navbar-wrapper">
       <div
         className="navbar-header-icon-wrapper mx-auto"
-        onClick={() => history.push("/home")}
+        onClick={() =>
+          state.page.parent !== "home" ? history.push("/home") : null
+        }
       >
         <img src="/gts1111.png" alt="logo here" className="img-fluid" />
         <div className="navbar-header">

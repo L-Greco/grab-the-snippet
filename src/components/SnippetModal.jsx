@@ -14,8 +14,10 @@ import {
   setQueryParametersAction,
   emptyTheSnippetAction,
   removeSnippetFromArrayAction,
+  setUserThemeAction,
+  replaceSnippetFromArrayAction,
 } from "../redux/actions";
-import { postRequest, deleteRequest } from "../lib/axios.js";
+import { deleteRequest, putRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
@@ -45,6 +47,12 @@ const mapDispatchToProps = (dispatch) => ({
   removeSnippet: (id) => {
     dispatch(removeSnippetFromArrayAction(id));
   },
+  setUserTheme: (theme) => {
+    dispatch(setUserThemeAction(theme));
+  },
+  replaceSnippet: (snippet) => {
+    dispatch(replaceSnippetFromArrayAction(snippet));
+  },
 });
 
 function SnippetModal({
@@ -59,27 +67,77 @@ function SnippetModal({
   emptyTheSnippet,
   index,
   removeSnippet,
+  setUserTheme,
+  replaceSnippet,
 }) {
   const ModalNode = useRef();
   const smallDeleteMOdal = useRef();
   const [show, setShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [snippetIsChanged, setSnippetIsChanged] = useState(false);
+  const [editorChanged, setEditorChanged] = useState(false);
+  const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
 
+  function checkIfChanged() {
+    if (page.cardModalIsOpen) {
+      const snippetBefore = page.snippetsArray.filter(
+        (PageSnippet) => PageSnippet._id === snippet.id
+      )[0];
+
+      if (
+        snippetBefore.code !== snippet.code ||
+        snippetBefore.title !== snippet.title ||
+        snippetBefore.language !== snippet.editorLanguage ||
+        snippetBefore.comments !== snippet.comments
+      ) {
+        setSnippetIsChanged(true);
+      } else setSnippetIsChanged(false);
+      if (user.editorTheme !== snippet.editorTheme) {
+        setEditorChanged(true);
+      } else setEditorChanged(false);
+    }
+  }
   const handleSave = async () => {
+    setSaveBtnIsLoading(true);
     let snippetToSend = {
       title: snippet.title,
       language: snippet.editorLanguage,
       code: snippet.code,
       queryParameters: snippet.queryParameters,
-      parent: page.parent,
+      parent: {
+        home: page.parent === "home" ? true : false,
+        folderId: page.parent === "home" ? null : page.parent,
+      },
+      comments: snippet.comments,
     };
 
     try {
-      if (user.editorTheme !== snippet.editorTheme) {
+      if (editorChanged) {
+        let userTheme = {
+          accountSettings: {
+            preferredEditorTheme: snippet.editorTheme,
+          },
+        };
+        const res = await putRequest("users/edit", userTheme);
+        if (res.status === 200) {
+          setUserTheme(snippet.editorTheme);
+          if (!snippetIsChanged) {
+            setSaveBtnIsLoading(false);
+            handleClose();
+          }
+        }
       }
-      let res = await postRequest(`snippets`, snippetToSend);
-      if (res.status === 201) {
-        emptyTheSnippet(user.editorLanguage, user.editorTheme);
+      if (snippetIsChanged) {
+        let res = await putRequest(
+          `snippets/edit/${snippet.id}`,
+          snippetToSend
+        );
+        if (res.status === 201) {
+          replaceSnippet({ ...snippetToSend, _id: snippet.id });
+          setSaveBtnIsLoading(false);
+          handleClose();
+        } else setSaveBtnIsLoading(false);
+        handleClose();
       }
     } catch (error) {
       console.log(error);
@@ -105,7 +163,9 @@ function SnippetModal({
       alert(error);
     }
   }
-
+  useEffect(() => {
+    checkIfChanged();
+  }, [snippet]);
   function CloseModalIfClickedOut(ref1, ref2) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -191,7 +251,7 @@ function SnippetModal({
                     value={snippet.comments}
                     onChange={(e) => setComments(e.target.value)}
                   />
-                  <input
+                  {/* <input
                     type="text"
                     placeholder={
                       text.SnippetCard.QueryParameters[page.language]
@@ -199,7 +259,7 @@ function SnippetModal({
                     className="add-snippet-query-input"
                     value={snippet.queryParameters}
                     onChange={(e) => setQuery(e.target.value)}
-                  />
+                  /> */}
                   {/* <button
                   className="clear-editor-btn"
                   onClick={() => setCode("")}
@@ -226,9 +286,21 @@ function SnippetModal({
                   </button>
                   <button
                     onClick={() => handleSave()}
-                    className="save-editor-btn"
+                    className={
+                      snippetIsChanged || editorChanged
+                        ? "save-editor-btn"
+                        : "d-none"
+                    }
                   >
-                    Save Changes
+                    {saveBtnIsLoading ? (
+                      <Spinner
+                        id="mySpinner"
+                        animation="border"
+                        variant="dark"
+                      />
+                    ) : (
+                      "Save Changes"
+                    )}
                   </button>
                   <CopyToClipboard text={snippet.code}>
                     <button

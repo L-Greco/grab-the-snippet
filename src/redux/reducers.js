@@ -74,6 +74,35 @@ export const pageManagementReducer = (state = initialState.page, action) => {
                 ...state,
                 foldersArray: newFoldersArray
             }
+        case `ADD_FOLDER_TO_USER_FOLDERS_ARRAY`:
+            return {
+                ...state,
+                userFolders: [...state.userFolders, action.payload]
+
+
+            }
+        case `SET_USERS_FOLDERS_ARRAY`:
+            return {
+                ...state,
+                userFolders: [...action.payload]
+
+
+            }
+        case `TOGGLE_FOLDER_SETTINGS_MODAL`:
+            return {
+                ...state,
+                folderSettingsModalIsOpen: action.payload
+
+
+            }
+        case `REPLACE_SNIPPET_FROM_ARRAY`:
+            let filteredArray = state.snippetsArray.map(snippet => snippet._id === action.payload._id ? action.payload : snippet)
+            return {
+                ...state,
+                snippetsArray: filteredArray
+
+
+            }
         default:
             return state
     }
@@ -92,6 +121,12 @@ export const userReducer = (state = initialState.user, action) => {
             return {
                 ...state,
                 editorTheme: action.payload
+
+            }
+        case `SET_USER_EDITOR_LANGUAGE`:
+            return {
+                ...state,
+                editorLanguage: action.payload
 
             }
         case `SET_LOGGED_IN`:
@@ -121,7 +156,7 @@ export const userReducer = (state = initialState.user, action) => {
                 loggedIn: true,
                 userLanded: true,
                 _id: action.payload._id,
-                folders: action.payload.folders
+
 
 
             }
@@ -132,21 +167,17 @@ export const userReducer = (state = initialState.user, action) => {
                 firstName: "",
                 lastName: "",
                 avatar: "",
+                email: "",
                 editorTheme: "",
                 editorLanguage: "",
                 language: "",
                 loggedIn: false,
+                userLanded: true,
                 _id: ""
 
 
             }
-        case `ADD_FOLDER_TO_USER_FOLDERS_ARRAY`:
-            return {
-                ...state,
-                folders: [...state.folders, action.payload]
 
-
-            }
 
         default:
             return state

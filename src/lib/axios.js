@@ -1,7 +1,7 @@
 import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
-import { setLoggedInAction, setLoggedOffAction } from "../redux/actions.js"
-import { useSelector, useDispatch } from "react-redux";
+import { clearUserAction } from "../redux/actions.js"
+import { useDispatch } from "react-redux";
 const axiosClient = axios.create();
 axiosClient.defaults.baseURL = process.env.REACT_APP_BE_URL;
 // console.log(axiosClient.defaults.baseURL)
@@ -29,10 +29,19 @@ export const deleteRequest = (URL) =>
 const refreshAuthLogic = failedRequest => axiosClient.post(`${process.env.REACT_APP_BE_URL}/users/refreshToken`,).then(tokenRefreshResponse => {
     console.log(tokenRefreshResponse)
     if (tokenRefreshResponse.status === 401) {
-        useDispatch(setLoggedOffAction())
+        console.log("yeah")
+        const res = postRequest("users/logout")
+        if (res.status === 200) {
+
+            useDispatch(clearUserAction());
+
+        }
+
     }
     return Promise.resolve();
 
 });
+
+
 
 createAuthRefreshInterceptor(axiosClient, refreshAuthLogic);

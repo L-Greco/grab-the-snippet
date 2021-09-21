@@ -1,21 +1,20 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   openCardModalAction,
-  closeCardModalAction,
-  cardModalisLoadingAction,
   setTheSnippetAction,
+  setSnippetEditorThemeAction,
 } from "../redux/actions.js";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { getRequest } from "../lib/axios.js";
-import Card from "react-bootstrap/Card";
-import SnippetModal from "./SnippetModal";
+import "../styles/cards.css";
 
 function MyCard({ data, toast }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const getTheSnippet = (data) => {
     dispatch(setTheSnippetAction(data));
+    dispatch(setSnippetEditorThemeAction(user.editorTheme));
     dispatch(openCardModalAction());
   };
   return (

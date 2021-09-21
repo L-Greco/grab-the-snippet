@@ -100,9 +100,10 @@
 }
 
 .grab-the-snippet-button {
-  padding: 0.6rem;
+  padding: 0.5rem;
   border-radius: 0.3rem;
   font-family: "Acme";
+  font-size: 1rem;
   margin-top: 1rem;
   border: none;
   background-color: rgb(35, 182, 204);
@@ -162,9 +163,10 @@
   flex-direction: column; */
 }
 .clear-editor-btn {
-  padding: 0.6rem;
+  padding: 0.5rem;
   margin-top: 2rem;
   border-radius: 0.3rem;
+  font-size: 1rem;
   font-family: "Acme";
   border: none;
   background-color: rgb(204, 35, 66);
@@ -177,19 +179,32 @@
 }
 
 .save-editor-btn {
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  font-family: "Acme";
+  margin-top: 2rem;
+  border: none;
+  font-size: 1rem;
+  /* background-color: rgb(35, 182, 204); */
+  background-color: var(--main-color-green);
+  color: var(--main-color-blue);
+  box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+  cursor: pointer;
+}
+.save-editor-btn:hover {
+  background-color: #69fa86;
+}
+/* .save-editor-disabled {
   padding: 0.6rem;
   border-radius: 0.3rem;
   font-family: "Acme";
   margin-top: 2rem;
   border: none;
-  background-color: rgb(35, 182, 204);
+  background-color: grey;
   color: white;
   box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
   cursor: pointer;
-}
-.save-editor-btn:hover {
-  background-color: var(--main-color);
-}
+} */
 
 .w-80 {
   width: 80%;
@@ -230,72 +245,7 @@
     margin-left: 0.5rem;
   }
 }
-/* ACCOUNT MODAL */
-.account-modal-main-container {
-  position: absolute;
-  width: 350px;
-  max-width: 95%;
-  top: 7vh;
-  height: 600px;
-  max-height: 90vh;
-  right: 0.4rem;
-  border-radius: 0.7rem;
-  /* transform: translate(-50%, -50%); */
-  z-index: 1000;
-  box-shadow: 0 17px 50px 0 rgb(0 0 0 / 19%), 0 12px 15px 0 rgb(0 0 0 / 24%);
-  background-color: white;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem;
-}
 
-.account-modal-header {
-  display: flex;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
-  align-items: center;
-}
-.xbtn1 {
-  font-size: 1.2rem;
-}
-
-.xbtn-wrapper1 {
-  cursor: pointer;
-  border: none;
-  background-color: white;
-  border-radius: 100%;
-  height: 2rem;
-  width: 2rem;
-  margin-left: auto;
-}
-.xbtn-wrapper1:hover {
-  background-color: #edebeb;
-}
-
-.account-modal-account {
-  margin-left: 120px;
-  font-family: "Acme";
-  font-size: 18px;
-  color: rgba(0, 0, 0, 0.611);
-}
-
-.account-modal-info {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
-  padding: 0.3rem;
-}
-.acc-name {
-  font-family: "Acme";
-  font-size: 17px;
-}
-.acc-mail {
-  font-family: "Acme";
-  font-size: 17px;
-  margin-top: 0.4rem;
-  margin-left: 1rem;
-  color: grey;
-}
 /* DELETE MODAL  */
 
 .small-delete-modal {

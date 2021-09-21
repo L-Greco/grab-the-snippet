@@ -13,10 +13,10 @@ export const initialState = {
         editorTheme: "",
         editorLanguage: "",
         language: "",
+        email: "",
         loggedIn: false,
         _id: "",
         userLanded: false,
-        folders: []
 
     },
     page: {
@@ -25,10 +25,12 @@ export const initialState = {
         cardModalIsOpen: false,
         addSnippetModalIsOpen: false,
         accountModalIsOpen: false,
+        folderSettingsModalIsOpen: false,
         parent: "",
         snippetsArray: [],
         foldersArray: [],
-        cardModalIsLoading: false
+        cardModalIsLoading: false,
+        userFolders: []
 
     },
     snippet: {

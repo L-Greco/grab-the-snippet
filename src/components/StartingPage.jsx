@@ -1,5 +1,10 @@
 import React from "react";
+import Test from "./Test";
 
 export default function StartingPage() {
-  return <div>Hello World</div>;
+  return (
+    <div>
+      <Test />
+    </div>
+  );
 }

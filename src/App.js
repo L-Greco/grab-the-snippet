@@ -1,12 +1,11 @@
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
-import Navbar from "./components/Navbar"
 import NoMatch from "./components/NoMatch";
 import StartingPage from "./components/StartingPage";
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import WebFont from "webfontloader"
-import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import { setLoggedInAction, setLoggedOffAction, setUserAction, setSnippetEditorThemeAction, setEditorLanguageAction } from "./redux/actions.js"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { setLoggedOffAction, setUserAction, setSnippetEditorThemeAction, setEditorLanguageAction, setUsersFoldersAction } from "./redux/actions.js"
 import { getRequest } from "./lib/axios.js"
 import { useSelector, useDispatch } from "react-redux";
 
@@ -21,9 +20,12 @@ function App() {
       const res = await getRequest("users/me")
       if (res.status === 200) {
         console.log(res.data)
-        dispatch(setUserAction(res.data))
+
+        dispatch(setUsersFoldersAction(res.data.folders))
         dispatch(setSnippetEditorThemeAction(res.data.accountSettings.preferredEditorTheme))
         dispatch(setEditorLanguageAction(res.data.accountSettings.preferredEditorLanguage))
+        dispatch(setUserAction(res.data))
+
 
       } else {
         dispatch(setLoggedOffAction())
@@ -45,23 +47,21 @@ function App() {
     setUser()
   }, [])
 
-  if (!user.userLanded) return null;
+  // if (!user.userLanded) return null;
   return (
     <>
-      {user.userLanded && <Router>
-        {/* {!loggedIn && <Redirect to="/" />}
-      {loggedIn && */}
+      <Router>
+
         <Switch>
           <Route path="/folder/:folderName">
 
             <HomePage />
           </Route>
           <Route exact path="/home">
-
             <HomePage />
           </Route>
 
-          <Route exact path="/">
+          <Route exact path="/test">
             <StartingPage />
           </Route>
           <Route exact path="/loginPage">
@@ -73,7 +73,7 @@ function App() {
         </Switch>
 
       </Router>
-      }
+
     </>
 
 
