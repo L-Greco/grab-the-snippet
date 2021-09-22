@@ -4,6 +4,7 @@ import Editor from "./Editor";
 import EditorOptions from "./EditorOptions";
 import Toast from "react-bootstrap/Toast";
 import Spinner from "react-bootstrap/Spinner";
+import Linkify from "react-linkify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import {
@@ -244,13 +245,15 @@ function SnippetModal({
                   <Editor />
                 </div>
                 <div className="add-Modal-inputs-wrapper ">
-                  <textarea
-                    type="text"
-                    placeholder={text.SnippetCard.Comments[page.language]}
-                    className="add-snippet-textarea"
-                    value={snippet.comments}
-                    onChange={(e) => setComments(e.target.value)}
-                  />
+                  <Linkify>
+                    <textarea
+                      type="text"
+                      placeholder={text.SnippetCard.Comments[page.language]}
+                      className="add-snippet-textarea"
+                      value={snippet.comments}
+                      onChange={(e) => setComments(e.target.value)}
+                    />
+                  </Linkify>
                   {/* <input
                     type="text"
                     placeholder={
@@ -307,7 +310,7 @@ function SnippetModal({
                       className="grab-the-snippet-button"
                       onClick={() => setShow(true)}
                     >
-                      Grab The Snippet!
+                      Grab it!
                     </button>
                   </CopyToClipboard>
                 </div>

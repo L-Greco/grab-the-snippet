@@ -224,58 +224,73 @@ function HomePage({ match, history }) {
       </Toast>
       <main className="home-main-container">
         <div className="home-functionality-wrapper">
-          <button className="addSnippetBtn" onClick={addSnippet}>
-            Add a Snippet!
-          </button>
-
-          {!folderInput && (
-            <button onClick={() => folderButton()} className="addFolderBtn">
-              Add a Folder!
-            </button>
-          )}
-
-          <div
-            ref={folderInputNode}
-            className={!folderInput ? "d-none" : "folder-input-wrapper "}
-          >
-            <input
-              id="folderInput"
-              type="text"
-              placeholder="Add Folder's name..."
-              value={foldersName}
-              onChange={(e) => setFoldersName(e.target.value)}
-            />
-            <div className="folder-inputs-wrapper">
-              <button onClick={handleSaveFolderInput} className="folder-btn1">
-                {saveIsLoading ? (
-                  <Spinner id="mySpinner" animation="border" variant="info" />
-                ) : (
-                  "Save"
-                )}
+          <div className="home-buttons-folder-wrapper">
+            <div style={{ display: "flex" }}>
+              <button className="addSnippetBtn" onClick={addSnippet}>
+                Add a Snippet!
               </button>
-              <button className="folder-btn2" onClick={handleCloseFolderInput}>
-                <AiOutlineClose />
-              </button>
-            </div>
-          </div>
-          {page.parent !== "home" && (
-            <div className="home-folder-settings-wrapper">
-              <em>
-                <button
-                  onClick={() =>
-                    dispatch(toggleFolderSettingsModalAction(true))
-                  }
-                  className="home-folder-btn"
-                >
-                  <div style={{ display: "flex", alignItem: "center" }}>
-                    {findFolderName(1)}{" "}
-                    <RiFolderSettingsLine style={{ fontSize: "1.2rem" }} />
-                  </div>
+
+              {!folderInput && (
+                <button onClick={() => folderButton()} className="addFolderBtn">
+                  Add a Folder!
                 </button>
-              </em>
-              {findFolderName(2) && <>child of "{findFolderName(2)}" </>}
+              )}
+
+              <div
+                ref={folderInputNode}
+                className={!folderInput ? "d-none" : "folder-input-wrapper "}
+              >
+                <input
+                  id="folderInput"
+                  type="text"
+                  placeholder="Add Folder's name..."
+                  value={foldersName}
+                  onChange={(e) => setFoldersName(e.target.value)}
+                />
+                <div className="folder-inputs-wrapper">
+                  <button
+                    onClick={handleSaveFolderInput}
+                    className="folder-btn1"
+                  >
+                    {saveIsLoading ? (
+                      <Spinner
+                        id="mySpinner"
+                        animation="border"
+                        variant="info"
+                      />
+                    ) : (
+                      "Save"
+                    )}
+                  </button>
+                  <button
+                    className="folder-btn2"
+                    onClick={handleCloseFolderInput}
+                  >
+                    <AiOutlineClose />
+                  </button>
+                </div>
+              </div>
             </div>
-          )}
+
+            {page.parent !== "home" && (
+              <div className="home-folder-settings-wrapper">
+                <em>
+                  <button
+                    onClick={() =>
+                      dispatch(toggleFolderSettingsModalAction(true))
+                    }
+                    className="home-folder-btn"
+                  >
+                    <div style={{ display: "flex", alignItem: "center" }}>
+                      {findFolderName(1)}{" "}
+                      <RiFolderSettingsLine style={{ fontSize: "1.2rem" }} />
+                    </div>
+                  </button>
+                </em>
+                {findFolderName(2) && <>child of "{findFolderName(2)}" </>}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="home-cards-container">

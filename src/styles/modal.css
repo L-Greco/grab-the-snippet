@@ -103,7 +103,7 @@
   padding: 0.5rem;
   border-radius: 0.3rem;
   font-family: "Acme";
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-top: 1rem;
   border: none;
   background-color: rgb(35, 182, 204);
@@ -166,7 +166,7 @@
   padding: 0.5rem;
   margin-top: 2rem;
   border-radius: 0.3rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-family: "Acme";
   border: none;
   background-color: rgb(204, 35, 66);
@@ -184,7 +184,7 @@
   font-family: "Acme";
   margin-top: 2rem;
   border: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   /* background-color: rgb(35, 182, 204); */
   background-color: var(--main-color-green);
   color: var(--main-color-blue);
@@ -242,7 +242,18 @@
     margin-right: 0.5rem;
   }
   .save-editor-btn {
-    margin-left: 0.5rem;
+    margin-right: 0.3rem;
+    font-size: 0.7rem;
+  }
+
+  .clear-editor-btn {
+    font-size: 0.7rem;
+  }
+  .grab-the-snippet-button {
+    font-size: 0.7rem;
+  }
+  .clear-editor-btn {
+    margin-right: 0.3rem;
   }
 }
 

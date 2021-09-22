@@ -8,7 +8,7 @@ export default function MyComp() {
         <ul className="navbar-nav">
           <li className="logo">
             <a href="#" className="nav-link">
-              <span className="link-text logo-text">Grab it!</span>
+              <span className="link-text logo-text">Goodbye</span>
               <svg
                 aria-hidden="true"
                 focusable="false"
@@ -59,7 +59,7 @@ export default function MyComp() {
                   />
                 </g>
               </svg>
-              <span className="link-text">Grab</span>
+              <span className="link-text">Thank you</span>
             </a>
           </li>
           <li className="nav-item">
@@ -87,7 +87,7 @@ export default function MyComp() {
                   />
                 </g>
               </svg>
-              <span className="link-text">The</span>
+              <span className="link-text">for</span>
             </a>
           </li>
           <li className="nav-item">
@@ -115,7 +115,7 @@ export default function MyComp() {
                   />
                 </g>
               </svg>
-              <span className="link-text">Snippet</span>
+              <span className="link-text">your</span>
             </a>
           </li>
           <li className="nav-item">
@@ -143,7 +143,7 @@ export default function MyComp() {
                   />
                 </g>
               </svg>
-              <span className="link-text">Yeah</span>
+              <span className="link-text">attention</span>
             </a>
           </li>
           <li className="nav-item" id="themeButton">
@@ -220,7 +220,7 @@ export default function MyComp() {
                   />
                 </g>
               </svg>
-              <span className="link-text">Themify</span>
+              <span className="link-text"></span>
             </a>
           </li>
         </ul>

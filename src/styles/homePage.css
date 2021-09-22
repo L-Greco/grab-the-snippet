@@ -19,6 +19,7 @@
   cursor: pointer;
   font-family: inherit;
   font-size: 1rem;
+  max-height: 2.3rem;
   font-weight: 600;
   box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
 }
@@ -147,4 +148,26 @@
 }
 .home-folder-btn:hover {
   background-color: #ffaf03;
+}
+
+.home-buttons-folder-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 700px) {
+  .home-buttons-folder-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-folder-settings-wrapper {
+    border: none;
+    margin-top: 1rem;
+    margin-left: 0rem;
+    padding-left: 0rem;
+  }
+  .home-folder-btn {
+    margin-left: 0rem;
+  }
 }

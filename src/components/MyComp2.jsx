@@ -1,50 +1,46 @@
 import React from "react";
-
+import { SiLinkedin } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
+import { AiOutlineMail } from "react-icons/ai";
 export default function MyComp2() {
   return (
     <main className="main1">
-      <h1>Grab The Snippet is Cool</h1>
-      <p>
-        I'm baby kale chips affogato ennui lumbersexual, williamsburg paleo
-        quinoa iceland normcore tumeric. Kitsch coloring book retro, seitan
-        schlitz tattooed biodiesel vexillologist neutra. Synth mumblecore deep
-        v, umami selfies normcore gluten-free snackwave. Seitan ramps drinking
-        vinegar venmo keytar, humblebrag VHS post-ironic tacos godard pour-over.
-      </p>
-      <p>
-        Sartorial kogi taxidermy, kickstarter synth yr irony ennui everyday
-        carry retro helvetica stumptown cloud bread squid echo park. Etsy cloud
-        bread sartorial quinoa tacos beard mumblecore shaman tumblr pop-up. Twee
-        retro fingerstache af helvetica pabst 8-bit leggings taiyaki portland
-        ramps tbh tumblr vinyl. Neutra humblebrag bushwick portland subway tile
-        plaid, offal scenester flexitarian cliche squid small batch palo santo.
-        Palo santo meh adaptogen +1 3 wolf moon, listicle brunch ethical fanny
-        pack everyday carry fam. Offal fingerstache taxidermy, man bun venmo
-        PBR&amp;B helvetica thundercats everyday carry tote bag artisan cray
-        wolf jianbing.
-      </p>
-      <p>
-        Taxidermy thundercats whatever austin. VHS helvetica ethical,
-        dreamcatcher enamel pin YOLO shabby chic locavore man bun crucifix pabst
-        chillwave pop-up vegan. Air plant mlkshk ethical echo park tumeric,
-        whatever crucifix godard scenester locavore pork belly yuccie vape. +1
-        gochujang put a bird on it, pork belly whatever selfies vaporware occupy
-        banh mi normcore VHS. Cornhole normcore hashtag tilde. Hell of yr
-        try-hard DIY raw denim banjo, enamel pin irony polaroid copper mug tofu.
-        Dreamcatcher lomo literally 90's before they sold out, 3 wolf moon banh
-        mi seitan chambray cliche offal tote bag occupy pug.
-      </p>
-      <p>
-        Post-ironic hot chicken salvia yr yuccie ugh cold-pressed keffiyeh
-        franzen viral taxidermy mustache slow-carb crucifix vape. Taiyaki yuccie
-        hell of tacos PBR&amp;B, kitsch meggings tbh truffaut kickstarter
-        mixtape af kogi. Fingerstache vegan tofu waistcoat gentrify cray.
-        Drinking vinegar 3 wolf moon health goth craft beer master cleanse.
-        Letterpress health goth 8-bit chillwave craft beer brooklyn.
-        Chicharrones master cleanse 8-bit, mumblecore copper mug messenger bag
-        poutine lomo kale chips flannel. Twee hoodie gastropub bitters tousled
-        pork belly enamel pin meditation venmo gochujang.
-      </p>
+      <h1>My Name is Konstantinos (Kostas) Makaronas</h1>
+      <h2>Contact Info</h2>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <SiLinkedin
+          style={{
+            color: "rgb(10,102,194)",
+            fontSize: "1.5rem",
+            marginRight: "1rem",
+          }}
+        />
+
+        <h3> linkedin.com/in/konstandinos-makaronas-119064129</h3>
+      </div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <SiGithub
+          style={{
+            fontSize: "1.5rem",
+            marginRight: "1rem",
+          }}
+        />
+
+        <h3> https://github.com/L-Greco</h3>
+      </div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <AiOutlineMail
+          style={{
+            fontSize: "1.5rem",
+            marginRight: "1rem",
+          }}
+        />
+
+        <h3> makaronaskonstandinos@gmail.com</h3>
+      </div>
+
+      {/* <p>My email is : makaronaskonstandinos@gmail.com</p>
+      <p>My GitHub is : https://github.com/L-Greco</p>
       <p>
         Next level selfies cronut ethical. Tofu tumblr you probably haven't
         heard of them, man braid literally forage swag chillwave. Pug yr flannel
@@ -101,7 +97,7 @@ export default function MyComp2() {
         retro taiyaki meditation twee gastropub VHS etsy. Semiotics gochujang
         street art normcore, edison bulb farm-to-table pour-over taxidermy
         brooklyn.
-      </p>
+      </p> */}
     </main>
   );
 }

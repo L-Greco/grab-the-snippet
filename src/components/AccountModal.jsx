@@ -57,11 +57,12 @@ function AccountModal() {
       alert(error);
     }
   }
+
   const ModalAccountNode = useRef();
   useEffect(() => {
     setEditorLanguage(state.user.editorLanguage);
     setEditorTheme(state.user.editorTheme);
-  }, []);
+  }, [state.user]);
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
