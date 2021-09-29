@@ -64,7 +64,9 @@ function AddSnippetModal({
   setUserTheme,
 }) {
   const addSnippetModalNode = useRef();
+
   const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
+
   const handleSave = async () => {
     let snippetToSend = {
       title: snippet.title,
@@ -97,6 +99,9 @@ function AddSnippetModal({
         addSnippetToArray(res.data);
         closeModal();
         emptyTheSnippet(user.editorLanguage, user.editorTheme);
+      }
+      if (!res) {
+        console.log("im here");
       }
       setSaveBtnIsLoading(false);
     } catch (error) {

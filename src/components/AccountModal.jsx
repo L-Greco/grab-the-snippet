@@ -27,9 +27,9 @@ function AccountModal() {
 
   async function handleLogout() {
     try {
-      dispatch(clearUserAction());
       const res = await postRequest("users/logout");
       if (res.status === 200) {
+        dispatch(clearUserAction());
       }
     } catch (error) {
       alert(error);
