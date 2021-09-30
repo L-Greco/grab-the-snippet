@@ -41,7 +41,8 @@
 }
 
 .account-modal-account {
-  margin-left: 120px;
+  margin-left: 50%;
+  transform: translate(-50%);
   font-family: "Acme";
   font-size: 20px;
   color: rgba(0, 0, 0, 0.611);

@@ -15,25 +15,25 @@ function App() {
   console.log(loggedIn)
   const dispatch = useDispatch()
 
-  const setUser = async () => {
-    try {
-      const res = await getRequest("users/me")
-      if (res.status === 200) {
-        console.log(res.data)
+  // const setUser = async () => {
+  //   try {
+  //     const res = await getRequest("users/me")
+  //     if (res.status === 200) {
+  //       console.log(res.data)
 
-        dispatch(setUsersFoldersAction(res.data.folders))
-        dispatch(setSnippetEditorThemeAction(res.data.accountSettings.preferredEditorTheme))
-        dispatch(setEditorLanguageAction(res.data.accountSettings.preferredEditorLanguage))
-        dispatch(setUserAction(res.data))
+  //       dispatch(setUsersFoldersAction(res.data.folders))
+  //       dispatch(setSnippetEditorThemeAction(res.data.accountSettings.preferredEditorTheme))
+  //       dispatch(setEditorLanguageAction(res.data.accountSettings.preferredEditorLanguage))
+  //       dispatch(setUserAction(res.data))
 
 
-      } else {
-        dispatch(setLoggedOffAction())
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //     } else {
+  //       dispatch(setLoggedOffAction())
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
 
 
@@ -44,7 +44,7 @@ function App() {
       }
     })
 
-    setUser()
+    // setUser()
   }, [])
 
   // if (!user.userLanded) return null;

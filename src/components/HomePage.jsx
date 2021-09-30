@@ -11,6 +11,10 @@ import {
   addFolderTOArrayAction,
   addFolderToUserFoldersArrayAction,
   toggleFolderSettingsModalAction,
+  setUsersFoldersAction,
+  setUserAction,
+  setLoggedOffAction,
+  clearUserAction,
 } from "../redux/actions";
 import { getRequest, postRequest } from "../lib/axios";
 // Components
@@ -27,6 +31,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { RiFolderSettingsLine } from "react-icons/ri";
 // css styles
 import "../styles/homePage.css";
+import FolderSettingsModal from "./FolderSettingsModal";
 
 // let text = require("../data/text.json");
 
@@ -41,7 +46,38 @@ function HomePage({ match, history }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
+  // setting the User
+  const setUser = async () => {
+    try {
+      const res = await getRequest("users/me");
+      if (res.status === 200) {
+        console.log(res.data);
 
+        dispatch(setUsersFoldersAction(res.data.folders));
+        dispatch(
+          setSnippetEditorThemeAction(
+            res.data.accountSettings.preferredEditorTheme
+          )
+        );
+        dispatch(
+          setEditorLanguageAction(
+            res.data.accountSettings.preferredEditorLanguage
+          )
+        );
+        dispatch(setUserAction(res.data));
+      } else {
+        dispatch(setLoggedOffAction());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    setUser();
+    // return () => {
+    //   dispatch(clearUserAction());
+    // };
+  }, []);
   // Finding Folder name through the id
   function findFolderName(a) {
     if (!page.parent) return null;
@@ -179,7 +215,7 @@ function HomePage({ match, history }) {
       getData();
     }
   }, [match]);
-  if (!user.userLanded) return null;
+  // if (!user.userLanded) return null;
   // Redirect if user is not logged in
   if (!user.loggedIn) {
     return <Redirect to="/LoginPage" />;
@@ -188,6 +224,13 @@ function HomePage({ match, history }) {
     <>
       <SnippetModal />
       <AddSnippetModal />
+      {page.parent !== "home" && (
+        <FolderSettingsModal
+          folder={findFolderName(1)}
+          folderId={match.params.folderName}
+        />
+      )}
+
       <Navbar />
       {/* GRAB THE SNIPPET TOAST HERE */}
       <Toast
