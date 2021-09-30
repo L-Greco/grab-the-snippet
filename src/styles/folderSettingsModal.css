@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
+  font-family: "Acme";
 }
 .folder-settings-modal-title {
   margin-left: 50%;
@@ -23,4 +24,33 @@
   font-family: "Acme";
   font-size: 20px;
   color: rgba(0, 0, 0, 0.611);
+}
+.radio-container {
+  margin-top: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
+}
+#folderNameInput {
+  resize: none;
+  outline: none;
+  width: 70%;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  font-family: "Acme";
+  font-size: 0.8rem;
+}
+.folder-modal-settings-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.change-folder-name-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deleteFolderAttention {
+  color: rgba(253, 0, 0, 0.631);
+  font-size: 16px;
+  font-style: italic;
 }
