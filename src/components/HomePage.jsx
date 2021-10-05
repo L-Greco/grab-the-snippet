@@ -224,7 +224,7 @@ function HomePage({ match, history }) {
     <>
       <SnippetModal />
       <AddSnippetModal />
-      {page.parent !== "home" && (
+      {page.parent !== "home" && page.folderSettingsModalIsOpen && (
         <FolderSettingsModal
           folder={findFolderName(1)}
           folderId={match.params.folderName}

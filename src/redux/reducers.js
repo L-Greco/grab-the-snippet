@@ -100,7 +100,15 @@ export const pageManagementReducer = (state = initialState.page, action) => {
             return {
                 ...state,
                 snippetsArray: filteredArray
+            }
+        case `CHANGE_FOLDER_NAME`:
+            const folder = state.userFolders.filter(folder => folder._id === action.folderId)[0]
+            console.log(action.folderId)
+            console.log(folder)
+            folder.name = action.folderName
 
+            return {
+                ...state
 
             }
         default:

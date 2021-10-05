@@ -155,6 +155,14 @@ export const setUsersFoldersAction = (array) => {
 
     }
 }
+export const changeFolderNameAction = (id, name) => {
+    return {
+        type: `CHANGE_FOLDER_NAME`,
+        folderId: id,
+        folderName: name
+
+    }
+}
 
 // *********************** USER *********************** //
 
