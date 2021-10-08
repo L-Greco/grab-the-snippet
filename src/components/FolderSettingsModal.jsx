@@ -1,24 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDom from "react-dom";
+import { withRouter, Redirect } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleFolderSettingsModalAction,
   changeFolderNameAction,
 } from "../redux/actions";
-import { putRequest } from "../lib/axios";
+import { putRequest, deleteRequest } from "../lib/axios";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
 import "../styles/folderSettingsModal.css";
+import "../styles/myBootstrap.css";
 
-function FolderSettingsModal({ folder, folderId }) {
+function FolderSettingsModal({ folder, folderId, history }) {
   const FolderSettingsModal = useRef();
   const dispatch = useDispatch();
   const page = useSelector((state) => state.page);
   const [radioInput, setRadioInput] = useState("");
   const [newFolderName, setNewFolderName] = useState("");
   const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [destination, setDestination] = useState("false");
   const [radioSnippetManagement, setRadioSnippetManagement] = useState("");
 
@@ -47,6 +50,26 @@ function FolderSettingsModal({ folder, folderId }) {
     }
   }
 
+  async function handleSaveDelete() {
+    setSaveBtnIsLoading(true);
+    try {
+      if (radioSnippetManagement === "delete") {
+        console.log("delete ");
+        const res = await deleteRequest(
+          `folders/deleteAndSnippets/${folderId}`
+        );
+        if (res.status === 200) {
+          handleClose();
+          history.push("/home");
+        }
+        setSaveBtnIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  }
+
   function filterFolderArr() {
     return page.userFolders.filter((fldr) => fldr.name !== folder);
   }
@@ -56,7 +79,10 @@ function FolderSettingsModal({ folder, folderId }) {
       input.focus();
     }, 150);
   }
-
+  function handleRadioInput(e) {
+    setRadioInput(e.target.value);
+    if (e.target.value === "name") setRadioSnippetManagement("");
+  }
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -86,7 +112,7 @@ function FolderSettingsModal({ folder, folderId }) {
           </button>
         </div>
         <div className="radio-container">
-          <Form onChange={(e) => setRadioInput(e.target.value)}>
+          <Form onChange={(e) => handleRadioInput(e)}>
             <Form.Check
               onClick={focusInput}
               type="radio"
@@ -155,20 +181,20 @@ function FolderSettingsModal({ folder, folderId }) {
               </Form>
 
               {radioSnippetManagement === "move" && (
-                <Form.Select
-                  // aria-label="Default select example"
-                  className="mt-2"
+                <select
+                  aria-label="Default select example"
+                  className="mt-2 form-select form-select"
                   onChange={(e) => setDestination(e.target.value)}
                   value={destination}
+                  size={4}
                 >
-                  <option value="">Choose a destination</option>
                   <option value="home">Home</option>
                   {filterFolderArr().map((fldr) => (
                     <option key={fldr._id + 1} value={fldr._id}>
                       {fldr.name}
                     </option>
                   ))}
-                </Form.Select>
+                </select>
               )}
               {radioSnippetManagement === "delete" && (
                 <p className="deleteFolderAttention">
@@ -180,13 +206,13 @@ function FolderSettingsModal({ folder, folderId }) {
                 (destination !== "" && radioSnippetManagement === "move")) && (
                 <button
                   style={{ width: "100%", fontSize: "1rem" }}
-                  onClick={() => handleSaveNameChange()}
-                  className={"save-editor-btn"}
+                  onClick={handleSaveDelete}
+                  className={"clear-editor-btn"}
                 >
                   {saveBtnIsLoading ? (
                     <Spinner id="mySpinner" animation="border" variant="dark" />
                   ) : (
-                    "Save Changes"
+                    "Delete"
                   )}
                 </button>
               )}
@@ -199,4 +225,4 @@ function FolderSettingsModal({ folder, folderId }) {
   );
 }
 
-export default FolderSettingsModal;
+export default withRouter(FolderSettingsModal);
