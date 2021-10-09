@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDom from "react-dom";
-import { withRouter, Redirect } from "react-router";
+import { withRouter } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleFolderSettingsModalAction,
@@ -22,7 +22,7 @@ function FolderSettingsModal({ folder, folderId, history }) {
   const [newFolderName, setNewFolderName] = useState("");
   const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [destination, setDestination] = useState("false");
+  const [destination, setDestination] = useState("home");
   const [radioSnippetManagement, setRadioSnippetManagement] = useState("");
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function FolderSettingsModal({ folder, folderId, history }) {
     }
   }
 
-  async function handleSaveDelete() {
+  async function handleDelete() {
     setSaveBtnIsLoading(true);
     try {
       if (radioSnippetManagement === "delete") {
@@ -62,9 +62,21 @@ function FolderSettingsModal({ folder, folderId, history }) {
           handleClose();
           history.push("/home");
         }
-        setSaveBtnIsLoading(false);
       }
+      if (radioSnippetManagement === "move") {
+        console.log(folderId);
+        console.log(destination);
+        const res = await deleteRequest(
+          `folders/deleteFolderAndMoveSnippets/${folderId}/${destination}`
+        );
+        if (res.status === 200) {
+          handleClose();
+          history.push("/home");
+        }
+      }
+      setSaveBtnIsLoading(false);
     } catch (error) {
+      setSaveBtnIsLoading(false);
       console.log(error);
       alert(error);
     }
@@ -185,8 +197,11 @@ function FolderSettingsModal({ folder, folderId, history }) {
                   aria-label="Default select example"
                   className="mt-2 form-select form-select"
                   onChange={(e) => setDestination(e.target.value)}
+                  // onFocus={selectOnFocus}
+                  // onBlur={selectOnBlur}
                   value={destination}
                   size={4}
+                  id="selectInput"
                 >
                   <option value="home">Home</option>
                   {filterFolderArr().map((fldr) => (
@@ -206,7 +221,7 @@ function FolderSettingsModal({ folder, folderId, history }) {
                 (destination !== "" && radioSnippetManagement === "move")) && (
                 <button
                   style={{ width: "100%", fontSize: "1rem" }}
-                  onClick={handleSaveDelete}
+                  onClick={handleDelete}
                   className={"clear-editor-btn"}
                 >
                   {saveBtnIsLoading ? (
