@@ -73,11 +73,13 @@ function SnippetModal({
 }) {
   const ModalNode = useRef();
   const smallDeleteMOdal = useRef();
+  const commentsNode = useRef();
   const [show, setShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [snippetIsChanged, setSnippetIsChanged] = useState(false);
   const [editorChanged, setEditorChanged] = useState(false);
   const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
+  const [showTextArea, setShowTextArea] = useState(false);
 
   function checkIfChanged() {
     if (page.cardModalIsOpen) {
@@ -148,6 +150,7 @@ function SnippetModal({
     closeModal();
     emptyTheSnippet(user.editorLanguage, user.editorTheme);
     setShowDeleteModal(false);
+    setShowTextArea(false);
   }
   // Function for Deleting the Snippet
   async function handleDelete() {
@@ -167,7 +170,7 @@ function SnippetModal({
   useEffect(() => {
     checkIfChanged();
   }, [snippet]);
-  function CloseModalIfClickedOut(ref1, ref2) {
+  function CloseModalIfClickedOut(ref1, ref2, ref3) {
     useEffect(() => {
       function handleClickOutside(event) {
         if (ref1.current && !ref1.current.contains(event.target)) {
@@ -177,6 +180,9 @@ function SnippetModal({
         if (ref2.current && !ref2.current.contains(event.target)) {
           setShowDeleteModal(false);
         }
+        if (ref3.current && !ref3.current.contains(event.target)) {
+          setShowTextArea(false);
+        }
       }
 
       // Bind the event listener
@@ -185,9 +191,9 @@ function SnippetModal({
         // Unbind the event listener
         document.removeEventListener("mousedown", handleClickOutside);
       };
-    }, [ref1, ref2]);
+    }, [ref1, ref2, ref3]);
   }
-  CloseModalIfClickedOut(ModalNode, smallDeleteMOdal);
+  CloseModalIfClickedOut(ModalNode, smallDeleteMOdal, commentsNode);
   // CloseModalIfClickedOut(smallDeleteMOdal);
 
   if (!page.cardModalIsOpen) return null;
@@ -245,30 +251,55 @@ function SnippetModal({
                   <Editor />
                 </div>
                 <div className="add-Modal-inputs-wrapper ">
-                  <Linkify>
-                    <textarea
-                      type="text"
-                      placeholder={text.SnippetCard.Comments[page.language]}
-                      className="add-snippet-textarea"
-                      value={snippet.comments}
-                      onChange={(e) => setComments(e.target.value)}
-                    />
-                  </Linkify>
-                  {/* <input
-                    type="text"
-                    placeholder={
-                      text.SnippetCard.QueryParameters[page.language]
-                    }
-                    className="add-snippet-query-input"
-                    value={snippet.queryParameters}
-                    onChange={(e) => setQuery(e.target.value)}
-                  /> */}
-                  {/* <button
-                  className="clear-editor-btn"
-                  onClick={() => setCode("")}
-                >
-                  Clear
-                </button> */}
+                  <div
+                    style={{ height: "45%" }}
+                    ref={commentsNode}
+                    onClick={() => setShowTextArea(true)}
+                  >
+                    {!showTextArea && (
+                      <div
+                        placeholder={text.SnippetCard.Comments[page.language]}
+                        className="div-textarea"
+                      >
+                        {snippet.comments === "" && (
+                          <span
+                            style={{
+                              fontSize: "0.7rem",
+                              fontFamily: "Acme",
+                              color: "rgba(0,0,0,0.6)",
+                            }}
+                          >
+                            {text.SnippetCard.Comments[page.language]}{" "}
+                          </span>
+                        )}
+
+                        <Linkify
+                          componentDecorator={(
+                            decoratedHref,
+                            decoratedText,
+                            key
+                          ) => (
+                            <a target="blank" href={decoratedHref} key={key}>
+                              {decoratedText}
+                            </a>
+                          )}
+                        >
+                          {snippet.comments}
+                        </Linkify>
+                      </div>
+                    )}
+                    {showTextArea && (
+                      <textarea
+                        autoFocus
+                        type="text"
+                        placeholder={text.SnippetCard.Comments[page.language]}
+                        value={snippet.comments}
+                        onChange={(e) => setComments(e.target.value)}
+                        className="add-snippet-textarea"
+                      />
+                    )}
+                  </div>
+
                   <Toast
                     onClose={() => setShow(false)}
                     show={show}
