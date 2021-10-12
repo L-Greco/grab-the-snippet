@@ -252,7 +252,7 @@ function SnippetModal({
                 </div>
                 <div className="add-Modal-inputs-wrapper ">
                   <div
-                    style={{ height: "45%" }}
+                    className="textarea-node"
                     ref={commentsNode}
                     onClick={() => setShowTextArea(true)}
                   >
