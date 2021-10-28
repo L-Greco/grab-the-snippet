@@ -296,6 +296,7 @@ function SnippetModal({
                         value={snippet.comments}
                         onChange={(e) => setComments(e.target.value)}
                         className="add-snippet-textarea"
+                        style={{ height: "100%" }}
                       />
                     )}
                   </div>

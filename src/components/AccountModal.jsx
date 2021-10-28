@@ -97,19 +97,47 @@ function AccountModal() {
           </button>
         </div>
         <div className="account-modal-info">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginLeft: "1rem",
-            }}
-          >
-            <div style={{ marginRight: "0.85rem" }} className="acc-name">
-              {state.user.firstName}
-            </div>
-            <div className="acc-name">{state.user.lastName}</div>
-          </div>
-          <div className="acc-mail mx-auto">{state.user.email}</div>
+          {state.user.provider === "google" && (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "1rem",
+                }}
+              >
+                {state.user.firstName !== "" && (
+                  <div style={{ marginRight: "0.85rem" }} className="acc-name">
+                    {state.user.firstName}
+                  </div>
+                )}
+                {state.user.lastName !== "" && (
+                  <div className="acc-name">{state.user.lastName}</div>
+                )}
+              </div>
+              {state.user.email !== "" && (
+                <div className="acc-mail mx-auto">{state.user.email}</div>
+              )}
+            </>
+          )}
+          {state.user.provider === "github" && (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "1rem",
+                }}
+              >
+                {state.user.username !== "" && (
+                  <div className="acc-name">{state.user.username}</div>
+                )}
+              </div>
+              {state.user.email !== "" && (
+                <div className="acc-mail mx-auto">{state.user.email}</div>
+              )}
+            </>
+          )}
         </div>
         <div className="acc-settings">
           <label
