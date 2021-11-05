@@ -61,23 +61,27 @@ function FolderSettingsModal({ folder, folderId, history }) {
         if (res.status === 200) {
           const res2 = await getRequest("users/updateMyFolders");
           if (res2.status === 200) {
+            handleClose();
+            history.push("/home");
+
             dispatch(setUsersFoldersAction(res2.data));
           }
-          handleClose();
-          history.push("/home");
         }
       }
-      if (radioSnippetManagement === "move") {
+      if (
+        radioSnippetManagement === "move" ||
+        page.snippetsArray.length === 0
+      ) {
         const res = await deleteRequest(
           `folders/deleteFolderAndMoveSnippets/${folderId}/${destination}`
         );
         if (res.status === 200) {
           const res2 = await getRequest("users/updateMyFolders");
           if (res2.status === 200) {
+            handleClose();
+            history.push("/home");
             dispatch(setUsersFoldersAction(res2.data));
           }
-          handleClose();
-          history.push("/home");
         }
       }
       setSaveBtnIsLoading(false);
@@ -179,32 +183,35 @@ function FolderSettingsModal({ folder, folderId, history }) {
               <p className="deleteFolderAttention">
                 Careful you are about to delete folder "{folder}",
                 <br />
-                nested folders upon deletion will move to the Home Page
+                nested folders (if there are any) upon deletion will move to the
+                Home Page.
               </p>
-              <Form onChange={(e) => setRadioSnippetManagement(e.target.value)}>
-                <Form.Check
-                  type="radio"
-                  id="deleteSnippets"
-                  name="uponDeletion"
-                  label="Delete snippets inside "
-                  value="delete"
-                ></Form.Check>
-                <Form.Check
-                  type="radio"
-                  id="moveSnippets"
-                  name="uponDeletion"
-                  label="move snippets to another folder"
-                  value="move"
-                ></Form.Check>
-              </Form>
+              {page.snippetsArray.length > 0 && (
+                <Form
+                  onChange={(e) => setRadioSnippetManagement(e.target.value)}
+                >
+                  <Form.Check
+                    type="radio"
+                    id="deleteSnippets"
+                    name="uponDeletion"
+                    label="Delete snippets inside "
+                    value="delete"
+                  ></Form.Check>
+                  <Form.Check
+                    type="radio"
+                    id="moveSnippets"
+                    name="uponDeletion"
+                    label="move snippets to another folder"
+                    value="move"
+                  ></Form.Check>
+                </Form>
+              )}
 
               {radioSnippetManagement === "move" && (
                 <select
                   aria-label="Default select example"
                   className="mt-2 form-select form-select"
                   onChange={(e) => setDestination(e.target.value)}
-                  // onFocus={selectOnFocus}
-                  // onBlur={selectOnBlur}
                   value={destination}
                   size={4}
                   id="selectInput"
@@ -224,7 +231,8 @@ function FolderSettingsModal({ folder, folderId, history }) {
                 </p>
               )}
               {(radioSnippetManagement === "delete" ||
-                (destination !== "" && radioSnippetManagement === "move")) && (
+                (destination !== "" && radioSnippetManagement === "move") ||
+                page.snippetsArray.length === 0) && (
                 <button
                   style={{ width: "100%", fontSize: "1rem" }}
                   onClick={handleDelete}
