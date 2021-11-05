@@ -131,7 +131,9 @@
   margin-left: 0.2rem;
   width: 20%;
 }
+
 .add-snippet-textarea {
+  font-size: 0.7rem;
   font-family: "Acme";
   background-color: white;
   border-radius: 0.2rem;
@@ -141,6 +143,22 @@
   height: 45%;
   padding: 0.5rem;
   overflow-wrap: break-word;
+  resize: none;
+  box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+}
+
+.div-textarea {
+  font-size: 0.7rem;
+  font-family: "Acme";
+  background-color: white;
+  border-radius: 0.2rem;
+  border: none;
+  outline-color: #99caa3;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  overflow-wrap: break-word;
+  overflow: auto;
   resize: none;
   box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
 }
@@ -212,7 +230,14 @@
 .w-20 {
   width: 20%;
 }
+.textarea-node {
+  height: 45%;
+}
 @media (max-width: 600px) {
+  .textarea-node {
+    width: 45%;
+    height: 5rem;
+  }
   .w-80 {
     width: 100%;
   }
@@ -229,28 +254,35 @@
     margin-top: 1rem;
     flex-direction: row;
     width: 100%;
-    align-items: flex-end;
+    justify-content: space-around;
   }
   .add-snippet-query-input {
     width: fit-content;
     overflow: auto;
     margin-right: 0.5rem;
   }
-  .add-snippet-textarea {
+  /* .add-snippet-textarea {
     height: 4rem;
     width: 50%;
     margin-right: 0.5rem;
-  }
+  } */
   .save-editor-btn {
     margin-right: 0.3rem;
     font-size: 0.7rem;
+    margin-top: auto;
+    height: 2.5rem;
   }
 
   .clear-editor-btn {
+    margin-left: 0.5rem;
     font-size: 0.7rem;
+    margin-top: auto;
+    height: 2.5rem;
   }
   .grab-the-snippet-button {
     font-size: 0.7rem;
+    margin-top: auto;
+    height: 2.5rem;
   }
   .clear-editor-btn {
     margin-right: 0.3rem;

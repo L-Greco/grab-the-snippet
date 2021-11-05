@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   toggleFolderSettingsModalAction,
   changeFolderNameAction,
+  setUsersFoldersAction,
 } from "../redux/actions";
-import { putRequest, deleteRequest } from "../lib/axios";
+import { putRequest, deleteRequest, getRequest } from "../lib/axios";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import Spinner from "react-bootstrap/Spinner";
@@ -33,7 +34,7 @@ function FolderSettingsModal({ folder, folderId, history }) {
     setRadioInput("");
     dispatch(toggleFolderSettingsModalAction(false));
   }
-
+  async function handleChange() {}
   async function handleSaveNameChange() {
     setSaveBtnIsLoading(true);
     try {
@@ -54,22 +55,27 @@ function FolderSettingsModal({ folder, folderId, history }) {
     setSaveBtnIsLoading(true);
     try {
       if (radioSnippetManagement === "delete") {
-        console.log("delete ");
         const res = await deleteRequest(
           `folders/deleteAndSnippets/${folderId}`
         );
         if (res.status === 200) {
+          const res2 = await getRequest("users/updateMyFolders");
+          if (res2.status === 200) {
+            dispatch(setUsersFoldersAction(res2.data));
+          }
           handleClose();
           history.push("/home");
         }
       }
       if (radioSnippetManagement === "move") {
-        console.log(folderId);
-        console.log(destination);
         const res = await deleteRequest(
           `folders/deleteFolderAndMoveSnippets/${folderId}/${destination}`
         );
         if (res.status === 200) {
+          const res2 = await getRequest("users/updateMyFolders");
+          if (res2.status === 200) {
+            dispatch(setUsersFoldersAction(res2.data));
+          }
           handleClose();
           history.push("/home");
         }

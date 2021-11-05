@@ -220,6 +220,7 @@ function HomePage({ match, history }) {
   if (!user.loggedIn) {
     return <Redirect to="/LoginPage" />;
   }
+  if (!user.loggedIn) return null;
   return (
     <>
       <SnippetModal />

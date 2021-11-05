@@ -14,10 +14,15 @@ function Navbar({ history }) {
   const dispatch = useDispatch();
 
   function returnCapitals(user) {
-    let firstName = user.firstName;
-    let lastName = user.lastName;
-    let myString = firstName.charAt(0) + " " + lastName.charAt(0);
-    setAcc(myString.toUpperCase());
+    if (user.provider === "google") {
+      let firstName = user.firstName;
+      let lastName = user.lastName;
+      let myString = firstName.charAt(0) + " " + lastName.charAt(0);
+      setAcc(myString.toUpperCase());
+    }
+    if (user.provider === "github") {
+      setAcc(user.username.charAt(0).toUpperCase());
+    }
   }
 
   useEffect(() => {

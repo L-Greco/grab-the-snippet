@@ -56,12 +56,16 @@ function LoginPage() {
             </a>
           </button>
           <button className="login-continue-with-provider">
-            <div className="login-icon-wrapper">
-              <SiGithub
-              //   style={{ color: "rgb(10,102,194)" }}
-              />
-              <div style={{ marginLeft: "5px" }}>Continue with GitHub</div>
-            </div>
+            <a
+              className="text-decoration-none "
+              style={{ color: "black" }}
+              href={process.env.REACT_APP_BE_URL + "/users/githubLogin"}
+            >
+              <div className="login-icon-wrapper">
+                <SiGithub />
+                <div style={{ marginLeft: "5px" }}>Continue with GitHub</div>
+              </div>
+            </a>
           </button>
           <button className="login-continue-with-provider">
             <div className="login-icon-wrapper">

@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import Editor from "./Editor";
 import EditorOptions from "./EditorOptions";
 import Spinner from "react-bootstrap/Spinner";
+import Toast from "react-bootstrap/Toast";
 import { connect } from "react-redux";
 import {
   closeAddSnippetModalAction,
@@ -66,54 +67,62 @@ function AddSnippetModal({
   const addSnippetModalNode = useRef();
 
   const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
-
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const handleClose = function () {
+    setShowErrorToast(false);
+    closeModal();
+  };
   const handleSave = async () => {
-    let snippetToSend = {
-      title: snippet.title,
-      language: snippet.editorLanguage,
-      code: snippet.code,
-      queryParameters: snippet.queryParameters,
-      parent: {
-        home: page.parent === "home" ? true : false,
-        folderId: page.parent === "home" ? null : page.parent,
-      },
-      comments: snippet.comments,
-    };
+    if (snippet.title === "" || snippet.code === "") {
+      setShowErrorToast(true);
+    } else {
+      let snippetToSend = {
+        title: snippet.title,
+        language: snippet.editorLanguage,
+        code: snippet.code,
+        queryParameters: snippet.queryParameters,
+        parent: {
+          home: page.parent === "home" ? true : false,
+          folderId: page.parent === "home" ? null : page.parent,
+        },
+        comments: snippet.comments,
+      };
 
-    try {
-      console.log(snippetToSend);
-      setSaveBtnIsLoading(true);
-      if (user.editorTheme !== snippet.editorTheme) {
-        let userTheme = {
-          accountSettings: {
-            preferredEditorTheme: snippet.editorTheme,
-          },
-        };
-        const res = await putRequest("users/edit", userTheme);
-        if (res.status === 200) {
-          setUserTheme(snippet.editorTheme);
+      try {
+        console.log(snippetToSend);
+        setSaveBtnIsLoading(true);
+        if (user.editorTheme !== snippet.editorTheme) {
+          let userTheme = {
+            accountSettings: {
+              preferredEditorTheme: snippet.editorTheme,
+            },
+          };
+          const res = await putRequest("users/edit", userTheme);
+          if (res.status === 200) {
+            setUserTheme(snippet.editorTheme);
+          }
         }
+        let res = await postRequest(`snippets`, snippetToSend);
+        if (res.status === 201) {
+          addSnippetToArray(res.data);
+          closeModal();
+          emptyTheSnippet(user.editorLanguage, user.editorTheme);
+        }
+        if (!res) {
+          console.log("im here");
+        }
+        setSaveBtnIsLoading(false);
+      } catch (error) {
+        setSaveBtnIsLoading(false);
+        console.log(error);
       }
-      let res = await postRequest(`snippets`, snippetToSend);
-      if (res.status === 201) {
-        addSnippetToArray(res.data);
-        closeModal();
-        emptyTheSnippet(user.editorLanguage, user.editorTheme);
-      }
-      if (!res) {
-        console.log("im here");
-      }
-      setSaveBtnIsLoading(false);
-    } catch (error) {
-      setSaveBtnIsLoading(false);
-      console.log(error);
     }
   };
   function CloseModalIfClickedOut(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
-          closeModal();
+          handleClose();
         }
       }
 
@@ -133,6 +142,25 @@ function AddSnippetModal({
     <>
       <div className="modal-overlay">
         <div ref={addSnippetModalNode} className="modal-main-container">
+          <Toast
+            style={{ backgroundColor: "var(--main-color-orange)" }}
+            onClose={() => setShowErrorToast(false)}
+            show={showErrorToast}
+            delay={4000}
+            autohide
+          >
+            <div className="toast-header">
+              Oooops
+              <AiOutlineClose
+                style={{ cursor: "pointer" }}
+                onClick={() => setShowErrorToast(false)}
+              />
+            </div>
+            <Toast.Body className="text-center">
+              {" "}
+              You need to have a title and a code to save a snippet!
+            </Toast.Body>
+          </Toast>
           <div className="main-content-modal">
             <div className="modal-header">
               <textarea
@@ -141,7 +169,7 @@ function AddSnippetModal({
                 placeholder={text.SnippetCard.Title[page.language]}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <button className="xbtn-wrapper" onClick={() => closeModal()}>
+              <button className="xbtn-wrapper" onClick={handleClose}>
                 <IconContext.Provider value={{ className: "xbtn" }}>
                   <AiOutlineClose />
                 </IconContext.Provider>
@@ -164,13 +192,7 @@ function AddSnippetModal({
                   value={snippet.comments}
                   onChange={(e) => setComments(e.target.value)}
                 />
-                {/* <input
-                  type="text"
-                  placeholder={text.SnippetCard.QueryParameters[page.language]}
-                  className="add-snippet-query-input"
-                  value={snippet.queryParameters}
-                  onChange={(e) => setQuery(e.target.value)}
-                /> */}
+
                 <button
                   className="clear-editor-btn"
                   onClick={() => setCode("")}

@@ -153,7 +153,7 @@ export const userReducer = (state = initialState.user, action) => {
         case `SET_USER`:
             return {
                 ...state,
-                username: action.payload.profile.username ? action.profile.username : "",
+                username: action.payload.profile.userName ? action.payload.profile.userName : "",
                 firstName: action.payload.profile.firstName,
                 lastName: action.payload.profile.lastName,
                 avatar: action.payload.profile.avatar,
@@ -164,6 +164,7 @@ export const userReducer = (state = initialState.user, action) => {
                 loggedIn: true,
                 userLanded: true,
                 _id: action.payload._id,
+                provider: action.payload.provider
 
 
 
