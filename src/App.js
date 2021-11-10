@@ -4,7 +4,7 @@ import NoMatch from "./components/NoMatch";
 import StartingPage from "./components/StartingPage";
 import { useEffect } from "react"
 import WebFont from "webfontloader"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { setLoggedOffAction, setUserAction, setSnippetEditorThemeAction, setEditorLanguageAction, setUsersFoldersAction } from "./redux/actions.js"
 import { getRequest } from "./lib/axios.js"
 import { useSelector, useDispatch } from "react-redux";
@@ -15,25 +15,6 @@ function App() {
   console.log(loggedIn)
   const dispatch = useDispatch()
 
-  // const setUser = async () => {
-  //   try {
-  //     const res = await getRequest("users/me")
-  //     if (res.status === 200) {
-  //       console.log(res.data)
-
-  //       dispatch(setUsersFoldersAction(res.data.folders))
-  //       dispatch(setSnippetEditorThemeAction(res.data.accountSettings.preferredEditorTheme))
-  //       dispatch(setEditorLanguageAction(res.data.accountSettings.preferredEditorLanguage))
-  //       dispatch(setUserAction(res.data))
-
-
-  //     } else {
-  //       dispatch(setLoggedOffAction())
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
 
 
@@ -53,6 +34,9 @@ function App() {
       <Router>
 
         <Switch>
+          {/* {!user.loggedIn &&
+            <Redirect from="/home" to="/loginPage" />
+          } */}
           <Route path="/folder/:folderName">
 
             <HomePage />

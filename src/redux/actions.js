@@ -219,6 +219,12 @@ export const addFolderToUserFoldersArrayAction = (folder) => {
         payload: folder
     }
 }
+export const setUserLandedAction = (boolean) => {
+    return {
+        type: `SET_USER_LANDED`,
+        payload: boolean
+    }
+}
 // not yet ready
 // export const removeFolderToUserFoldersArrayAction = (folder) => {
 //     return {

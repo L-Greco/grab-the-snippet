@@ -8,6 +8,7 @@ import {
   setUserLanguageAction,
   setUserThemeAction,
   clearUserAction,
+  setUserLandedAction,
 } from "../redux/actions.js";
 import { putRequest, postRequest } from "../lib/axios";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
@@ -30,6 +31,7 @@ function AccountModal() {
       const res = await postRequest("users/logout");
       if (res.status === 200) {
         dispatch(clearUserAction());
+        dispatch(setUserLandedAction(false));
       }
     } catch (error) {
       alert(error);

@@ -146,7 +146,7 @@ export const userReducer = (state = initialState.user, action) => {
         case `SET_LOGGED_OFF`:
             return {
                 ...state,
-                userLanded: true,
+
                 loggedIn: false
 
             }
@@ -162,7 +162,6 @@ export const userReducer = (state = initialState.user, action) => {
                 editorLanguage: action.payload.accountSettings.preferredEditorLanguage,
                 language: action.payload.accountSettings.preferredApplicationLanguage,
                 loggedIn: true,
-                userLanded: true,
                 _id: action.payload._id,
                 provider: action.payload.provider
 
@@ -185,6 +184,11 @@ export const userReducer = (state = initialState.user, action) => {
                 _id: ""
 
 
+            }
+        case `SET_USER_LANDED`:
+            return {
+                ...state,
+                userLanded: action.payload
             }
 
 

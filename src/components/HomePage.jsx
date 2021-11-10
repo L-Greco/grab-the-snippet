@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { withRouter, Redirect } from "react-router";
+import { withRouter, Redirect, Prompt } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   openAddSnippetModalAction,
   addParentAction,
@@ -15,6 +16,7 @@ import {
   setUserAction,
   setLoggedOffAction,
   clearUserAction,
+  setUserLandedAction,
 } from "../redux/actions";
 import { getRequest, postRequest } from "../lib/axios";
 // Components
@@ -46,13 +48,24 @@ function HomePage({ match, history }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
+
+  // Component did mount
+  useEffect(() => {
+    setUser();
+    setUserLandedAction(true);
+
+    return () => {
+      // dispatch(clearUserAction());
+      dispatch(setUserLandedAction(false));
+    };
+  }, []);
+
   // setting the User
   const setUser = async () => {
     try {
       const res = await getRequest("users/me");
-      if (res.status === 200) {
-        console.log(res.data);
 
+      if (res.status === 200) {
         dispatch(setUsersFoldersAction(res.data.folders));
         dispatch(
           setSnippetEditorThemeAction(
@@ -65,19 +78,17 @@ function HomePage({ match, history }) {
           )
         );
         dispatch(setUserAction(res.data));
+        dispatch(setUserLandedAction(true));
       } else {
+        dispatch(setUserLandedAction(true));
         dispatch(setLoggedOffAction());
       }
     } catch (error) {
+      dispatch(setUserLandedAction(true));
       console.log(error);
     }
   };
-  useEffect(() => {
-    setUser();
-    // return () => {
-    //   dispatch(clearUserAction());
-    // };
-  }, []);
+
   // Finding Folder name through the id
   function findFolderName(a) {
     if (!page.parent) return null;
@@ -164,7 +175,6 @@ function HomePage({ match, history }) {
     try {
       setIsLoading(true);
       if (checkIfFolderExists()) {
-        console.time("time");
         const folderResponse = await getRequest(
           `folders/${returnParent("state")}`
         );
@@ -177,7 +187,6 @@ function HomePage({ match, history }) {
           dispatch(addSnippetsArrayAction(res.data));
         }
         setIsLoading(false);
-        console.timeEnd("time");
       } else if (page.parent !== "home") {
         history.push("/home");
       }
@@ -217,10 +226,13 @@ function HomePage({ match, history }) {
   }, [match]);
   // if (!user.userLanded) return null;
   // Redirect if user is not logged in
-  if (!user.loggedIn) {
-    return <Redirect to="/LoginPage" />;
-  }
+  // if (!user.loggedIn) {
+  //   // return <Redirect to="/loginPage" />;
+  //   history.replace("/loginPage");
+  // }
+  if (!user.loggedIn && user.userLanded) return <Redirect to="/loginPage" />;
   if (!user.loggedIn) return null;
+
   return (
     <>
       <SnippetModal />

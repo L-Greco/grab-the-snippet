@@ -241,7 +241,6 @@ function SnippetModal({
                   </IconContext.Provider>
                 </button>
               </div>
-
               <div className="w-80">
                 <EditorOptions />
               </div>
@@ -250,6 +249,7 @@ function SnippetModal({
                 <div className="editor-col">
                   <Editor />
                 </div>
+
                 <div className="add-Modal-inputs-wrapper ">
                   <div
                     className="textarea-node"
