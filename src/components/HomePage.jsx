@@ -52,13 +52,23 @@ function HomePage({ match, history }) {
   // Component did mount
   useEffect(() => {
     setUser();
+    // isUserThere();
     setUserLandedAction(true);
+    console.log(localStorage.getItem("userLanded"));
 
     return () => {
       // dispatch(clearUserAction());
       dispatch(setUserLandedAction(false));
     };
   }, []);
+  // On mounting it adds the parent on the global state page.parent and then gets the data
+  useEffect(() => {
+    if (user.loggedIn) {
+      dispatch(addParentAction(returnParent("state")));
+      getData();
+      console.log(match);
+    }
+  }, [match]);
 
   // setting the User
   const setUser = async () => {
@@ -217,20 +227,19 @@ function HomePage({ match, history }) {
     }, [ref]);
   }
   CloseModalIfClickedOut(folderInputNode);
-  // On mounting it adds the parent on the global state page.parent and then gets the data
-  useEffect(() => {
-    if (user.loggedIn) {
-      dispatch(addParentAction(returnParent("state")));
-      getData();
-    }
-  }, [match]);
+
   // if (!user.userLanded) return null;
   // Redirect if user is not logged in
   // if (!user.loggedIn) {
   //   // return <Redirect to="/loginPage" />;
   //   history.replace("/loginPage");
   // }
-  if (!user.loggedIn && user.userLanded) return <Redirect to="/loginPage" />;
+  if (!user.loggedIn && localStorage.getItem("userLanded") === "false") {
+    return <Redirect to="/loginPage" />;
+  }
+  if (!user.loggedIn)
+    console.log("sdasdas", localStorage.getItem("userLanded"));
+
   if (!user.loggedIn) return null;
 
   return (

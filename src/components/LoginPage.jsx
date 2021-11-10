@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserLandedAction } from "../redux/actions.js";
 // Icons
 import { SiLinkedin } from "react-icons/si";
 import { SiGithub } from "react-icons/si";
@@ -10,6 +11,11 @@ import { Redirect } from "react-router";
 
 function LoginPage() {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const logWithProviderClicked = function () {
+    dispatch(setUserLandedAction(true));
+    localStorage.setItem("userLanded", true);
+  };
   if (user.loggedIn) {
     return <Redirect to="/home" />;
   }
@@ -41,7 +47,10 @@ function LoginPage() {
           >
             OR
           </div>
-          <button className="login-continue-with-provider">
+          <button
+            onClick={logWithProviderClicked}
+            className="login-continue-with-provider"
+          >
             <a
               className="text-decoration-none "
               style={{ color: "black" }}

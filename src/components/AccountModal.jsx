@@ -30,6 +30,7 @@ function AccountModal() {
     try {
       const res = await postRequest("users/logout");
       if (res.status === 200) {
+        localStorage.setItem("userLanded", false);
         dispatch(clearUserAction());
         dispatch(setUserLandedAction(false));
       }
