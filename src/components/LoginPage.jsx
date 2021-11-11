@@ -64,7 +64,10 @@ function LoginPage() {
               </div>
             </a>
           </button>
-          <button className="login-continue-with-provider">
+          <button
+            onClick={logWithProviderClicked}
+            className="login-continue-with-provider"
+          >
             <a
               className="text-decoration-none "
               style={{ color: "black" }}

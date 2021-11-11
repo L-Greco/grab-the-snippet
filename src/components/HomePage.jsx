@@ -228,12 +228,6 @@ function HomePage({ match, history }) {
   }
   CloseModalIfClickedOut(folderInputNode);
 
-  // if (!user.userLanded) return null;
-  // Redirect if user is not logged in
-  // if (!user.loggedIn) {
-  //   // return <Redirect to="/loginPage" />;
-  //   history.replace("/loginPage");
-  // }
   if (!user.loggedIn && localStorage.getItem("userLanded") === "false") {
     return <Redirect to="/loginPage" />;
   }
