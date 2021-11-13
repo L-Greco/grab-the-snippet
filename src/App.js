@@ -25,18 +25,20 @@ function App() {
       }
     })
 
-    // setUser()
+
   }, [])
 
-  // if (!user.userLanded) return null;
+
   return (
     <>
       <Router>
 
         <Switch>
-          {/* {!user.loggedIn &&
-            <Redirect from="/home" to="/loginPage" />
-          } */}
+
+          <Route exact path="/">
+
+            <StartingPage />
+          </Route>
           <Route path="/folder/:folderName">
 
             <HomePage />
