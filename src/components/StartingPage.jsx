@@ -6,9 +6,15 @@ let text = require("../data/text.json");
 function StartingPage() {
   const [scroll, setScroll] = useState(1);
   const state = useSelector((state) => state);
+  const returnToTop = function () {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
   useEffect(() => {
     const onScroll = () => {
-      const scrollCheck = window.scrollY < 10;
+      // console.log(document.documentElement.scrollTop);
+      const scrollCheck =
+        document.documentElement.scrollTop < 10 || document.body.scrolTop < 10;
       if (scrollCheck !== scroll) {
         setScroll(scrollCheck);
       }
@@ -21,21 +27,24 @@ function StartingPage() {
 
   return (
     <>
-      <header data-scrolled={!scroll} className="pseudoNav">
-        <a href="/" style={{ textDecoration: "none" }}>
-          <div className="navbar-header-icon-wrapper">
-            <img src="/gts1111.png" alt="logo here" className="img-fluid" />
-            <div className="navbar-header-sp">
-              {text.HomePage.h1[state.page.language]}
-            </div>
+      <header
+        onClick={returnToTop}
+        data-scrolled={!scroll}
+        className="pseudoNav"
+      >
+        <div className="navbar-header-icon-wrapper">
+          <img src="/gts1111.png" alt="logo here" className="img-fluid" />
+          <div className="navbar-header-sp" data-scrolled={!scroll}>
+            {text.HomePage.h1[state.page.language]}
           </div>
-        </a>
+        </div>
+
         <div style={{ fontFamily: "Acme", display: "flex" }}>
           <Link to="/loginPage">Log In</Link>
         </div>
       </header>
 
-      <section className="sp-section1 d-flex">
+      <section id="opening" className="sp-section1 d-flex">
         <div class="jumbotron mx-auto">
           <h1>
             Save your snippets once , grab them with a click for a lifetime!
@@ -55,6 +64,9 @@ function StartingPage() {
           </Link>
         </div>
       </section>
+      <section></section>
+      <section></section>
+      <section></section>
       <div style={{ height: "500px", color: "blue" }}>sss</div>
       <button onClick={() => console.log(scroll)}></button>
       <div style={{ height: "500px", color: "blue" }}>sss</div>

@@ -101,18 +101,22 @@ function HomePage({ match, history }) {
 
   // Finding Folder name through the id
   function findFolderName(a) {
-    if (!page.parent) return null;
-    const { name, parent } = page.userFolders.filter(
-      (folder) => folder._id === page.parent
-    )[0];
-    if (!parent.home) {
-      const nameOfParent = page.userFolders.filter(
-        (folder) => folder._id === parent.folderId
-      )[0].name;
-      if (a === 1) return `${name}`;
-      if (a === 2) return `${nameOfParent}`;
-    } else if (a == 1) return `${name}`;
-    if (a === 2) return null;
+    try {
+      if (!page.parent) return null;
+      const { name, parent } = page.userFolders.filter(
+        (folder) => folder._id === page.parent
+      )[0];
+      if (!parent.home) {
+        const nameOfParent = page.userFolders.filter(
+          (folder) => folder._id === parent.folderId
+        )[0].name;
+        if (a === 1) return `${name}`;
+        if (a === 2) return `${nameOfParent}`;
+      } else if (a == 1) return `${name}`;
+      if (a === 2) return null;
+    } catch (error) {
+      history.push("/home");
+    }
   }
   // Close Folder input and clear the local state
   function handleCloseFolderInput() {
