@@ -46,22 +46,38 @@ function StartingPage() {
 
       <section id="opening" className="sp-section1 d-flex">
         <div class="jumbotron mx-auto">
-          <h1>
-            Save your snippets once , grab them with a click for a lifetime!
-          </h1>
-          <p class="lead">
-            Save your snippets once , grab them with a click for a lifetime!
-          </p>
-          <hr class="my-4" />
-          <p>
-            It uses utility classes for typography and spacing to space content
-            out within the larger container.
-          </p>
-          <Link to="/loginPage">
-            <button class="btn btn-primary " style={{ fontFamily: "Acme" }}>
-              Login-it's free
-            </button>
-          </Link>
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-md-8">
+                <h1>Grab The Snippet helps developers be faster than ever.</h1>
+                <p class="lead">
+                  Store your code snippets as cards and have access on them with
+                  a click!
+                </p>
+                <hr class="my-4" />
+                <p>
+                  You can either open the snippet and see the code or copy the
+                  code to clipboard with a click.
+                </p>
+                <Link to="/loginPage">
+                  <button
+                    class="btn btn-primary "
+                    style={{ fontFamily: "Acme" }}
+                  >
+                    Login-it's free
+                  </button>
+                </Link>
+              </div>
+              <div className="d-none d-md-block col-4">
+                <img
+                  className="img-fluid"
+                  src="pic2.png"
+                  alt=""
+                  style={{ height: "auto" }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <section></section>
