@@ -10,14 +10,14 @@
   min-height: 50px;
   padding: 1rem;
   position: fixed;
-  transition: all 500ms ease-out 0s;
+  /* transition: all 500ms ease-out 0s; */
   width: 100%;
   z-index: 100;
   top: 0;
   left: 0;
 }
 .pseudoNav[data-scrolled="true"] {
-  background-color: var(--main-color);
+  background-color: rgb(35, 155, 173);
   box-shadow: rgb(0 0 0 / 30%) 0px 0px 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.179);
 }
@@ -29,6 +29,7 @@
   cursor: pointer;
   position: relative;
   margin-left: 0.5rem;
+  opacity: 0.8;
 }
 
 .navbar-header-sp::before {
@@ -45,8 +46,16 @@
 .navbar-header-sp:hover::before {
   width: 100%;
 }
+.navbar-header-sp:hover {
+  opacity: 1;
+}
 .sp-section1 {
-  margin-top: 3rem;
+  margin-top: 7rem;
+  color: white;
+}
+.sp-section2 {
+  margin-top: 4rem;
+  color: white;
 }
 .jumbotron {
   padding: 1.5rem;
