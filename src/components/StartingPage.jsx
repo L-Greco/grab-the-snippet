@@ -57,11 +57,11 @@ function StartingPage() {
             <div className="row">
               <div className="col-12 col-md-7">
                 <h1 className="mt-0">
-                  Grab The Snippet helps developers be faster than ever.
+                  Grab The Snippet helps developers to thrive.
                 </h1>
                 <p className="lead">
-                  Store your code snippets as cards and have access on them with
-                  a click!
+                  Store your code snippets as cards and have access with just a
+                  click!
                 </p>
                 <hr className="my-4" />
                 <p>
