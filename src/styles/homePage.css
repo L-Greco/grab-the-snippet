@@ -47,6 +47,7 @@
   padding: 0.5rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .folder-input-wrapper {
@@ -170,4 +171,9 @@
   .home-folder-btn {
     margin-left: 0rem;
   }
+}
+
+.imgBord {
+  border: 2px solid white;
+  border-radius: 15px;
 }

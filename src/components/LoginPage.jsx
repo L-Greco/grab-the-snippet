@@ -2,12 +2,12 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserLandedAction } from "../redux/actions.js";
+import { Redirect } from "react-router";
 // Icons
 import { SiLinkedin } from "react-icons/si";
 import { SiGithub } from "react-icons/si";
 import { FcGoogle } from "react-icons/fc";
 import "../styles/loginPage.css";
-import { Redirect } from "react-router";
 
 function LoginPage() {
   const user = useSelector((state) => state.user);
