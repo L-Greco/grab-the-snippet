@@ -82,7 +82,7 @@ function StartingPage() {
                   </button>
                 </Link>
               </div>
-              <div className="col-12 col-md-5 mt-5">
+              <div className="d-none d-md-block col-5 ">
                 <img
                   className="img-fluid imgBord"
                   src="pic2.png"
@@ -94,7 +94,7 @@ function StartingPage() {
           </div>
         </div>
       </section>
-      <section id="links" className="sp-section1 d-flex ">
+      <section id="links" className="sp-section2 d-flex ">
         <div className="jumbotron mx-auto">
           <div className="container">
             <div className="row">
@@ -120,7 +120,7 @@ function StartingPage() {
           </div>
         </div>
       </section>
-      <section id="folders" className="sp-section1 d-flex ">
+      <section id="folders" className="sp-section2 d-flex ">
         <div className="jumbotron mx-auto">
           <div className="container">
             <div className="row">
