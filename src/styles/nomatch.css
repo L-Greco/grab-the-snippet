@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Mono:400");
+
+.mainCont {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 96px;
+  font-family: "Fira Mono", monospace;
+  letter-spacing: -7px;
+}

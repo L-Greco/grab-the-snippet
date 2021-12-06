@@ -49,6 +49,12 @@
 .navbar-header-sp:hover {
   opacity: 1;
 }
+.sph1 {
+  margin-top: 0;
+  margin-bottom: 7rem;
+  font-size: 2.4rem;
+  font-weight: 500;
+}
 .sp-section1 {
   margin-top: 7rem;
   color: white;

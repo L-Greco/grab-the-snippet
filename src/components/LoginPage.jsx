@@ -2,14 +2,16 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserLandedAction } from "../redux/actions.js";
-import { Redirect } from "react-router";
+import { Redirect, withRouter } from "react-router";
+import { Link } from "react-router-dom";
+
 // Icons
 import { SiLinkedin } from "react-icons/si";
 import { SiGithub } from "react-icons/si";
 import { FcGoogle } from "react-icons/fc";
 import "../styles/loginPage.css";
 
-function LoginPage() {
+function LoginPage({ history }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const logWithProviderClicked = function () {
@@ -21,9 +23,10 @@ function LoginPage() {
   }
   return (
     <>
-      <h1 className="text-center" style={{ fontFamily: "Rampart One" }}>
+      <h1 className="text-center lph1" onClick={() => history.push("/")}>
         Grab The Snippet
       </h1>
+
       <div className="login-page-container">
         <div className="login-page-wrapper">
           <div className="login-1st-span"> Log In to Grab The Snippet</div>
@@ -97,4 +100,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

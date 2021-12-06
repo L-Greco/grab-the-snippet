@@ -46,7 +46,7 @@ function Navbar({ history }) {
         onClick={() => dispatch(openAccountModalAction())}
         className="navbar-account"
       >
-        <div className="text-center"> {acc}</div>
+        <div className="text-center"> ACC</div>
       </div>
       <AccountModal />
     </div>

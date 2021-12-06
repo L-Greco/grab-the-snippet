@@ -59,8 +59,8 @@ function StartingPage() {
       <section id="opening" className="sp-section1 d-flex ">
         <div className="jumbotron mx-auto">
           <div className="container">
-            <h1 className="mt-0 mb-5" style={{ fontSize: "2rem" }}>
-              Grab The Snippet helps developers to thrive.
+            <h1 className="sph1 text-center">
+              Grab The Snippet helps developers to thrive!
             </h1>
             <div className="row">
               <div className="col-12 col-md-7">
