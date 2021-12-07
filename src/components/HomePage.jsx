@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter, Redirect, Prompt } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-
 import {
   openAddSnippetModalAction,
   addParentAction,
@@ -29,8 +28,9 @@ import Folder from "./Folder";
 import Spinner from "react-bootstrap/Spinner";
 import Toast from "react-bootstrap/Toast";
 // React Icons
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineArrowUp } from "react-icons/ai";
 import { RiFolderSettingsLine } from "react-icons/ri";
+import { IconContext } from "react-icons"; // this is so i can style the react icon
 // css styles
 import "../styles/homePage.css";
 import FolderSettingsModal from "./FolderSettingsModal";
@@ -48,6 +48,7 @@ function HomePage({ match, history }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
+  const [scroll, setScroll] = useState(1);
 
   // Component did mount
   useEffect(() => {
@@ -69,7 +70,26 @@ function HomePage({ match, history }) {
       console.log(match);
     }
   }, [match]);
-
+  // return to top
+  const returnToTop = function () {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
+  useEffect(() => {
+    const onScroll = () => {
+      // console.log(document.documentElement.scrollTop);
+      console.log(scroll);
+      const scrollCheck =
+        document.documentElement.scrollTop < 10 || document.body.scrolTop < 10;
+      if (scrollCheck !== scroll) {
+        setScroll(scrollCheck);
+      }
+    };
+    document.addEventListener("scroll", onScroll);
+    return () => {
+      document.removeEventListener("scroll", onScroll);
+    };
+  }, [scroll, setScroll]);
   // setting the User
   const setUser = async () => {
     try {
@@ -242,6 +262,14 @@ function HomePage({ match, history }) {
 
   return (
     <>
+      {!scroll && (
+        <div className="goToTopBtn" onClick={returnToTop}>
+          <IconContext.Provider value={{ className: "arrow" }}>
+            <AiOutlineArrowUp />
+          </IconContext.Provider>
+        </div>
+      )}
+
       <SnippetModal />
       <AddSnippetModal />
       {page.parent !== "home" && page.folderSettingsModalIsOpen && (

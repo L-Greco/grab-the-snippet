@@ -177,3 +177,26 @@
   border: 2px solid white;
   border-radius: 15px;
 }
+
+.goToTopBtn {
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: grey;
+  border-radius: 50%;
+  position: fixed;
+  top: 90%;
+  left: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  z-index: 100;
+  cursor: pointer;
+}
+.goToTopBtn:hover {
+  opacity: 1;
+}
+.arrow {
+  color: white;
+  font-size: 1.8rem;
+}

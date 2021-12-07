@@ -98,6 +98,14 @@ function StartingPage() {
         <div className="jumbotron mx-auto">
           <div className="container">
             <div className="row">
+              <div className="d-none d-md-block col-5">
+                <img
+                  className="img-fluid imgBord"
+                  src="pic3.png"
+                  alt=""
+                  style={{ height: "auto" }}
+                />
+              </div>
               <div className="col-12 col-md-7">
                 <p className="lead">
                   The comment's section inside the card is a link recognizer!
@@ -107,14 +115,6 @@ function StartingPage() {
                   Upon saving, GTS will recognize and activate the links inside
                   the comments!
                 </p>
-              </div>
-              <div className="d-none d-md-block col-5">
-                <img
-                  className="img-fluid imgBord"
-                  src="pic3.png"
-                  alt=""
-                  style={{ height: "auto" }}
-                />
               </div>
             </div>
           </div>
@@ -139,6 +139,14 @@ function StartingPage() {
               </div>
             </div>
             <div style={{ alignItems: "center" }} className="row mt-5">
+              <div className="d-none d-md-block col-5">
+                <img
+                  className="img-fluid imgBord"
+                  src="pic5.png"
+                  alt=""
+                  style={{ height: "auto" }}
+                />
+              </div>
               <div className="col-12 col-md-7">
                 <p className="lead">
                   Upon entering inside a folder you can click on the settings
@@ -152,14 +160,6 @@ function StartingPage() {
                   You can modify the folder while taking care of the snippets
                   inside!
                 </p>
-              </div>
-              <div className="d-none d-md-block col-5">
-                <img
-                  className="img-fluid imgBord"
-                  src="pic5.png"
-                  alt=""
-                  style={{ height: "auto" }}
-                />
               </div>
             </div>
           </div>
