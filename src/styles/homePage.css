@@ -47,7 +47,7 @@
   padding: 0.5rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .folder-input-wrapper {
@@ -173,6 +173,11 @@
   }
 }
 
+@media (max-width: 600px) {
+  .home-cards-container {
+    justify-content: center;
+  }
+}
 .imgBord {
   border: 2px solid white;
   border-radius: 15px;

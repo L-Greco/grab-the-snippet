@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: [`Rampart One`, `Azeret Mono`, 'Anton', 'Acme', 'Roboto']
+        families: [`Rampart One`, `Azeret Mono`, 'Anton', 'Acme', 'Roboto', 'Lobster']
       }
     })
 

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 // react Icons
 import { RiFolderSettingsLine } from "react-icons/ri";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 import "../styles/startingPage.css";
 let text = require("../data/text.json");
@@ -50,17 +50,25 @@ function StartingPage() {
             display: "flex",
           }}
         >
-          <Link style={{ color: "white" }} to="/loginPage">
+          <Link className="splink1" to="/loginPage">
             Log In
           </Link>
         </div>
       </header>
-
       <section id="opening" className="sp-section1 d-flex ">
         <div className="jumbotron mx-auto">
           <div className="container">
             <h1 className="sph1 text-center">
-              Grab The Snippet helps developers to thrive!
+              <span
+                style={{
+                  fontFamily: "Rampart One",
+                  fontWeight: "700",
+                  color: "black",
+                }}
+              >
+                Grab The Snippet{" "}
+              </span>
+              helps developers to thrive!
             </h1>
             <div className="row">
               <div className="col-12 col-md-7">
@@ -185,8 +193,32 @@ function StartingPage() {
           src="pic6.png"
           alt=""
           style={{ height: "auto", maxWidth: "70%" }}
+          d
         />
       </section>
+      <footer className="spft">
+        Designed and built by L-Greco
+        <a
+          target="_blank"
+          href="https://www.linkedin.com/in/konstandinos-makaronas-119064129/"
+          className="spftlink"
+        >
+          {" "}
+          <AiFillLinkedin />{" "}
+        </a>
+        <a
+          target="_blank"
+          href="https://github.com/L-Greco"
+          className="spftlink"
+        >
+          {" "}
+          <AiFillGithub />{" "}
+        </a>
+      </footer>
+      <p style={{ color: "white", fontFamily: "Lobster", textAlign: "center" }}>
+        {" "}
+        © Copyright 2021. All rights reserved.
+      </p>
     </>
   );
 }
