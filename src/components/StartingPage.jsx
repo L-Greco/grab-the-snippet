@@ -66,8 +66,8 @@ function StartingPage() {
                   color: "black",
                 }}
               >
-                Grab The Snippet{" "}
-              </span>
+                Grab The Snippet
+              </span>{" "}
               helps developers to thrive!
             </h1>
             <div className="row">
@@ -76,6 +76,15 @@ function StartingPage() {
                   Store your code snippets as cards and have access with just a
                   click!
                 </p>
+                <div className="d-block d-md-none col-5 mx-auto w-100 ">
+                  <img
+                    className="img-fluid imgBord"
+                    src="pic2.png"
+                    alt=""
+                    style={{ height: "auto" }}
+                  />
+                </div>
+
                 <hr className="my-4" />
                 <p>
                   You can either open the snippet and see the code or copy to
@@ -178,45 +187,46 @@ function StartingPage() {
         id="responsiveness"
       >
         <div>
-          {" "}
           <p
             className="lead text-center"
             style={{ fontFamily: "Acme", color: "white" }}
           >
             You can use GTS even in one third of your screen since it's fully
             responsive!
-          </p>{" "}
+          </p>
         </div>
 
         <img
           className="img-fluid mx-auto imgBord "
           src="pic6.png"
-          alt=""
+          alt="..."
           style={{ height: "auto", maxWidth: "70%" }}
-          d
         />
       </section>
+
       <footer className="spft">
-        Designed and built by L-Greco
-        <a
-          target="_blank"
-          href="https://www.linkedin.com/in/konstandinos-makaronas-119064129/"
-          className="spftlink"
-        >
+        <div className="mx-auto">
           {" "}
-          <AiFillLinkedin />{" "}
-        </a>
-        <a
-          target="_blank"
-          href="https://github.com/L-Greco"
-          className="spftlink"
-        >
-          {" "}
-          <AiFillGithub />{" "}
-        </a>
+          Designed and built by L-Greco
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/konstandinos-makaronas-119064129/"
+            rel="noreferrer"
+            className="spftlink"
+          >
+            <AiFillLinkedin />
+          </a>
+          <a
+            target="_blank"
+            href="https://github.com/L-Greco"
+            rel="noreferrer"
+            className="spftlink"
+          >
+            <AiFillGithub />
+          </a>{" "}
+        </div>
       </footer>
       <p style={{ color: "white", fontFamily: "Lobster", textAlign: "center" }}>
-        {" "}
         © Copyright 2021. All rights reserved.
       </p>
     </>

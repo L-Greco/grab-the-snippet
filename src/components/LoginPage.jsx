@@ -23,9 +23,11 @@ function LoginPage({ history }) {
   }
   return (
     <>
-      <h1 className="text-center lph1" onClick={() => history.push("/")}>
-        Grab The Snippet
-      </h1>
+      <div style={{ width: "fitContent" }}>
+        <h1 className="text-center lph1" onClick={() => history.push("/")}>
+          Grab The Snippet
+        </h1>
+      </div>
 
       <div className="login-page-container">
         <div className="login-page-wrapper">

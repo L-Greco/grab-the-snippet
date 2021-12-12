@@ -101,10 +101,8 @@
 .splink1:hover {
   opacity: 1;
   transform: scale(1.3);
-  /* transform: translate(-12px); */
 }
 .spft {
-  /* font-family: Acme; */
   border-top: 3px solid rgb(35, 155, 173);
   padding: 1rem;
   margin-top: 2rem;
@@ -115,15 +113,16 @@
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 0.1rem;
+  flex-direction: column;
 }
 .spftlink {
   margin-left: 1rem;
   color: white;
   cursor: pointer;
   transition: 200ms linear;
+  font-size: 1.5rem;
 }
 .spftlink:hover {
   transform: scale(1.3);
-  /* color: white !important; */
   color: rgb(35, 155, 173) !important;
 }
