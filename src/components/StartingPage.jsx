@@ -55,6 +55,7 @@ function StartingPage() {
           </Link>
         </div>
       </header>
+
       <section id="opening" className="sp-section1 d-flex ">
         <div className="jumbotron mx-auto">
           <div className="container">
@@ -76,9 +77,9 @@ function StartingPage() {
                   Store your code snippets as cards and have access with just a
                   click!
                 </p>
-                <div className="d-block d-md-none col-5 mx-auto w-100 ">
+                <div style={{ width: "100%" }} className="d-flex d-md-none   ">
                   <img
-                    className="img-fluid imgBord"
+                    className="img-fluid imgBord mx-auto"
                     src="pic2.png"
                     alt=""
                     style={{ height: "auto" }}
@@ -127,6 +128,17 @@ function StartingPage() {
                 <p className="lead">
                   The comment's section inside the card is a link recognizer!
                 </p>
+                <div
+                  style={{ width: "100%" }}
+                  className="d-flex d-md-none col-5 mx-auto  "
+                >
+                  <img
+                    className="img-fluid imgBord mx-auto"
+                    src="pic3.png"
+                    alt=""
+                    style={{ height: "auto" }}
+                  />
+                </div>
                 <hr className="my-4" />
                 <p>
                   Upon saving, GTS will recognize and activate the links inside
@@ -143,6 +155,17 @@ function StartingPage() {
             <div className="row">
               <div className="col-12 col-md-7">
                 <p className="lead">GTS provides folder creation.</p>
+                <div
+                  style={{ width: "100%" }}
+                  className="d-flex d-md-none col-5 mx-auto  "
+                >
+                  <img
+                    className="img-fluid imgBord mx-auto"
+                    src="pic4.png"
+                    alt=""
+                    style={{ height: "auto" }}
+                  />
+                </div>
                 <hr className="my-4" />
                 <p>You can create nested folders inside previous folders!</p>
               </div>
@@ -171,7 +194,17 @@ function StartingPage() {
                   <RiFolderSettingsLine style={{ fontSize: "2rem" }} />
                   and modify the folder.
                 </p>
-
+                <div
+                  style={{ width: "100%" }}
+                  className="d-flex d-md-none col-5 mx-auto  "
+                >
+                  <img
+                    className="img-fluid imgBord mx-auto"
+                    src="pic5.png"
+                    alt=""
+                    style={{ height: "auto" }}
+                  />
+                </div>
                 <hr className="my-4" />
                 <p>
                   You can modify the folder while taking care of the snippets

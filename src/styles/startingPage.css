@@ -51,11 +51,11 @@
 }
 .sph1 {
   margin-top: 0;
-  margin-bottom: 7rem;
-  font-size: 2.4rem;
+  margin-bottom: 5rem;
+  font-size: 2rem;
   font-weight: 500;
   color: black;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 .sp-section1 {
   margin-top: 7rem;
@@ -78,16 +78,6 @@
     width: 70%;
   }
 } */
-@media (min-width: 1400px) {
-  .jumbotron {
-    width: 70%;
-  }
-}
-@media (min-width: 1600px) {
-  .jumbotron {
-    width: 60%;
-  }
-}
 
 .fldrs1 {
   margin-bottom: auto;
@@ -125,4 +115,24 @@
 .spftlink:hover {
   transform: scale(1.3);
   color: rgb(35, 155, 173) !important;
+}
+@media (min-width: 1400px) {
+  .jumbotron {
+    width: 70%;
+  }
+}
+@media (min-width: 1600px) {
+  .jumbotron {
+    width: 60%;
+  }
+}
+@media (max-width: 767px) {
+  .sph1 {
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+  }
+
+  .sp-section1 {
+    margin-top: 5rem;
+  }
 }

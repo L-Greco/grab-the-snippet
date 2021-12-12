@@ -21,12 +21,14 @@
 }
 
 .login-page-container {
+  margin-top: 1rem;
   box-shadow: 0 17px 50px 0 rgb(0 0 0 / 19%), 0 12px 15px 0 rgb(0 0 0 / 24%);
   background-color: white;
   height: 80%;
   width: 570px;
-  position: absolute;
-  /* top: 55%;
+  /* display: flex; */
+  /* position: absolute;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%); */
   border-radius: 10px;
