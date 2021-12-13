@@ -135,4 +135,8 @@
   .sp-section1 {
     margin-top: 5rem;
   }
+  section,
+  p {
+    text-align: center;
+  }
 }
