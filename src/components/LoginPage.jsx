@@ -68,9 +68,7 @@ function LoginPage({ history }) {
                 href={process.env.REACT_APP_BE_URL + "/users/googleLogin"}
               >
                 <div className="login-icon-wrapper">
-                  <FcGoogle
-                  //   style={{ color: "rgb(10,102,194)" }}
-                  />
+                  <FcGoogle />
                   <div style={{ marginLeft: "5px" }}>Continue with Google</div>
                 </div>
               </a>
