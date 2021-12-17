@@ -52,7 +52,11 @@ function HomePage({ match, history }) {
 
   // Component did mount
   useEffect(() => {
-    setUser();
+    try {
+      setUser();
+    } catch (error) {
+      console.log(error);
+    }
     // isUserThere();
     setUserLandedAction(true);
     console.log(localStorage.getItem("userLanded"));
