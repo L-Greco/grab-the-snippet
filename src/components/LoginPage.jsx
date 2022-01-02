@@ -87,12 +87,12 @@ function LoginPage({ history }) {
                 </div>
               </a>
             </button>
-            <button className="login-continue-with-provider">
+            {/* <button className="login-continue-with-provider">
               <div className="login-icon-wrapper">
                 <SiLinkedin style={{ color: "rgb(10,102,194)" }} />
                 <div style={{ marginLeft: "5px" }}> Continue with LinkedIn</div>
               </div>
-            </button>
+            </button> */}
 
             <div
               style={{ borderBottom: "1px solid grey", marginTop: "1rem" }}

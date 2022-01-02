@@ -116,6 +116,12 @@
   transform: scale(1.3);
   color: rgb(35, 155, 173) !important;
 }
+
+@media (max-width: 540px) {
+  .navbar-header-sp {
+    display: none;
+  }
+}
 @media (min-width: 1400px) {
   .jumbotron {
     width: 70%;
@@ -126,12 +132,17 @@
     width: 60%;
   }
 }
+@media (max-width: 540px) {
+  .sp-section1 {
+    margin-top: 3rem;
+  }
+}
+
 @media (max-width: 767px) {
   .sph1 {
     margin-bottom: 3rem;
     font-size: 1.5rem;
   }
-
   .sp-section1 {
     margin-top: 5rem;
   }
