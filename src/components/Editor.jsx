@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Controlled as ControlledEditor,
-  UnControlled as UncontrolledEditor,
-} from "react-codemirror2";
+import React from "react";
+import { Controlled as ControlledEditor } from "react-codemirror2";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setEditorCodeAction } from "../redux/actions";
@@ -209,7 +206,6 @@ import "../styles/codemirror.css";
 
 function Editor() {
   const snippet = useSelector((state) => state.snippet);
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (

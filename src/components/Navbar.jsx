@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AccountModal from "./AccountModal";
 import { useSelector, useDispatch } from "react-redux";
-import { withRouter, Redirect } from "react-router";
+import { withRouter } from "react-router";
 import { openAccountModalAction } from "../redux/actions";
 import "../styles/navbar.css";
 let text = require("../data/text.json");
 
 function Navbar({ history }) {
-  const [acc, setAcc] = useState("");
+  // const [acc, setAcc] = useState("");
 
   const state = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
-  function returnCapitals(user) {
-    if (user.provider === "google") {
-      let firstName = user.firstName;
-      let lastName = user.lastName;
-      let myString = firstName.charAt(0) + " " + lastName.charAt(0);
-      setAcc(myString.toUpperCase());
-    }
-    if (user.provider === "github") {
-      setAcc(user.username.charAt(0).toUpperCase());
-    }
-  }
+  // function returnCapitals(user) {
+  //   if (user.provider === "google") {
+  //     let firstName = user.firstName;
+  //     let lastName = user.lastName;
+  //     let myString = firstName.charAt(0) + " " + lastName.charAt(0);
+  //     setAcc(myString.toUpperCase());
+  //   }
+  //   if (user.provider === "github") {
+  //     setAcc(user.username.charAt(0).toUpperCase());
+  //   }
+  // }
 
-  useEffect(() => {
-    returnCapitals(state.user);
-  }, [state.user]);
+  // useEffect(() => {
+  //   returnCapitals(state.user);
+  // }, [state.user]);
 
   return (
     <div className="navbar-wrapper">

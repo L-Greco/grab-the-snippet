@@ -22,7 +22,6 @@ function FolderSettingsModal({ folder, folderId, history }) {
   const [radioInput, setRadioInput] = useState("");
   const [newFolderName, setNewFolderName] = useState("");
   const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [destination, setDestination] = useState("home");
   const [radioSnippetManagement, setRadioSnippetManagement] = useState("");
 
@@ -34,7 +33,6 @@ function FolderSettingsModal({ folder, folderId, history }) {
     setRadioInput("");
     dispatch(toggleFolderSettingsModalAction(false));
   }
-  async function handleChange() {}
   async function handleSaveNameChange() {
     setSaveBtnIsLoading(true);
     try {

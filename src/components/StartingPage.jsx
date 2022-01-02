@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // react Icons
 import { RiFolderSettingsLine } from "react-icons/ri";
-import { IconContext } from "react-icons"; // this is so i can style the react icon
-import { AiOutlineClose, AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 import "../styles/startingPage.css";
 let text = require("../data/text.json");

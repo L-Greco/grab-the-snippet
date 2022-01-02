@@ -1,7 +1,5 @@
 import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
-import { clearUserAction } from "../redux/actions.js"
-import { useDispatch } from "react-redux";
 const axiosClient = axios.create();
 axiosClient.defaults.baseURL = process.env.REACT_APP_BE_URL;
 // console.log(axiosClient.defaults.baseURL)

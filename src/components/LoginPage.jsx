@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserLandedAction } from "../redux/actions.js";
 import { Redirect, withRouter } from "react-router";
-import { Link } from "react-router-dom";
 
 // Icons
 import { SiLinkedin } from "react-icons/si";

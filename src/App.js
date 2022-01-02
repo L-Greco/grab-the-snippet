@@ -4,16 +4,14 @@ import NoMatch from "./components/NoMatch";
 import StartingPage from "./components/StartingPage";
 import { useEffect } from "react"
 import WebFont from "webfontloader"
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import { setLoggedOffAction, setUserAction, setSnippetEditorThemeAction, setEditorLanguageAction, setUsersFoldersAction } from "./redux/actions.js"
-import { getRequest } from "./lib/axios.js"
-import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function App() {
   const user = useSelector((state) => state.user);
   const loggedIn = user.loggedIn
   console.log(loggedIn)
-  const dispatch = useDispatch()
+
 
 
 

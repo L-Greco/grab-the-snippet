@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { withRouter, Redirect, Prompt } from "react-router";
+import { withRouter, Redirect } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import {
   openAddSnippetModalAction,
@@ -14,7 +14,6 @@ import {
   setUsersFoldersAction,
   setUserAction,
   setLoggedOffAction,
-  clearUserAction,
   setUserLandedAction,
 } from "../redux/actions";
 import { getRequest, postRequest } from "../lib/axios";
@@ -136,7 +135,7 @@ function HomePage({ match, history }) {
         )[0].name;
         if (a === 1) return `${name}`;
         if (a === 2) return `${nameOfParent}`;
-      } else if (a == 1) return `${name}`;
+      } else if (a === 1) return `${name}`;
       if (a === 2) return null;
     } catch (error) {
       history.push("/home");

@@ -11,7 +11,6 @@ let arrayOfEditorThemes = editorData["editor-themes"];
 
 export default function EditorOptions() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const snippet = useSelector((state) => state.snippet);
   return (
     <div className="editor-options-wrapper">
