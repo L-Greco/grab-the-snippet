@@ -57,11 +57,9 @@ function HomePage({ match, history }) {
       console.log(error);
     }
     // isUserThere();
-    setUserLandedAction(true);
-    // console.log(localStorage.getItem("userLanded"));
+    dispatch(setUserLandedAction(true));
 
     return () => {
-      // dispatch(clearUserAction());
       dispatch(setUserLandedAction(false));
     };
   }, []);
@@ -71,7 +69,7 @@ function HomePage({ match, history }) {
       dispatch(addParentAction(returnParent("state")));
       getData();
     }
-  }, [match]);
+  }, [match, user.loggedIn]);
   // return to top
   const returnToTop = function () {
     document.body.scrollTop = 0;
