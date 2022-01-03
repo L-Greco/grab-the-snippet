@@ -5,7 +5,7 @@ import { setUserLandedAction } from "../redux/actions.js";
 import { Redirect, withRouter } from "react-router";
 
 // Icons
-import { SiLinkedin } from "react-icons/si";
+
 import { SiGithub } from "react-icons/si";
 import { FcGoogle } from "react-icons/fc";
 import "../styles/loginPage.css";

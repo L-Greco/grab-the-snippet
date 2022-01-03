@@ -15,7 +15,7 @@ axiosClient.defaults.withCredentials = true;
 
 
 export const getRequest = (URL, options = {}) =>
-    axiosClient.get(`/${URL}`, options).then((response) => response)
+    axiosClient.get(`/${URL}`, options).then((response) => response).catch(e => localStorage.setItem("userLanded", false))
 
 export const postRequest = (URL, payload) =>
     axiosClient.post(`/${URL}`, payload).then((response) => response);
@@ -29,51 +29,13 @@ export const deleteRequest = (URL) =>
 
 const refreshAuthLogic = failedRequest => axiosClient.post(`${process.env.REACT_APP_BE_URL}/users/refreshToken`,)
     .then(tokenRefreshResponse => {
-        console.log(tokenRefreshResponse)
-        return Promise.resolve();
+        if (tokenRefreshResponse.status === 200) {
+            return Promise.resolve();
+        } else return Promise.reject(failedRequest)
+
+
     })
-
-
-
-
-
-
-
-
 
 
 createAuthRefreshInterceptor(axiosClient, refreshAuthLogic);
 
-// const refreshAuthLogic = async (failedRequest) => {
-//     try {
-//         const tokenRefreshResponse = await axiosClient.post(`${process.env.REACT_APP_BE_URL}/users/refreshToken`,)
-//         if (tokenRefreshResponse.status === 401) {
-//             console.log("yaaa")
-//             console.log(tokenRefreshResponse)
-//             const res = await postRequest("users/logout")
-//         }
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
-
-// export const postRequest = async (URL, payload) => {
-//     try {
-//         const res = await axiosClient.post(`/${URL}`, payload)
-//         console.log(res.status)
-//         if (res.status !== 401) return res
-//         if (res.status === 401 || res.status === 403) {
-//             const refreshTokenRes = await axiosClient.post(`/users/refreshToken`)
-//             if (refreshTokenRes.status === 200) {
-//                 const secondRes = await axiosClient.post(`/${URL}`, payload)
-//                 return secondRes
-//             } else if (refreshTokenRes.status === 401) {
-//                 return false
-//             }
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-
-// }

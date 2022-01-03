@@ -29,7 +29,7 @@ function StartingPage() {
       document.removeEventListener("scroll", onScroll);
     };
   }, [scroll, setScroll]);
-  if (localStorage.getItem("userLanded") === "true") {
+  if (state.user.loggedIn && localStorage.getItem("userLanded") === "true") {
     return <Redirect to="/home" />;
   }
   return (

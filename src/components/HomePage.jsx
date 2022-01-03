@@ -67,10 +67,9 @@ function HomePage({ match, history }) {
   }, []);
   // On mounting it adds the parent on the global state page.parent and then gets the data
   useEffect(() => {
-    if (localStorage.getItem("userLanded") === "true") {
+    if (user.loggedIn) {
       dispatch(addParentAction(returnParent("state")));
       getData();
-      console.log(match);
     }
   }, [match]);
   // return to top
@@ -97,7 +96,6 @@ function HomePage({ match, history }) {
   const setUser = async () => {
     try {
       const res = await getRequest("users/me");
-      console.log(res);
 
       if (res.status === 200) {
         dispatch(setUsersFoldersAction(res.data.folders));
@@ -114,14 +112,12 @@ function HomePage({ match, history }) {
         dispatch(setUserAction(res.data));
         dispatch(setUserLandedAction(true));
       } else {
-        console.log("dsda");
         dispatch(setUserLandedAction(false));
         dispatch(setLoggedOffAction());
       }
     } catch (error) {
       dispatch(setUserLandedAction(true));
       console.log(error);
-      console.log("dsada");
     }
   };
 
@@ -166,7 +162,6 @@ function HomePage({ match, history }) {
         };
         const res = await postRequest("folders", folderObj);
         if (res.status === 201) {
-          console.log(res.data);
           handleCloseFolderInput();
           setSaveIsLoading(false);
           dispatch(addFolderTOArrayAction(res.data));
@@ -258,21 +253,11 @@ function HomePage({ match, history }) {
   }
   CloseModalIfClickedOut(folderInputNode);
 
-  // if (!user.loggedIn && localStorage.getItem("userLanded") === "false") {
-  //   return <Redirect to="/loginPage" />;
-  // }
-  if (localStorage.getItem("userLanded") === "false") {
+  if (!user.loggedIn && localStorage.getItem("userLanded") === "false") {
     return <Redirect to="/loginPage" />;
   }
 
-  if (!user.loggedIn)
-    console.log(
-      "user is not logged in and user landed has value :",
-      localStorage.getItem("userLanded")
-    );
-
-  // if (!user.loggedIn) return null;
-  if (localStorage.getItem("userLanded") === "false") return null;
+  if (!user.loggedIn) return null;
 
   return (
     <>
