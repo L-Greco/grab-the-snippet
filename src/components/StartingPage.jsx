@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router";
 // react Icons
 import { RiFolderSettingsLine } from "react-icons/ri";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
@@ -28,7 +29,9 @@ function StartingPage() {
       document.removeEventListener("scroll", onScroll);
     };
   }, [scroll, setScroll]);
-
+  if (localStorage.getItem("userLanded") === "true") {
+    return <Redirect to="/home" />;
+  }
   return (
     <>
       <header

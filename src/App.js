@@ -8,12 +8,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function App() {
-  const user = useSelector((state) => state.user);
-  const loggedIn = user.loggedIn
-  console.log(loggedIn)
-
-
-
 
 
   useEffect(() => {

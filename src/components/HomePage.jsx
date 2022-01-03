@@ -58,7 +58,7 @@ function HomePage({ match, history }) {
     }
     // isUserThere();
     setUserLandedAction(true);
-    console.log(localStorage.getItem("userLanded"));
+    // console.log(localStorage.getItem("userLanded"));
 
     return () => {
       // dispatch(clearUserAction());
@@ -67,7 +67,7 @@ function HomePage({ match, history }) {
   }, []);
   // On mounting it adds the parent on the global state page.parent and then gets the data
   useEffect(() => {
-    if (user.loggedIn) {
+    if (localStorage.getItem("userLanded") === "true") {
       dispatch(addParentAction(returnParent("state")));
       getData();
       console.log(match);
@@ -81,7 +81,7 @@ function HomePage({ match, history }) {
   useEffect(() => {
     const onScroll = () => {
       // console.log(document.documentElement.scrollTop);
-      console.log(scroll);
+
       const scrollCheck =
         document.documentElement.scrollTop < 10 || document.body.scrolTop < 10;
       if (scrollCheck !== scroll) {
@@ -97,6 +97,7 @@ function HomePage({ match, history }) {
   const setUser = async () => {
     try {
       const res = await getRequest("users/me");
+      console.log(res);
 
       if (res.status === 200) {
         dispatch(setUsersFoldersAction(res.data.folders));
@@ -113,12 +114,14 @@ function HomePage({ match, history }) {
         dispatch(setUserAction(res.data));
         dispatch(setUserLandedAction(true));
       } else {
-        dispatch(setUserLandedAction(true));
+        console.log("dsda");
+        dispatch(setUserLandedAction(false));
         dispatch(setLoggedOffAction());
       }
     } catch (error) {
       dispatch(setUserLandedAction(true));
       console.log(error);
+      console.log("dsada");
     }
   };
 
@@ -255,13 +258,21 @@ function HomePage({ match, history }) {
   }
   CloseModalIfClickedOut(folderInputNode);
 
-  if (!user.loggedIn && localStorage.getItem("userLanded") === "false") {
+  // if (!user.loggedIn && localStorage.getItem("userLanded") === "false") {
+  //   return <Redirect to="/loginPage" />;
+  // }
+  if (localStorage.getItem("userLanded") === "false") {
     return <Redirect to="/loginPage" />;
   }
-  if (!user.loggedIn)
-    console.log("sdasdas", localStorage.getItem("userLanded"));
 
-  if (!user.loggedIn) return null;
+  if (!user.loggedIn)
+    console.log(
+      "user is not logged in and user landed has value :",
+      localStorage.getItem("userLanded")
+    );
+
+  // if (!user.loggedIn) return null;
+  if (localStorage.getItem("userLanded") === "false") return null;
 
   return (
     <>
