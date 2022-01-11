@@ -29,7 +29,9 @@ export default function EditorOptions() {
         />
         <datalist id="programming-languages">
           {arrayOfEditorLanguages.map((language) => (
-            <option key={language + 1} value={language}></option>
+            <option key={language + 1} value={language}>
+              {language}
+            </option>
           ))}
         </datalist>{" "}
       </div>
