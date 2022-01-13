@@ -13,6 +13,7 @@ import "../styles/loginPage.css";
 function LoginPage({ history }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  // hmm
   const logWithProviderClicked = function () {
     dispatch(setUserLandedAction(true));
     localStorage.setItem("userLanded", true);
