@@ -14,11 +14,11 @@ axiosClient.defaults.withCredentials = true;
 
 
 
-export const getRequest = (URL, options = {}) =>
-    axiosClient.get(`/${URL}`, options).then((response) => response).catch(e => localStorage.setItem("userLanded", false))
+export const getRequest = async (URL, options = {}) =>
+    axiosClient.get(`/${URL}`, options).then((response) => response).catch(e => e)
 
 export const postRequest = (URL, payload) =>
-    axiosClient.post(`/${URL}`, payload).then((response) => response);
+    axiosClient.post(`/${URL}`, payload).then((response) => response).catch(e => e);
 
 
 export const putRequest = (URL, payload, options = {}) =>
@@ -37,5 +37,5 @@ const refreshAuthLogic = failedRequest => axiosClient.post(`${process.env.REACT_
     })
 
 
-createAuthRefreshInterceptor(axiosClient, refreshAuthLogic);
+// createAuthRefreshInterceptor(axiosClient, refreshAuthLogic);
 

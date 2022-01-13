@@ -94,7 +94,8 @@ function HomePage({ match, history }) {
   const setUser = async () => {
     try {
       const res = await getRequest("users/me");
-
+      console.log(res);
+      if (!res) history.push("/");
       if (res.status === 200) {
         dispatch(setUsersFoldersAction(res.data.folders));
         dispatch(
@@ -109,6 +110,10 @@ function HomePage({ match, history }) {
         );
         dispatch(setUserAction(res.data));
         dispatch(setUserLandedAction(true));
+
+        if (res.status === 401) {
+          console.log("we did it");
+        }
       } else {
         dispatch(setUserLandedAction(false));
         dispatch(setLoggedOffAction());
@@ -211,10 +216,22 @@ function HomePage({ match, history }) {
         const folderResponse = await getRequest(
           `folders/${returnParent("state")}`
         );
-
+        console.log(folderResponse);
+        if (!folderResponse.status) {
+          const refrResp = await postRequest(`users/refreshToken`);
+          console.log(refrResp);
+          if (!refrResp.status) history.push("/");
+          const folderResponse = await getRequest(
+            `folders/${returnParent("state")}`
+          );
+          if (folderResponse.status === 200) {
+            dispatch(addFoldersArrayAction(folderResponse.data));
+          }
+        }
         if (folderResponse.status === 200) {
           dispatch(addFoldersArrayAction(folderResponse.data));
         }
+
         const res = await getRequest(`snippets/${returnParent("url")}`);
         if (res.status === 200) {
           dispatch(addSnippetsArrayAction(res.data));
