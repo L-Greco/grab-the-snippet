@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controlled as ControlledEditor } from "react-codemirror2";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -207,7 +207,37 @@ import "../styles/codemirror.css";
 function Editor() {
   const snippet = useSelector((state) => state.snippet);
   const dispatch = useDispatch();
+  const [snippetCorrectLang, setSnippetCorrectLang] = useState(
+    snippet.editorLanguage
+  );
 
+  useEffect(() => {
+    setSnippetCorrectLang(handleClikeInput(snippet.editorLanguage));
+  }, [snippet.editorLanguage]);
+
+  const handleClikeInput = (lang) => {
+    switch (lang) {
+      case "c":
+        return "text/x-csrc";
+      case "c++":
+        return "text/x-c++src";
+      case "java":
+        return "text/x-java";
+      case "c#":
+        return "text/x-csharp";
+      case "objective-c":
+        return "text/x-objectivec";
+      case "scala":
+        return "text/x-scala";
+      case "squirrel":
+        return "text/x-squirrel";
+      case "ceylon":
+        return "text/x-ceylon";
+
+      default:
+        return lang;
+    }
+  };
   return (
     <div>
       <ControlledEditor
@@ -219,7 +249,8 @@ function Editor() {
         options={{
           keyMap: "sublime",
           lineWrapping: true,
-          mode: snippet.editorLanguage,
+          // mode: snippet.editorLanguage,
+          mode: snippetCorrectLang,
           lint: true,
           lineNumbers: true,
           theme: snippet.editorTheme,
