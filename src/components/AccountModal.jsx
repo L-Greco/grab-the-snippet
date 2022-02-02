@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/accountModal.css";
 import ReactDom from "react-dom";
+import { withRouter } from "react-router";
 import Spinner from "react-bootstrap/Spinner";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -19,7 +20,7 @@ let editorData = require("../data/editor.json");
 let arrayOfEditorLanguages = editorData["programming-languages-array"];
 let arrayOfEditorThemes = editorData["editor-themes"];
 
-function AccountModal() {
+function AccountModal({ location, history }) {
   const state = useSelector((state) => state);
   const [editorLanguage, setEditorLanguage] = useState("");
   const [editorTheme, setEditorTheme] = useState("");
@@ -34,6 +35,7 @@ function AccountModal() {
         dispatch(clearUserAction());
         dispatch(setUserLandedAction(false));
       }
+      if (location.pathname === "/questionPage") history.push("/loginPage");
     } catch (error) {
       alert(error);
     }
@@ -202,4 +204,4 @@ function AccountModal() {
   );
 }
 
-export default AccountModal;
+export default withRouter(AccountModal);

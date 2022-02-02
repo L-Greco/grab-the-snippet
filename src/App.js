@@ -2,11 +2,11 @@ import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import NoMatch from "./components/NoMatch";
 import StartingPage from "./components/StartingPage";
-import NstartingPage from "./components/NstartingPage";
+import QuestionPage from "./components/QuestionPage";
 import { useEffect } from "react"
 import WebFont from "webfontloader"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 
 function App() {
 
@@ -28,15 +28,14 @@ function App() {
 
         <Switch>
 
-          <Route exact path="/">
 
-            <NstartingPage />
-          </Route>
-          {/* 
-          <Route exact path="/">
 
+          <Route exact path="/">
             <StartingPage />
-          </Route> */}
+          </Route>
+          <Route exact path="/questionPage">
+            <QuestionPage />
+          </Route>
           <Route path="/folder/:folderName">
 
             <HomePage />
@@ -51,6 +50,7 @@ function App() {
           <Route exact path="/loginPage">
             <LoginPage />
           </Route>
+
           <Route path="*">
             <NoMatch />
           </Route>

@@ -110,6 +110,22 @@
   letter-spacing: 0.1rem;
   flex-direction: column;
 }
+.qpft {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  border-top: 3px solid rgb(35, 155, 173);
+  padding: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: white;
+  display: flex;
+  font-family: Lobster;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  flex-direction: column;
+}
 .spftlink {
   margin-left: 1rem;
   color: white;

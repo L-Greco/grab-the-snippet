@@ -6,6 +6,7 @@
   position: relative;
   height: 7vh;
   border-bottom: 1px solid rgba(0, 0, 0, 0.179);
+  align-items: center;
 }
 .navbar-header {
   font-family: "Rampart One";
