@@ -2,6 +2,7 @@ import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import NoMatch from "./components/NoMatch";
 import StartingPage from "./components/StartingPage";
+import NstartingPage from "./components/NstartingPage";
 import { useEffect } from "react"
 import WebFont from "webfontloader"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -29,8 +30,13 @@ function App() {
 
           <Route exact path="/">
 
-            <StartingPage />
+            <NstartingPage />
           </Route>
+          {/* 
+          <Route exact path="/">
+
+            <StartingPage />
+          </Route> */}
           <Route path="/folder/:folderName">
 
             <HomePage />

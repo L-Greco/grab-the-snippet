@@ -9,7 +9,8 @@
   justify-content: space-between;
   min-height: 50px;
   padding: 1rem;
-  position: fixed;
+  position: relative;
+  /* position: fixed; */
   /* transition: all 500ms ease-out 0s; */
   width: 100%;
   z-index: 100;
@@ -29,7 +30,7 @@
   cursor: pointer;
   position: relative;
   margin-left: 0.5rem;
-  opacity: 0.8;
+  /* opacity: 0.8; */
 }
 
 .navbar-header-sp::before {
@@ -58,9 +59,10 @@
   opacity: 0.8;
 }
 .sp-section1 {
-  margin-top: 7rem;
+  margin-top: 3rem;
   color: white;
 }
+
 .sp-section2 {
   margin-top: 3rem;
   color: white;
@@ -93,6 +95,9 @@
   transform: scale(1.3);
 }
 .spft {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
   border-top: 3px solid rgb(35, 155, 173);
   padding: 1rem;
   margin-top: 2rem;
@@ -117,11 +122,24 @@
   color: rgb(35, 155, 173) !important;
 }
 
-@media (max-width: 540px) {
+.sectionOne {
+  margin-top: 1rem;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(44, 205, 229, 0.7),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("http://localhost:3000/mockup.png");
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+}
+
+/* @media (max-width: 540px) {
   .navbar-header-sp {
     display: none;
   }
-}
+} */
 @media (min-width: 1400px) {
   .jumbotron {
     width: 70%;
@@ -143,9 +161,9 @@
     margin-bottom: 3rem;
     font-size: 1.5rem;
   }
-  .sp-section1 {
+  /* .sp-section1 {
     margin-top: 5rem;
-  }
+  } */
   section,
   p {
     text-align: center;
