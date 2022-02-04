@@ -15,8 +15,9 @@ import {
   setUserAction,
   setLoggedOffAction,
   setUserLandedAction,
+  clearUserAction,
 } from "../redux/actions";
-import { getRequest, postRequest } from "../lib/axios";
+import { getRequest, postRequest, refreshRequest } from "../lib/axios";
 // Components
 import SnippetModal from "./SnippetModal";
 import AddSnippetModal from "./AddSnippetModal";
@@ -49,14 +50,28 @@ function HomePage({ match, history }) {
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [scroll, setScroll] = useState(1);
 
-  // Component did mount
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollCheck =
+        document.documentElement.scrollTop < 10 || document.body.scrolTop < 10;
+      if (scrollCheck !== scroll) {
+        setScroll(scrollCheck);
+      }
+    };
+    document.addEventListener("scroll", onScroll);
+    return () => {
+      document.removeEventListener("scroll", onScroll);
+    };
+  }, [scroll, setScroll]);
+  // NETWORK ACTIVITY
+
   useEffect(() => {
     try {
       setUser();
     } catch (error) {
       console.log(error);
     }
-    // isUserThere();
+
     dispatch(setUserLandedAction(true));
 
     return () => {
@@ -70,60 +85,158 @@ function HomePage({ match, history }) {
       getData();
     }
   }, [match, user.loggedIn]);
+
+  // Runs on mounting the component and gets the data
+  async function getData() {
+    try {
+      setIsLoading(true);
+      function on200(category, res) {
+        if (category === "folder") {
+          dispatch(addFoldersArrayAction(res.data));
+        }
+        if (category === "snippet") {
+          dispatch(addSnippetsArrayAction(res.data));
+        }
+      }
+      if (checkIfFolderExists()) {
+        const folderResponse = await getRequest(
+          `folders/${returnParent("state")}`
+        );
+        if (!folderResponse.status) {
+          const ref = await refreshRequest();
+
+          if (!ref) {
+            dispatch(clearUserAction());
+          }
+          if (ref.status === 200) {
+            const res = await getRequest(`folders/${returnParent("state")}`);
+            if (res.status === 200) {
+              on200("folder", res);
+            }
+          }
+        }
+        if (folderResponse.status === 200) {
+          on200("folder", folderResponse);
+        }
+
+        const res = await getRequest(`snippets/${returnParent("url")}`);
+        if (res.status === 200) {
+          on200("snippet", res);
+        }
+        if (!res.status) {
+          const ref = await refreshRequest();
+          if (!ref) {
+            dispatch(clearUserAction());
+          }
+          if (ref.status === 200) {
+            const res = await getRequest(`snippets/${returnParent("url")}`);
+            if (res.status === 200) {
+              on200("snippet", res);
+            }
+          }
+        }
+        setIsLoading(false);
+      } else if (page.parent !== "home") {
+        history.push("/home");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  // setting the User
+  const setUser = async () => {
+    // secondary func that runs on status 200
+    function on200(res) {
+      dispatch(setUsersFoldersAction(res.data.folders));
+      dispatch(
+        setSnippetEditorThemeAction(
+          res.data.accountSettings.preferredEditorTheme
+        )
+      );
+      dispatch(
+        setEditorLanguageAction(
+          res.data.accountSettings.preferredEditorLanguage
+        )
+      );
+      dispatch(setUserAction(res.data));
+      dispatch(setUserLandedAction(true));
+    }
+    try {
+      const res = await getRequest("users/me");
+
+      if (!res.status) {
+        const ref = await refreshRequest();
+        if (!ref) {
+          dispatch(clearUserAction());
+        }
+        if (ref.status === 200) {
+          const res1 = await getRequest("users/me");
+          on200(res1);
+        }
+      }
+      if (res.status === 200) {
+        on200(res);
+      }
+    } catch (error) {
+      dispatch(clearUserAction());
+      alert("Server Error :/");
+    }
+  };
+
+  // Function for Saving the Folder
+  async function handleSaveFolderInput() {
+    try {
+      function on201(res) {
+        handleCloseFolderInput();
+        setSaveIsLoading(false);
+        dispatch(addFolderTOArrayAction(res.data));
+        dispatch(addFolderToUserFoldersArrayAction(res.data));
+      }
+      let filteredArray = page.foldersArray.filter(
+        (folder) => folder.name === foldersName
+      );
+      if (!filteredArray.length > 0) {
+        setSaveIsLoading(true);
+        const folderObj = {
+          name: foldersName,
+          parent: {
+            home: page.parent === "home" ? true : false,
+            folderId: page.parent === "home" ? null : page.parent,
+          },
+        };
+        const res = await postRequest("folders", folderObj);
+        if (res.status === 201) {
+          on201(res);
+        }
+        if (!res.status) {
+          const ref = await refreshRequest();
+          if (!ref) {
+            dispatch(clearUserAction());
+          }
+          if (ref.status === 200) {
+            const res1 = await postRequest("folders", folderObj);
+            if (res1.status === 201) {
+              on201(res1);
+            } else throw new Error();
+          }
+        }
+      } else {
+        handleCloseFolderInput();
+        setShowErrorToast(true);
+      }
+    } catch (error) {
+      handleCloseFolderInput();
+    }
+  }
+  // END OF NETWORK ACTIVITY
+
   // return to top
   const returnToTop = function () {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   };
-  useEffect(() => {
-    const onScroll = () => {
-      // console.log(document.documentElement.scrollTop);
-
-      const scrollCheck =
-        document.documentElement.scrollTop < 10 || document.body.scrolTop < 10;
-      if (scrollCheck !== scroll) {
-        setScroll(scrollCheck);
-      }
-    };
-    document.addEventListener("scroll", onScroll);
-    return () => {
-      document.removeEventListener("scroll", onScroll);
-    };
-  }, [scroll, setScroll]);
-  // setting the User
-  const setUser = async () => {
-    try {
-      const res = await getRequest("users/me");
-      console.log(res);
-      if (!res) history.push("/");
-      if (res.status === 200) {
-        dispatch(setUsersFoldersAction(res.data.folders));
-        dispatch(
-          setSnippetEditorThemeAction(
-            res.data.accountSettings.preferredEditorTheme
-          )
-        );
-        dispatch(
-          setEditorLanguageAction(
-            res.data.accountSettings.preferredEditorLanguage
-          )
-        );
-        dispatch(setUserAction(res.data));
-        dispatch(setUserLandedAction(true));
-
-        if (res.status === 401) {
-          console.log("we did it");
-        }
-      } else {
-        dispatch(setUserLandedAction(false));
-        dispatch(setLoggedOffAction());
-      }
-    } catch (error) {
-      dispatch(setUserLandedAction(true));
-      console.log(error);
-    }
-  };
-
   // Finding Folder name through the id
   function findFolderName(a) {
     try {
@@ -148,37 +261,7 @@ function HomePage({ match, history }) {
     setFolderInput(false);
     setFoldersName("");
   }
-  // Function for Saving the Folder
-  async function handleSaveFolderInput() {
-    try {
-      let filteredArray = page.foldersArray.filter(
-        (folder) => folder.name === foldersName
-      );
-      if (!filteredArray.length > 0) {
-        setSaveIsLoading(true);
-        const folderObj = {
-          name: foldersName,
-          parent: {
-            home: page.parent === "home" ? true : false,
-            folderId: page.parent === "home" ? null : page.parent,
-          },
-        };
-        const res = await postRequest("folders", folderObj);
-        if (res.status === 201) {
-          handleCloseFolderInput();
-          setSaveIsLoading(false);
-          dispatch(addFolderTOArrayAction(res.data));
-          dispatch(addFolderToUserFoldersArrayAction(res.data));
-        }
-      } else {
-        handleCloseFolderInput();
-        setShowErrorToast(true);
-      }
-    } catch (error) {
-      handleCloseFolderInput();
-      alert(error);
-    }
-  }
+
   // Return Parent from the url
   function returnParent(string) {
     if (string === "url") {
@@ -208,43 +291,7 @@ function HomePage({ match, history }) {
       return true;
     } else return false;
   }
-  // Runs on mounting the component and gets the data
-  async function getData() {
-    try {
-      setIsLoading(true);
-      if (checkIfFolderExists()) {
-        const folderResponse = await getRequest(
-          `folders/${returnParent("state")}`
-        );
-        console.log(folderResponse);
-        if (!folderResponse.status) {
-          const refrResp = await postRequest(`users/refreshToken`);
-          console.log(refrResp);
-          if (!refrResp.status) history.push("/");
-          const folderResponse = await getRequest(
-            `folders/${returnParent("state")}`
-          );
-          if (folderResponse.status === 200) {
-            dispatch(addFoldersArrayAction(folderResponse.data));
-          }
-        }
-        if (folderResponse.status === 200) {
-          dispatch(addFoldersArrayAction(folderResponse.data));
-        }
 
-        const res = await getRequest(`snippets/${returnParent("url")}`);
-        if (res.status === 200) {
-          dispatch(addSnippetsArrayAction(res.data));
-        }
-        setIsLoading(false);
-      } else if (page.parent !== "home") {
-        history.push("/home");
-      }
-    } catch (error) {
-      setIsLoading(false);
-      alert(error);
-    }
-  }
   // Click on folder button
   function folderButton() {
     setFolderInput(true);
@@ -271,8 +318,10 @@ function HomePage({ match, history }) {
   if (!user.loggedIn && localStorage.getItem("userLanded") === "false") {
     return <Redirect to="/loginPage" />;
   }
-
-  if (!user.loggedIn) return null;
+  // {
+  //   localStorage.getItem("userLanded") && <Redirect to="/loginPage" />;
+  // }
+  // if (!user.loggedIn) return null;
 
   return (
     <>

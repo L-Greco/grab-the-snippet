@@ -5,6 +5,7 @@ import EditorOptions from "./EditorOptions";
 import Spinner from "react-bootstrap/Spinner";
 import Toast from "react-bootstrap/Toast";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import {
   closeAddSnippetModalAction,
   setSnippetTitleAction,
@@ -14,8 +15,9 @@ import {
   emptyTheSnippetAction,
   addSnippetTOArrayAction,
   setUserThemeAction,
+  setLoggedOffAction,
 } from "../redux/actions";
-import { postRequest, putRequest } from "../lib/axios.js";
+import { postRequest, putRequest, refreshRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
@@ -49,6 +51,9 @@ const mapDispatchToProps = (dispatch) => ({
   setUserTheme: (theme) => {
     dispatch(setUserThemeAction(theme));
   },
+  setUserLoggedOff: () => {
+    dispatch(setLoggedOffAction());
+  },
 });
 
 function AddSnippetModal({
@@ -63,6 +68,8 @@ function AddSnippetModal({
   emptyTheSnippet,
   addSnippetToArray,
   setUserTheme,
+  history,
+  setUserLoggedOff,
 }) {
   const addSnippetModalNode = useRef();
 
@@ -89,7 +96,6 @@ function AddSnippetModal({
       };
 
       try {
-        console.log(snippetToSend);
         setSaveBtnIsLoading(true);
         if (user.editorTheme !== snippet.editorTheme) {
           let userTheme = {
@@ -98,19 +104,40 @@ function AddSnippetModal({
             },
           };
           const res = await putRequest("users/edit", userTheme);
+          if (!res.status) {
+            const ref = await refreshRequest();
+            if (!ref) {
+              setUserLoggedOff();
+            }
+            const res1 = await putRequest("users/edit", userTheme);
+            if (res1.status === 200) {
+              setUserTheme(snippet.editorTheme);
+            }
+          }
           if (res.status === 200) {
             setUserTheme(snippet.editorTheme);
           }
         }
         let res = await postRequest(`snippets`, snippetToSend);
+
+        if (!res.status) {
+          const ref = await refreshRequest();
+          if (!ref) {
+            setUserLoggedOff();
+          }
+          if (ref.status === 200) {
+            let res1 = await postRequest(`snippets`, snippetToSend);
+            addSnippetToArray(res1.data);
+            closeModal();
+            emptyTheSnippet(user.editorLanguage, user.editorTheme);
+          }
+        }
         if (res.status === 201) {
           addSnippetToArray(res.data);
           closeModal();
           emptyTheSnippet(user.editorLanguage, user.editorTheme);
         }
-        if (!res) {
-          console.log("im here");
-        }
+
         setSaveBtnIsLoading(false);
       } catch (error) {
         setSaveBtnIsLoading(false);
@@ -220,4 +247,6 @@ function AddSnippetModal({
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddSnippetModal);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AddSnippetModal)
+);

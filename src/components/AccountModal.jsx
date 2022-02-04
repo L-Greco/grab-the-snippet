@@ -11,7 +11,8 @@ import {
   clearUserAction,
   setUserLandedAction,
 } from "../redux/actions.js";
-import { putRequest, postRequest } from "../lib/axios";
+// networking
+import { putRequest, postRequest, refreshRequest } from "../lib/axios";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -31,6 +32,17 @@ function AccountModal({ location, history }) {
     try {
       localStorage.setItem("userLanded", false);
       const res = await postRequest("users/logout");
+      if (!res.status) {
+        const ref = await refreshRequest();
+        if (!ref) {
+          history.push("/loginPage");
+        }
+        const res1 = await postRequest("/users/logout");
+        if (res1.status === 200) {
+          dispatch(clearUserAction());
+          dispatch(setUserLandedAction(false));
+        }
+      }
       if (res.status === 200) {
         dispatch(clearUserAction());
         dispatch(setUserLandedAction(false));

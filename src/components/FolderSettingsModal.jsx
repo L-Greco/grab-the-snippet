@@ -6,8 +6,14 @@ import {
   toggleFolderSettingsModalAction,
   changeFolderNameAction,
   setUsersFoldersAction,
+  clearUserAction,
 } from "../redux/actions";
-import { putRequest, deleteRequest, getRequest } from "../lib/axios";
+import {
+  putRequest,
+  deleteRequest,
+  getRequest,
+  refreshRequest,
+} from "../lib/axios";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import Spinner from "react-bootstrap/Spinner";
@@ -33,6 +39,8 @@ function FolderSettingsModal({ folder, folderId, history }) {
     setRadioInput("");
     dispatch(toggleFolderSettingsModalAction(false));
   }
+
+  // NETWORK ACTIVITY
   async function handleSaveNameChange() {
     setSaveBtnIsLoading(true);
     try {
@@ -40,6 +48,19 @@ function FolderSettingsModal({ folder, folderId, history }) {
         name: newFolderName,
       };
       const res = await putRequest(`folders/edit/${folderId}`, obj);
+      if (!res.status) {
+        const ref = await refreshRequest();
+        if (!ref) {
+          dispatch(clearUserAction());
+        }
+        if (ref.status === 200) {
+          const res1 = await putRequest(`folders/edit/${folderId}`, obj);
+          if (res1.status === 201) {
+            dispatch(changeFolderNameAction(folderId, newFolderName));
+            handleClose();
+          }
+        }
+      }
       if (res.status === 201) {
         dispatch(changeFolderNameAction(folderId, newFolderName));
         handleClose();
@@ -50,19 +71,38 @@ function FolderSettingsModal({ folder, folderId, history }) {
   }
 
   async function handleDelete() {
+    // what to do on 200 request
+    function on200(res) {
+      handleClose();
+      history.push("/home");
+      dispatch(setUsersFoldersAction(res.data));
+    }
+    // start of main logic
     setSaveBtnIsLoading(true);
     try {
       if (radioSnippetManagement === "delete") {
         const res = await deleteRequest(
           `folders/deleteAndSnippets/${folderId}`
         );
+        if (!res.status) {
+          const ref = await refreshRequest();
+          if (!ref) {
+            dispatch(clearUserAction());
+          }
+          if (ref.status === 200) {
+            const res1 = await deleteRequest(
+              `folders/deleteAndSnippets/${folderId}`
+            );
+            if (res1.status === 200) {
+              const res2 = await getRequest("/users/updateMyFolders");
+              if (res2.status === 200) on200(res2);
+            }
+          }
+        }
         if (res.status === 200) {
           const res2 = await getRequest("users/updateMyFolders");
           if (res2.status === 200) {
-            handleClose();
-            history.push("/home");
-
-            dispatch(setUsersFoldersAction(res2.data));
+            on200(res2);
           }
         }
       }
@@ -73,20 +113,35 @@ function FolderSettingsModal({ folder, folderId, history }) {
         const res = await deleteRequest(
           `folders/deleteFolderAndMoveSnippets/${folderId}/${destination}`
         );
+        if (!res.status) {
+          const ref = await refreshRequest();
+          if (!ref) {
+            dispatch(clearUserAction());
+          }
+          if (ref.status === 200) {
+            const res1 = await deleteRequest(
+              `folders/deleteFolderAndMoveSnippets/${folderId}/${destination}`
+            );
+            if (res1.status === 200) {
+              const res2 = await getRequest("users/updateMyFolders");
+              if (res2.status === 200) {
+                on200(res2);
+              }
+            }
+          }
+        }
         if (res.status === 200) {
           const res2 = await getRequest("users/updateMyFolders");
           if (res2.status === 200) {
-            handleClose();
-            history.push("/home");
-            dispatch(setUsersFoldersAction(res2.data));
+            on200(res2);
           }
         }
       }
       setSaveBtnIsLoading(false);
     } catch (error) {
+      alert("Server Error");
       setSaveBtnIsLoading(false);
       console.log(error);
-      alert(error);
     }
   }
 

@@ -22,6 +22,7 @@ function App() {
   }, [])
 
 
+
   return (
     <>
       <Router>
@@ -36,10 +37,11 @@ function App() {
           <Route exact path="/questionPage">
             <QuestionPage />
           </Route>
-          <Route path="/folder/:folderName">
+          {localStorage.getItem("userLanded") && <Route path="/folder/:folderName">
 
             <HomePage />
-          </Route>
+          </Route>}
+
           <Route exact path="/home">
             <HomePage />
           </Route>

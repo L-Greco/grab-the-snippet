@@ -17,8 +17,9 @@ import {
   removeSnippetFromArrayAction,
   setUserThemeAction,
   replaceSnippetFromArrayAction,
+  clearUserAction,
 } from "../redux/actions";
-import { deleteRequest, putRequest } from "../lib/axios.js";
+import { deleteRequest, putRequest, refreshRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
@@ -54,6 +55,9 @@ const mapDispatchToProps = (dispatch) => ({
   replaceSnippet: (snippet) => {
     dispatch(replaceSnippetFromArrayAction(snippet));
   },
+  clearUser: () => {
+    dispatch(clearUserAction());
+  },
 });
 
 function SnippetModal({
@@ -70,6 +74,7 @@ function SnippetModal({
   removeSnippet,
   setUserTheme,
   replaceSnippet,
+  clearUser,
 }) {
   const ModalNode = useRef();
   const smallDeleteMOdal = useRef();
@@ -100,6 +105,7 @@ function SnippetModal({
       } else setEditorChanged(false);
     }
   }
+  // NETWORK ACTIVITY
   const handleSave = async () => {
     setSaveBtnIsLoading(true);
     let snippetToSend = {
@@ -129,6 +135,22 @@ function SnippetModal({
             handleClose();
           }
         }
+        if (!res.status) {
+          const ref = await refreshRequest();
+          if (!ref) {
+            clearUser();
+          }
+          if (ref.status === 200) {
+            const res1 = await putRequest("users/edit", userTheme);
+            if (res1.status === 200) {
+              setUserTheme(snippet.editorTheme);
+              if (!snippetIsChanged) {
+                setSaveBtnIsLoading(false);
+                handleClose();
+              }
+            }
+          }
+        }
       }
       if (snippetIsChanged) {
         let res = await putRequest(
@@ -139,34 +161,65 @@ function SnippetModal({
           replaceSnippet({ ...snippetToSend, _id: snippet.id });
           setSaveBtnIsLoading(false);
           handleClose();
-        } else setSaveBtnIsLoading(false);
-        handleClose();
+        }
+        if (!res.status) {
+          const ref = await refreshRequest();
+          if (!ref) {
+            clearUser();
+          }
+          if (ref.status === 200) {
+            const res1 = await putRequest(
+              `snippets/edit/${snippet.id}`,
+              snippetToSend
+            );
+            if (res1.status === 201) {
+              replaceSnippet({ ...snippetToSend, _id: snippet.id });
+              setSaveBtnIsLoading(false);
+              handleClose();
+            }
+          }
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
+  // Function for Deleting the Snippet
+  async function handleDelete() {
+    function on200() {
+      removeSnippet(snippet.id);
+      handleClose();
+    }
+    try {
+      const res = await deleteRequest(`snippets/delete/${snippet.id}`);
+
+      if (res.status === 200) {
+        on200();
+      }
+      if (!res.status) {
+        const ref = await refreshRequest();
+        if (!ref) {
+          clearUser();
+        }
+        if (ref.status === 200) {
+          const res1 = await deleteRequest(`snippets/delete/${snippet.id}`);
+          if (res1.status === 200) {
+            on200();
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  //END OF NETWORK ACTIVITY
   function handleClose() {
     closeModal();
     emptyTheSnippet(user.editorLanguage, user.editorTheme);
     setShowDeleteModal(false);
     setShowTextArea(false);
   }
-  // Function for Deleting the Snippet
-  async function handleDelete() {
-    try {
-      const res = await deleteRequest(`snippets/delete/${snippet.id}`);
 
-      if (res.status === 200) {
-        removeSnippet(snippet.id);
-        handleClose();
-      } else if (res.status === 404) {
-        alert(`Error 404 : "Snippet not found!"`);
-      }
-    } catch (error) {
-      alert(error);
-    }
-  }
   useEffect(() => {
     checkIfChanged();
   }, [snippet]);
