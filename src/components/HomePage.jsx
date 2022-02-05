@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter, Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   openAddSnippetModalAction,
@@ -256,6 +257,15 @@ function HomePage({ match, history }) {
       history.push("/home");
     }
   }
+
+  //
+  function findIdOfFolder(name) {
+    const { _id } = page.userFolders.filter(
+      (folder) => folder.name === name
+    )[0];
+
+    if (_id) return _id;
+  }
   // Close Folder input and clear the local state
   function handleCloseFolderInput() {
     setFolderInput(false);
@@ -441,7 +451,21 @@ function HomePage({ match, history }) {
                     </div>
                   </button>
                 </em>
-                {findFolderName(2) && <>child of "{findFolderName(2)}" </>}
+                {findFolderName(2) && (
+                  <>
+                    child of
+                    <Link
+                      // style={{
+                      //   color: "var(--main-color-blue)",
+                      //   marginLeft: "0.5rem",
+                      // }}
+                      className="parentLink"
+                      to={`/folder/${findIdOfFolder(findFolderName(2))}`}
+                    >
+                      {findFolderName(2)}
+                    </Link>
+                  </>
+                )}
               </div>
             )}
           </div>

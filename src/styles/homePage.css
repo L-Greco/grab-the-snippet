@@ -205,3 +205,13 @@
   color: white;
   font-size: 1.8rem;
 }
+.parentLink {
+  margin-left: 0.5rem;
+  border-radius: 25%;
+  padding: 0.2rem;
+  background-color: rgb(255, 255, 255, 1);
+  text-decoration: none;
+}
+.parentLink:hover {
+  text-decoration: underline;
+}
