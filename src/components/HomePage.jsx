@@ -64,6 +64,7 @@ function HomePage({ match, history }) {
       document.removeEventListener("scroll", onScroll);
     };
   }, [scroll, setScroll]);
+
   // NETWORK ACTIVITY
 
   useEffect(() => {
