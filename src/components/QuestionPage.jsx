@@ -79,6 +79,41 @@ function QuestionPage() {
                   <div className="d-none d-md-block col-5">
                     <img
                       className="img-fluid imgBord"
+                      src="gts_header.png"
+                      alt=""
+                      style={{ height: "auto" }}
+                    />
+                  </div>
+                  <div className="col-12 col-md-7">
+                    <p className="lead">
+                      Clicking on the header will navigate you to the home page
+                      unless you already are in the home page!
+                    </p>
+                    <div
+                      style={{ width: "100%" }}
+                      className="d-flex d-md-none col-5 mx-auto  "
+                    >
+                      <img
+                        className="img-fluid imgBord mx-auto"
+                        src="gts_header.png"
+                        alt=""
+                        style={{ height: "auto" }}
+                      />
+                    </div>
+                    <hr className="my-4" />
+                    <p>It's handy specially when you are in a nested folder.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="header" className="sp-section2 d-flex ">
+            <div className="jumbotron mx-auto">
+              <div className="container">
+                <div className="row">
+                  <div className="d-none d-md-block col-5">
+                    <img
+                      className="img-fluid imgBord"
                       src="pic3.png"
                       alt=""
                       style={{ height: "auto" }}
@@ -110,6 +145,7 @@ function QuestionPage() {
               </div>
             </div>
           </section>
+
           <section id="folders" className="sp-section2 d-flex ">
             <div className="jumbotron mx-auto">
               <div className="container">
