@@ -24,7 +24,7 @@ function LoginPage({ history }) {
   return (
     <>
       <div
-        className="d-none d-md-flex"
+        className="d-flex "
         style={{ display: "flex", justifyContent: "space-around" }}
       >
         <h1 className="text-center lph1 " onClick={() => history.push("/")}>
@@ -35,7 +35,7 @@ function LoginPage({ history }) {
         <div className="login-page-container mx-auto">
           <div className="login-page-wrapper">
             <div className="login-1st-span"> Log In to Grab The Snippet</div>
-            <Form>
+            {/* <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control type="email" placeholder="Enter email" />
                 <Form.Text className="text-muted ">
@@ -51,12 +51,12 @@ function LoginPage({ history }) {
               </Form.Group>
             </Form>
 
-            <button className="login-page-button">Log In</button>
+            <button className="login-page-button">Log In</button> */}
             <div
               className="text-muted mx-auto mt-3 mb-1"
               style={{ fontSize: "0.8rem" }}
             >
-              OR
+              {/* OR */}
             </div>
             <button
               onClick={logWithProviderClicked}
@@ -95,11 +95,11 @@ function LoginPage({ history }) {
               </div>
             </button> */}
 
-            <div
+            {/*  <div
               style={{ borderBottom: "1px solid grey", marginTop: "1rem" }}
             ></div>
 
-            <div className="login-link mx-auto">Sign Up for an account</div>
+            <div className="login-link mx-auto">Sign Up for an account</div> */}
           </div>
         </div>
       </div>

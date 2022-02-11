@@ -14,7 +14,6 @@ import {
   toggleFolderSettingsModalAction,
   setUsersFoldersAction,
   setUserAction,
-  setLoggedOffAction,
   setUserLandedAction,
   clearUserAction,
 } from "../redux/actions";
@@ -46,7 +45,7 @@ function HomePage({ match, history }) {
   const [folderInput, setFolderInput] = useState(false);
   const [foldersName, setFoldersName] = useState("");
   const [saveIsLoading, setSaveIsLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [showToast, setShowToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [scroll, setScroll] = useState(1);
@@ -80,7 +79,7 @@ function HomePage({ match, history }) {
       dispatch(setUserLandedAction(false));
     };
   }, []);
-  // On mounting it adds the parent on the global state page.parent and then gets the data
+  //  gets the data
   useEffect(() => {
     if (user.loggedIn) {
       dispatch(addParentAction(returnParent("state")));
@@ -88,10 +87,11 @@ function HomePage({ match, history }) {
     }
   }, [match, user.loggedIn]);
 
-  // Runs on mounting the component and gets the data
+  // gets the data
   async function getData() {
     try {
       setIsLoading(true);
+      // console.log("2");
       function on200(category, res) {
         if (category === "folder") {
           dispatch(addFoldersArrayAction(res.data));
@@ -437,7 +437,7 @@ function HomePage({ match, history }) {
               </div>
             </div>
 
-            {page.parent !== "home" && (
+            {page.parent !== "home" && !isLoading && (
               <div className="home-folder-settings-wrapper">
                 <em>
                   <button

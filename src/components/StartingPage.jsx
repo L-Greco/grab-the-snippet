@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router";
+import { getRequest } from "../lib/axios";
 // react Icons
 import { RiFolderSettingsLine } from "react-icons/ri";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
@@ -11,6 +12,16 @@ let text = require("../data/text.json");
 function StartingPage() {
   const [scroll, setScroll] = useState(1);
   const state = useSelector((state) => state);
+  // NETWORK ACTIVITY
+  async function wakeUp() {
+    try {
+      const res = await getRequest("users/wakingTheDyno");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  //END OF NETWORK ACTIVITY
+
   const returnToTop = function () {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -51,7 +62,7 @@ function StartingPage() {
             display: "flex",
           }}
         >
-          <Link className="splink1" to="/loginPage">
+          <Link onClick={wakeUp} className="splink1" to="/loginPage">
             Log In
           </Link>
         </div>
@@ -63,7 +74,7 @@ function StartingPage() {
               <div className="col-12 col-md-7">
                 <h1 style={{ fontWeight: "500" }}>
                   Grab The Snippet provides developers with a tool for
-                  organizing and storing their code in the form of cards.
+                  organizing and storing their code snippets as cards.
                 </h1>
                 <div
                   style={{ width: "100%" }}
@@ -79,6 +90,7 @@ function StartingPage() {
                   <button
                     className="btn btn-primary "
                     style={{ fontFamily: "Acme", width: "50%" }}
+                    onClick={wakeUp}
                   >
                     Give it a try- it's free
                   </button>
