@@ -87,7 +87,7 @@ function QuestionPage() {
                   <div className="col-12 col-md-7">
                     <p className="lead">
                       Clicking on the header will navigate you to the home page
-                      unless you already are in the home page!
+                      , unless you are already there!
                     </p>
                     <div
                       style={{ width: "100%" }}
