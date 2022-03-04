@@ -167,7 +167,6 @@ function HomePage({ match, history }) {
     }
     try {
       const res = await getRequest("users/me");
-
       if (!res.status) {
         const ref = await refreshRequest();
         if (!ref) {

@@ -19,7 +19,6 @@ function QuestionPage() {
   };
   useEffect(() => {
     const onScroll = () => {
-      // console.log(document.documentElement.scrollTop);
       const scrollCheck =
         document.documentElement.scrollTop < 10 || document.body.scrolTop < 10;
       if (scrollCheck !== scroll) {

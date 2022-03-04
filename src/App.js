@@ -45,10 +45,6 @@ function App() {
           <Route exact path="/home">
             <HomePage />
           </Route>
-
-          <Route exact path="/test">
-            <StartingPage />
-          </Route>
           <Route exact path="/loginPage">
             <LoginPage />
           </Route>
