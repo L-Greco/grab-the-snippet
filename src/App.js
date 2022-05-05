@@ -3,25 +3,10 @@ import LoginPage from "./components/LoginPage";
 import NoMatch from "./components/NoMatch";
 import StartingPage from "./components/StartingPage";
 import QuestionPage from "./components/QuestionPage";
-import { useEffect } from "react"
-import WebFont from "webfontloader"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 function App() {
-
-
-  useEffect(() => {
-    WebFont.load({
-      google: {
-        families: [`Rampart One`, `Azeret Mono`, 'Anton', 'Acme', 'Roboto', 'Lobster']
-      }
-    })
-
-
-  }, [])
-
-
 
   return (
     <>
