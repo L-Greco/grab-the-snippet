@@ -49,6 +49,7 @@ function HomePage({ match, history }) {
   const [showToast, setShowToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [scroll, setScroll] = useState(1);
+  const [pageRendered, setPageRendered] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -67,6 +68,7 @@ function HomePage({ match, history }) {
   // NETWORK ACTIVITY
 
   useEffect(() => {
+    setPageRendered(true);
     try {
       setUser();
     } catch (error) {
@@ -332,7 +334,7 @@ function HomePage({ match, history }) {
   //   localStorage.getItem("userLanded") && <Redirect to="/loginPage" />;
   // }
   // if (!user.loggedIn) return null;
-
+  if (!pageRendered) return <> Page is Loading</>;
   return (
     <>
       {!scroll && (

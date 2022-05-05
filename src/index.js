@@ -1,4 +1,3 @@
-
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import './styles/myBootstrap.css';
@@ -9,14 +8,11 @@ import WebFont from "webfontloader"
 
 WebFont.load({
   google: {
-    families: [`Rampart One`, `Azeret Mono`, 'Anton', 'Acme', 'Roboto', 'Lobster']
+    families: [`Rampart One`, 'Acme', `Azeret Mono`, 'Anton', 'Roboto', 'Lobster']
   }
 })
 
 ReactDOM.render(
-
-
-
 
 
   <Provider store={configureStore()}>
