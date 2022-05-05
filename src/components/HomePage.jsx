@@ -334,7 +334,7 @@ function HomePage({ match, history }) {
   //   localStorage.getItem("userLanded") && <Redirect to="/loginPage" />;
   // }
   // if (!user.loggedIn) return null;
-  if (!pageRendered) return <> Page is Loading</>;
+  if (!pageRendered) return <> </>;
   return (
     <>
       {!scroll && (
