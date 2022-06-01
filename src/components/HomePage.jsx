@@ -222,7 +222,10 @@ function HomePage({ match, history }) {
             const res1 = await postRequest("folders", folderObj);
             if (res1.status === 201) {
               on201(res1);
-            } else throw new Error();
+            } else {
+              setSaveIsLoading(false);
+              throw new Error();
+            }
           }
         }
       } else {
@@ -230,6 +233,7 @@ function HomePage({ match, history }) {
         setShowErrorToast(true);
       }
     } catch (error) {
+      setSaveIsLoading(false);
       handleCloseFolderInput();
     }
   }
