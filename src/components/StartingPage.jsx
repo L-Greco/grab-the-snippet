@@ -12,7 +12,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import "../styles/startingPage.css";
 let text = require("../data/text.json");
-function StartingPage() {
+function StartingPage({ history }) {
   const [scroll, setScroll] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const state = useSelector((state) => state);
@@ -134,18 +134,14 @@ function StartingPage() {
                   clipboard with a click.
                 </p>
                 <Link to="/loginPage">
-                  <button
-                    className="btn btn-primary "
-                    style={{ fontFamily: "Acme", width: "64%" }}
-                    onClick={wakeUp}
-                  >
+                  <button className="btn btn-primary " onClick={wakeUp}>
                     Give it a try- it's free
                   </button>
                 </Link>
               </div>
               <div
                 style={{ color: "black" }}
-                className=" cardsWrapper d-none d-sm-flex  col-md-5 "
+                className=" cardsWrapper col-md-5 "
               >
                 {/* <img
                   className="img-fluid imgBord"
@@ -153,11 +149,7 @@ function StartingPage() {
                   alt=""
                   style={{ height: "auto" }}
                 /> */}
-                <MyCard
-                  style={{ alignSelf: "center" }}
-                  toast={() => setShowToast(true)}
-                  data={data1}
-                />
+                <MyCard toast={() => setShowToast(true)} data={data1} />
                 <MyCard toast={() => setShowToast(true)} data={data2} />
                 <MyCard toast={() => setShowToast(true)} data={data3} />
               </div>

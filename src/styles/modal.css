@@ -320,3 +320,12 @@
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1000;
 }
+.hiddenLink {
+  text-decoration: none;
+  text-align: center;
+  font: "Acme";
+  color: black;
+}
+.hiddenLink :hover {
+  color: hover;
+}

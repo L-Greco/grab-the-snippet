@@ -5,6 +5,7 @@ import EditorOptions from "./EditorOptions";
 import Toast from "react-bootstrap/Toast";
 import Spinner from "react-bootstrap/Spinner";
 import Linkify from "react-linkify";
+
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import {
@@ -24,6 +25,7 @@ import { deleteRequest, putRequest, refreshRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/modal.css";
+import { Link } from "react-router-dom";
 
 let text = require("../data/text.json");
 
@@ -399,6 +401,15 @@ function SnippetModal({
                       "Save Changes"
                     )}
                   </button>
+                  {fromStartingPage && (
+                    <Link
+                      to="/loginPage"
+                      className="save-editor-btn hiddenLink"
+                    >
+                      Save
+                    </Link>
+                  )}
+
                   <CopyToClipboard text={snippet.code}>
                     <button
                       className="grab-the-snippet-button"
