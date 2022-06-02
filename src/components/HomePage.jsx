@@ -461,10 +461,6 @@ function HomePage({ match, history }) {
                   <>
                     child of
                     <Link
-                      // style={{
-                      //   color: "var(--main-color-blue)",
-                      //   marginLeft: "0.5rem",
-                      // }}
                       className="parentLink"
                       to={`/folder/${findIdOfFolder(findFolderName(2))}`}
                     >

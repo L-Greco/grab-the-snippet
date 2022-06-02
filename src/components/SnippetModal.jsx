@@ -18,6 +18,7 @@ import {
   setUserThemeAction,
   replaceSnippetFromArrayAction,
   clearUserAction,
+  setSnippetEditorThemeAction,
 } from "../redux/actions";
 import { deleteRequest, putRequest, refreshRequest } from "../lib/axios.js";
 import { IconContext } from "react-icons"; // this is so i can style the react icon
@@ -75,6 +76,7 @@ function SnippetModal({
   setUserTheme,
   replaceSnippet,
   clearUser,
+  fromStartingPage,
 }) {
   const ModalNode = useRef();
   const smallDeleteMOdal = useRef();
@@ -86,7 +88,11 @@ function SnippetModal({
   const [saveBtnIsLoading, setSaveBtnIsLoading] = useState(false);
   const [showTextArea, setShowTextArea] = useState(false);
 
+  useEffect(() => {
+    if (fromStartingPage) setUserTheme("abcdef");
+  }, []);
   function checkIfChanged() {
+    if (fromStartingPage) return; // if it invokes from startingPage ( is just a show with no functionality)
     if (page.cardModalIsOpen) {
       const snippetBefore = page.snippetsArray.filter(
         (PageSnippet) => PageSnippet._id === snippet.id
@@ -366,12 +372,15 @@ function SnippetModal({
                     </div>
                     {/* <Toast.Body className="text-center"></Toast.Body> */}
                   </Toast>
-                  <button
-                    className="clear-editor-btn"
-                    onClick={() => setShowDeleteModal(true)}
-                  >
-                    Delete
-                  </button>
+                  {!fromStartingPage && (
+                    <button
+                      className="clear-editor-btn"
+                      onClick={() => setShowDeleteModal(true)}
+                    >
+                      Delete
+                    </button>
+                  )}
+
                   <button
                     onClick={() => handleSave()}
                     className={
