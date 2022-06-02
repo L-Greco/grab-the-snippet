@@ -5,8 +5,6 @@ axiosClient.defaults.baseURL = process.env.REACT_APP_BE_URL;
 // console.log(axiosClient.defaults.baseURL)
 axiosClient.defaults.headers = {
     'Content-Type': 'application/json',
-    // "Access-Control-Allow-Origin": `*`,
-    // "Access-Control-Allow-Credentials": true,
     "Accept": "application/json"
 };
 axiosClient.defaults.timeout = 20000;
