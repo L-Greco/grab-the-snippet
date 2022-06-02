@@ -11,7 +11,7 @@ export const initialState = {
         lastName: "",
         avatar: "",
         editorTheme: "",
-        editorLanguage: "",
+        editorLanguage: "tomorrow-night-bright",
         language: "",
         email: "",
         loggedIn: false,

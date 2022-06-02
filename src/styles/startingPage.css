@@ -10,8 +10,6 @@
   min-height: 50px;
   padding: 1rem;
   position: relative;
-  /* position: fixed; */
-  /* transition: all 500ms ease-out 0s; */
   width: 100%;
   z-index: 100;
   top: 0;
@@ -22,7 +20,15 @@
   box-shadow: rgb(0 0 0 / 30%) 0px 0px 10px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.179);
 }
-
+#opening button {
+  font-family: "Acme";
+  width: 100%;
+  max-width: 600px;
+}
+section h1 {
+  font-weight: 400;
+  text-align: justify;
+}
 .navbar-header-sp {
   font-family: "Rampart One";
   font-size: 1.4rem;
@@ -58,9 +64,12 @@
   color: black;
   opacity: 0.8;
 }
-.sp-section1 {
+#opening {
   margin-top: 3rem;
   color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
 }
 
 .sp-section2 {
@@ -94,13 +103,11 @@
   opacity: 1;
   transform: scale(1.3);
 }
-.spft {
+footer {
   width: 100%;
-  position: fixed;
-  bottom: 0;
   border-top: 3px solid rgb(35, 155, 173);
   padding: 1rem;
-  margin-top: 2rem;
+  margin-top: auto;
   text-align: center;
   color: white;
   display: flex;
@@ -112,11 +119,11 @@
 }
 .qpft {
   width: 100%;
-  position: relative;
-  bottom: 0;
+  /* position: relative;
+  bottom: 0; */
   border-top: 3px solid rgb(35, 155, 173);
   padding: 1rem;
-  margin-top: 2rem;
+  margin-top: auto;
   text-align: center;
   color: white;
   display: flex;
@@ -150,12 +157,11 @@
   background-size: cover;
   background-position: center;
 }
+footer span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.73);
+}
 
-/* @media (max-width: 540px) {
-  .navbar-header-sp {
-    display: none;
-  }
-} */
 @media (min-width: 1400px) {
   .jumbotron {
     width: 70%;
@@ -177,11 +183,24 @@
     margin-bottom: 3rem;
     font-size: 1.5rem;
   }
-  /* .sp-section1 {
-    margin-top: 5rem;
-  } */
+  .cardsWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @media (max-width: 600px) {
+    .cardsWrapper {
+      display: none;
+    }
+  }
   section,
   p {
     text-align: center;
+  }
+}
+@media (max-width: 576px) {
+  .pseudoNav {
+    justify-content: center;
   }
 }

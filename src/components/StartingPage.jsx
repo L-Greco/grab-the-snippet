@@ -3,14 +3,18 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import { getRequest } from "../lib/axios";
+import MyCard from "./MyCard.jsx";
+import SnippetModal from "./SnippetModal.jsx";
+import Toast from "react-bootstrap/Toast";
 // react Icons
-import { RiFolderSettingsLine } from "react-icons/ri";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
 import "../styles/startingPage.css";
 let text = require("../data/text.json");
-function StartingPage() {
+function StartingPage({ history }) {
   const [scroll, setScroll] = useState(1);
+  const [showToast, setShowToast] = useState(false);
   const state = useSelector((state) => state);
   // NETWORK ACTIVITY
   async function wakeUp() {
@@ -25,6 +29,36 @@ function StartingPage() {
   const returnToTop = function () {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+  };
+  const data1 = {
+    title: "Welcome Javascript",
+    language: "javascript",
+    code: `// with ctrl+/ you can add comments
+    console.log("Hello World")`,
+    comments: `Comments section here.
+    It's also a link recognizer.
+    https://www.grabthesnippet.com/`,
+  };
+  const data2 = {
+    title: "Welcome PHP",
+    language: "php",
+    code: `<!-- with ctrl+/ you can add comments -->
+    <?php 
+    echo "Hello World"
+    ?>`,
+    comments: `Comments section here.
+    It's also a link recognizer.
+    https://www.grabthesnippet.com/`,
+  };
+
+  const data3 = {
+    title: "Welcome Python",
+    language: "python",
+    code: `# with ctrl+/ you can add comments
+    printf("Hello World")`,
+    comments: `Comments section here.
+    It's also a link recognizer.
+    https://www.grabthesnippet.com/`,
   };
   useEffect(() => {
     const onScroll = () => {
@@ -45,18 +79,36 @@ function StartingPage() {
   }
   return (
     <>
+      <Toast
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={1000}
+        autohide
+      >
+        <div className="toast-header">
+          Woohooo
+          <AiOutlineClose onClick={() => setShowToast(false)} />
+        </div>
+        <Toast.Body className="text-center"> Copied to clipboard!</Toast.Body>
+      </Toast>
+      <SnippetModal fromStartingPage={true} />
       <header className="pseudoNav">
         <div
           onClick={() => window.location.reload()}
           className="navbar-header-icon-wrapper"
         >
-          <img src="/gts1111.png" alt="logo here" className="img-fluid" />
+          <img
+            src="/gts1111.png"
+            alt="logo here"
+            className="img-fluid d-none d-sm-block"
+          />
           <div className="navbar-header-sp" data-scrolled={false}>
             {text.HomePage.h1[state.page.language]}
           </div>
         </div>
 
         <div
+          className="d-none d-sm-flex"
           style={{
             fontFamily: "Acme",
             display: "flex",
@@ -67,12 +119,12 @@ function StartingPage() {
           </Link>
         </div>
       </header>
-      <section id="opening" className="sp-section1 d-flex ">
+      <section id="opening">
         <div className="jumbotron mx-auto">
           <div className="container">
             <div className="row">
               <div className="col-12 col-md-7">
-                <h1 style={{ fontWeight: "500" }}>
+                <h1>
                   Grab The Snippet provides developers with a tool for
                   organizing and storing their code snippets as cards.
                 </h1>
@@ -87,39 +139,39 @@ function StartingPage() {
                   clipboard with a click.
                 </p>
                 <Link to="/loginPage">
-                  <button
-                    className="btn btn-primary "
-                    style={{ fontFamily: "Acme", width: "50%" }}
-                    onClick={wakeUp}
-                  >
+                  <button className="btn btn-primary " onClick={wakeUp}>
                     Give it a try- it's free
                   </button>
                 </Link>
               </div>
-              <div className="d-none d-md-block col-5 ">
-                <img
+              <div
+                style={{ color: "black" }}
+                className=" cardsWrapper col-md-5 "
+              >
+                {/* <img
                   className="img-fluid imgBord"
                   src="mockup.png"
                   alt=""
                   style={{ height: "auto" }}
-                />
+                /> */}
+                <MyCard toast={() => setShowToast(true)} data={data1} />
+                <MyCard toast={() => setShowToast(true)} data={data2} />
+                <MyCard toast={() => setShowToast(true)} data={data3} />
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <footer className="spft">
+      </section>{" "}
+      <footer>
         <div className="mx-auto">
-          {" "}
-          Designed and built by L-Greco
+          <span> Designed and built by Kostas M </span>
           <a
             target="_blank"
             href="https://www.linkedin.com/in/konstandinos-makaronas-119064129/"
             rel="noreferrer"
             className="spftlink"
           >
-            <AiFillLinkedin />
+            <AiFillLinkedin style={{ fontSize: "0.9rem" }} />
           </a>
           <a
             target="_blank"
@@ -127,19 +179,10 @@ function StartingPage() {
             rel="noreferrer"
             className="spftlink"
           >
-            <AiFillGithub />
-          </a>{" "}
+            <AiFillGithub style={{ fontSize: "0.9rem" }} />
+          </a>
         </div>
-        <p
-          style={{
-            color: "white",
-            fontFamily: "Lobster",
-            textAlign: "center",
-            fontSize: "1rem",
-          }}
-        >
-          © Copyright 2021. All rights reserved.
-        </p>
+        <span>© Copyright 2021. All rights reserved.</span>
       </footer>
     </>
   );
