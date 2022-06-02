@@ -327,5 +327,5 @@
   color: black;
 }
 .hiddenLink :hover {
-  color: hover;
+  color: rgb(138, 138, 138) !important;
 }

@@ -199,3 +199,8 @@ footer span {
     text-align: center;
   }
 }
+@media (max-width: 576px) {
+  .pseudoNav {
+    justify-content: center;
+  }
+}

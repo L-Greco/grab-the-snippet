@@ -97,13 +97,18 @@ function StartingPage({ history }) {
           onClick={() => window.location.reload()}
           className="navbar-header-icon-wrapper"
         >
-          <img src="/gts1111.png" alt="logo here" className="img-fluid" />
+          <img
+            src="/gts1111.png"
+            alt="logo here"
+            className="img-fluid d-none d-sm-block"
+          />
           <div className="navbar-header-sp" data-scrolled={false}>
             {text.HomePage.h1[state.page.language]}
           </div>
         </div>
 
         <div
+          className="d-none d-sm-flex"
           style={{
             fontFamily: "Acme",
             display: "flex",
