@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Controlled as ControlledEditor } from "react-codemirror2";
-
 import { useSelector, useDispatch } from "react-redux";
 import { setEditorCodeAction } from "../redux/actions";
 
@@ -250,7 +249,6 @@ function Editor() {
         options={{
           keyMap: "sublime",
           lineWrapping: true,
-          // mode: snippet.editorLanguage,
           mode: snippetCorrectLang,
           lint: true,
           lineNumbers: true,
@@ -258,19 +256,6 @@ function Editor() {
           autoCloseBrackets: true,
         }}
       />
-      {/* <UncontrolledEditor
-        className="editor"
-        onChange={(editor, data, value) => dispatch(setEditorCodeAction(value))}
-        options={{
-          keyMap: "sublime",
-          lineWrapping: true,
-          mode: snippet.editorLanguage, // here its the editor's language
-          lint: true,
-          lineNumbers: true,
-          theme: user.editorTheme, // here the editor's theme
-          autoCloseBrackets: true,
-        }}
-      /> */}
     </div>
   );
 }

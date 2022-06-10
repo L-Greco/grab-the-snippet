@@ -1,5 +1,11 @@
 /* my Css from here  */
-
+/* .monaco-mouse-cursor-text > div {
+  font-size: 0.5rem;
+}
+.margin-view-overlays > div {
+  font-size: 0.5rem;
+  line-height: 10px !important;
+} */
 .editor-options-wrapper {
   display: flex;
   flex-direction: row;

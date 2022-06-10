@@ -63,7 +63,7 @@ const refreshAuthLogic = failedRequest => axiosClient.post(`${process.env.REACT_
     .then(tokenRefreshResponse => {
         return Promise.resolve();
 
-    }).catch(e => console.log(e))
+    }).catch(e => Promise.reject(e))
 
 //     }).catch(e => localStorage.setItem("userLanded", false))
 // const refreshAuthLogic = failedRequest => axiosClient.post(`${process.env.REACT_APP_BE_URL}/users/refreshToken`,)
