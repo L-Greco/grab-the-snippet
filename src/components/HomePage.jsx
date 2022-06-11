@@ -395,7 +395,7 @@ function HomePage({ match, history }) {
       <main className="home-main-container">
         <div className="home-functionality-wrapper">
           <div className="home-buttons-folder-wrapper">
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", alignItems: "flex-start" }}>
               <button className="addSnippetBtn" onClick={addSnippet}>
                 Add a Snippet!
               </button>

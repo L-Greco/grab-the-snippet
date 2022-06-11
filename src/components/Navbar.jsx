@@ -41,7 +41,12 @@ function Navbar({ history, location }) {
             : null
         }
       >
-        <img src="/gts1111.png" alt="logo here" className="img-fluid" />
+        <img
+          src="/gts1111.png"
+          alt="logo here"
+          className="img-fluid d-none d-sm-block"
+        />
+
         <div className="navbar-header">
           {text.HomePage.h1[state.page.language]}
         </div>

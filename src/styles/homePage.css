@@ -8,6 +8,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.179);
   padding: 0.5rem;
   align-items: center;
+  position: relative;
 }
 
 .addSnippetBtn {
@@ -19,7 +20,6 @@
   cursor: pointer;
   font-family: inherit;
   font-size: 1rem;
-  max-height: 2.3rem;
   font-weight: 600;
   box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
 }
@@ -64,8 +64,16 @@
   font-size: 1rem;
   font-weight: 600;
   box-shadow: rgb(0 0 0 / 40%) 1px 1px 5px 0;
+  position: absolute;
+  left: 9rem;
+  top: 0;
+  z-index: 10;
 }
-
+@media (max-width: 319px) {
+  .folder-input-wrapper {
+    left: 6rem;
+  }
+}
 #folderInput {
   resize: none;
   outline: none;

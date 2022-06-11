@@ -1,6 +1,6 @@
 {
   "name": "grab-the-snippet",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "private": true,
   "dependencies": {
     "@monaco-editor/react": "^4.4.5",
