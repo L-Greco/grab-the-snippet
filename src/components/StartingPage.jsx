@@ -6,16 +6,20 @@ import { getRequest } from "../lib/axios";
 import MyCard from "./MyCard.jsx";
 import SnippetModal from "./SnippetModal.jsx";
 import Toast from "react-bootstrap/Toast";
+import { useDispatch } from "react-redux";
+import { closeCardModalAction } from "../redux/actions.js";
 // react Icons
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 
 import "../styles/startingPage.css";
+
 let text = require("../data/text.json");
 function StartingPage({ history }) {
   const [scroll, setScroll] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
   // NETWORK ACTIVITY
   async function wakeUp() {
     try {
@@ -74,6 +78,14 @@ function StartingPage({ history }) {
       document.removeEventListener("scroll", onScroll);
     };
   }, [scroll, setScroll]);
+  useEffect(() => {
+    return () => {
+      cleanUp();
+    };
+  }, []);
+  function cleanUp() {
+    dispatch(closeCardModalAction());
+  }
   if (state.user.loggedIn && localStorage.getItem("userLanded") === "true") {
     return <Redirect to="/home" />;
   }
@@ -117,6 +129,10 @@ function StartingPage({ history }) {
           <Link onClick={wakeUp} className="splink1" to="/loginPage">
             Log In
           </Link>
+          <span>OR</span>
+          <Link className="splink1" to="/signUp">
+            Sign Up
+          </Link>
         </div>
       </header>
       <section id="opening">
@@ -138,22 +154,14 @@ function StartingPage({ history }) {
                   You can either open the snippet and see the code or copy to
                   clipboard with a click.
                 </p>
-                <Link to="/loginPage">
-                  <button className="btn btn-primary " onClick={wakeUp}>
-                    Give it a try- it's free
-                  </button>
+                <Link className="btn btn-primary " to="/loginPage">
+                  Give it a try- it's free
                 </Link>
               </div>
               <div
                 style={{ color: "black" }}
                 className=" cardsWrapper col-md-5 "
               >
-                {/* <img
-                  className="img-fluid imgBord"
-                  src="mockup.png"
-                  alt=""
-                  style={{ height: "auto" }}
-                /> */}
                 <MyCard toast={() => setShowToast(true)} data={data1} />
                 <MyCard toast={() => setShowToast(true)} data={data2} />
                 <MyCard toast={() => setShowToast(true)} data={data3} />

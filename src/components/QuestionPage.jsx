@@ -32,9 +32,12 @@ function QuestionPage() {
   }, [scroll, setScroll]);
 
   useEffect(() => {
-    window.addEventListener(`load`, setIsloading(false));
+    setTimeout(() => {
+      setIsloading(false);
+    }, 500);
     return () => {
-      window.removeEventListener(`load`, setIsloading(true));
+      setIsloading(true);
+      setScroll(1);
     };
   }, []);
 
@@ -48,8 +51,9 @@ function QuestionPage() {
           </IconContext.Provider>
         </div>
       )}
-      {isLoading && (
-        <div style={{ display: "flex" }}>
+
+      {isLoading ? (
+        <div style={{ display: "flex", marginTop: "2rem" }}>
           <div className="mx-auto">
             <Spinner
               style={{ marginRight: "1rem" }}
@@ -68,8 +72,7 @@ function QuestionPage() {
             />
           </div>
         </div>
-      )}
-      {!isLoading && (
+      ) : (
         <div>
           <section id="links" className="sp-section2 d-flex ">
             <div className="jumbotron mx-auto">

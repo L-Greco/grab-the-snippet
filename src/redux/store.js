@@ -17,7 +17,8 @@ export const initialState = {
         loggedIn: false,
         _id: "",
         userLanded: false,
-        provider: ""
+        provider: "",
+        credentials: ""
 
     },
     page: {

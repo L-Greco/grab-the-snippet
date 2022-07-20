@@ -2,8 +2,6 @@
   cursor: pointer;
   font-family: Rampart One;
   position: relative;
-  /* left: 50%;
-  transform: translate(-50%); */
 }
 .lph1::before {
   content: "";
@@ -30,24 +28,6 @@
   padding: 1.5rem;
   font-family: var(--font-2);
 }
-/* @media screen and (max-width: 574px) and (min-width: 501px) {
-  .login-page-container {
-    top: 50%;
-    left: 50%;
-    width: 95vw;
-    height: 80%;
-  }
-} */
-/* @media (max-width: 500px) {
-  .login-page-container {
-    top: 52%;
-    left: 50%;
-    width: 100vw;
-    height: 96vh;
-    z-index: 1000;
-    border-radius: 0px;
-  }
-} */
 
 .login-page-wrapper {
   display: flex;
@@ -65,6 +45,7 @@
 }
 
 .login-page-button {
+  width: 100%;
   background-color: #6fcc81;
   color: white;
   font-family: var(--font-2);
@@ -111,4 +92,82 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+/* signup */
+
+.circle-loader {
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-left-color: #5cb85c;
+  animation: loader-spin 1.2s infinite linear;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+}
+
+.load-complete {
+  -webkit-animation: none;
+  animation: none;
+  border-color: #5cb85c;
+  transition: border 500ms ease-out;
+}
+
+.checkmark {
+  /* display: none; */
+}
+.checkmark.draw:after {
+  animation-duration: 800ms;
+  animation-timing-function: ease;
+  animation-name: checkmark;
+  transform: scaleX(-1) rotate(135deg);
+}
+.checkmark:after {
+  opacity: 1;
+  height: 1em;
+  width: 0.5em;
+  transform-origin: left top;
+  border-right: 3px solid #5cb85c;
+  border-top: 3px solid #5cb85c;
+  content: "";
+  left: 0.2em;
+  top: 0.9em;
+  position: absolute;
+}
+.disabled {
+  cursor: not-allowed !important;
+  background-color: rgba(0, 0, 0, 0.276) !important;
+}
+
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 0.5em;
+    opacity: 1;
+  }
+  40% {
+    height: 1em;
+    width: 0.5em;
+    opacity: 1;
+  }
+  100% {
+    height: 1em;
+    width: 0.5em;
+    opacity: 1;
+  }
 }

@@ -45,14 +45,21 @@
 .myCard:hover {
   transform: scale(1.1);
 }
-
+.myCard:hover .myCard-title {
+  overflow: auto;
+  text-overflow: initial;
+}
 .myCard-title {
-  font-size: 0.8rem;
+  font-size: small;
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 100%;
   margin-bottom: auto;
   height: 66%;
+  font-family: "Roboto";
+  transition: 200ms linear;
+  padding: 0;
+  margin: 0;
 }
 
 .myCard-subtitle {

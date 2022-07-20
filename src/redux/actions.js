@@ -225,10 +225,11 @@ export const setUserLandedAction = (boolean) => {
         payload: boolean
     }
 }
-// not yet ready
-// export const removeFolderToUserFoldersArrayAction = (folder) => {
-//     return {
-//         type: `ADD_FOLDER_TO_USER_ARRAY`,
-//         payload: folder
-//     }
-// }
+export const setUserCredentialsAction = (mail, password) => {
+    return {
+        type: `SET_USER_CREDENTIALS`,
+        userMail: mail,
+        userPass: password
+    }
+}
+

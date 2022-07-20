@@ -190,6 +190,12 @@ export const userReducer = (state = initialState.user, action) => {
                 ...state,
                 userLanded: action.payload
             }
+        case `SET_USER_CREDENTIALS`:
+            return {
+                ...state,
+                email: action.userMail,
+                credentials: action.userPass
+            }
 
 
         default:

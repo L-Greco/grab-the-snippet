@@ -184,7 +184,7 @@ function HomePage({ match, history }) {
       }
     } catch (error) {
       dispatch(clearUserAction());
-      alert("Server Error :/");
+      console.log(error);
     }
   };
 

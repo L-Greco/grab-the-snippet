@@ -20,9 +20,9 @@ function MyCard({ data, toast }) {
   return (
     <div>
       <div className="myCard">
-        <div className="myCard-title" onClick={() => getTheSnippet(data)}>
+        <h6 className="myCard-title" onClick={() => getTheSnippet(data)}>
           {data.title}
-        </div>
+        </h6>
         {/* <div className="mb-2 text-muted myCard-subtitle">{data.language}</div> */}
 
         <div className="myCard-btn-wrapper">

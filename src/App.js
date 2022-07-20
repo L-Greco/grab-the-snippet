@@ -4,6 +4,7 @@ import NoMatch from "./components/NoMatch";
 import StartingPage from "./components/StartingPage";
 import QuestionPage from "./components/QuestionPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignUpPage from "./components/SignUpPage";
 
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route exact path="/loginPage">
             <LoginPage />
+          </Route>
+          <Route exact path="/signUp">
+            <SignUpPage />
           </Route>
 
           <Route path="*">

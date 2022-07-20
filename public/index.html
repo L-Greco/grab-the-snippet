@@ -12,11 +12,79 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
   <title>Grab The Snippet</title>
+  <style>
+    body {
+      background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(44, 205, 229, 0.9920343137254902) 131%);
+    }
+
+    .initialLoadingBig-wrapper {
+      margin: 0;
+      padding: 0;
+      height: 98.3vh;
+
+      width: 95vw;
+    }
+
+    .initialLoadingLoader-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50vw;
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+
+    }
+
+    .initialLoadingH1 {
+      color: white;
+      font-family: monospace;
+      margin: 1.5rem 0 0 0;
+      font-size: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .initialLoadingH1::after {
+      content: "";
+      position: absolute;
+      background-color: white;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      width: 60%;
+      animation: sideToside 2s ease-in-out infinite;
+    }
+
+    @keyframes sideToside {
+
+      0%,
+      100% {
+        transform: translateX(-50%);
+      }
+
+      50% {
+        transform: translateX(150%);
+      }
+    }
+  </style>
+
 </head>
 
 <body>
 
-  <div id="root"></div>
+  <div id="root">
+    <div class="initialLoadingBig-wrapper">
+      <div class="initialLoadingLoader-wrapper ">
+        <h1 class="initialLoadingH1">Grab The Snippet</h1>
+      </div>
+
+    </div>
+
+
+  </div>
   <div id="portal"></div>
 </body>
 

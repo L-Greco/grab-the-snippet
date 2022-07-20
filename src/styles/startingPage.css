@@ -98,6 +98,8 @@ section h1 {
   color: black !important;
   opacity: 0.8;
   transition: 200ms linear;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 .splink1:hover {
   opacity: 1;
